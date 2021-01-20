@@ -1,0 +1,93 @@
+{
+	"pages": [
+		{
+			"path": "pages/tabBar/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				//"enablePullDownRefresh":true,
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "\ue563",
+							"fontSrc": "/static/uni.ttf",
+							"fontSize": "22px",
+							"float":"left"
+						},
+						{
+							"text": "选择地点",
+							"fontSize": "14",
+							"select": true,
+							"width": "auto"
+						}
+						],
+						"titleText":"首页"
+						
+					},
+					"bounce": "none"
+					}
+				}
+		},
+		{
+			"path": "pages/tabBar/square/square",
+			"style": {
+				"navigationBarTitleText": "广场"
+			}
+		},
+		{
+			"path": "pages/tabBar/order/order",
+			"style": {
+				"navigationBarTitleText": "订单"
+			}
+		},
+		{
+			"path": "pages/tabBar/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path": "pages/product/product-list",
+			"style": {
+				"navigationBarTitleText": "产品"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#12de12",
+		"borderStyle": "black",
+		"backgroundColor": "#F8F8F8",
+		"list": [{
+				"pagePath": "pages/tabBar/index/index",
+				"iconPath": "static/index-0.png",//200首页
+				"selectedIconPath": "static/index-1.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/tabBar/square/square",
+				"iconPath": "static/square-0.png",//平台
+				"selectedIconPath": "static/square-1.png",
+				"text": "广场"
+			}, {
+				"pagePath": "pages/tabBar/order/order",
+				"iconPath": "static/order-0.png",//订单
+				"selectedIconPath": "static/order-1.png",
+				"text": "订单"
+			}, {
+				"pagePath": "pages/tabBar/mine/mine",
+				"iconPath": "static/mine-0.png",//我的
+				"selectedIconPath": "static/mine-1.png",
+				"text": "我的"
+			}
+		]
+	}
+}
