@@ -25,6 +25,9 @@ export const request = (module, operation, data={})=>{
 				  
 			  } */
 			  alert(res.result);
+		  })
+		  .catch((err) => {
+			  
 		  });
 	});
 }
