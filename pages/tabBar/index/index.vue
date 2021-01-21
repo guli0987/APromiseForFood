@@ -101,7 +101,9 @@
 				let pickerValueArray = await this.$api.json('pickerArray');
 				this.pickerValueArray = pickerValueArray;
 				
-				let swiper_info = await this.$api.json('swiperInfo');
+				//let swiper_info = await this.$api.json('swiperInfo');
+				//this.swiper_info = swiper_info;
+				const swiper_info = await this.$request('test','getSwiper',{});
 				this.swiper_info = swiper_info;
 				
 				let tag_DataList = await this.$api.json('tagDataList');

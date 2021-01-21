@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import Json from './Json' //测试虚拟数据
+import {request} from 'common/js/request.js'
 Vue.config.productionTip = false
 
 const json = type=>{
@@ -12,6 +13,7 @@ const json = type=>{
 	})
 }
 Vue.prototype.$api = {json};
+Vue.prototype.$request=request;
 
 App.mpType = 'app'
 const app = new Vue({
