@@ -12,12 +12,12 @@
 					"colorClass": "uni-bg-green",
 					"url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg",
 					"content":"内容 B",
-					"link":"/pages/product/list?firstCateId=f47f682c5f1ae67f007ad8226bb01b44"
+					"link":"2"
 				}, {
 					"colorClass": "uni-bg-blue",
 					"url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/094a9dc0-50c0-11eb-b680-7980c8a877b8.jpg",
 					"content": "内容 C",
-					"link":"/pages/product/list?firstCateId=f47f682c5f1ae67f007ad8226bb01b44"
+					"link":"3"
 				}
 			]
 		}

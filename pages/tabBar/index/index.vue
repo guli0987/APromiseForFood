@@ -24,7 +24,7 @@
 		<view>
 			<uni-swiper-dot @clickItem="swiperClickItem" :info="swiper_info" :current="swiper_current" :mode="swiper_mode" :dots-styles="swiper_dotsStyles" field="swiper_content">
 				<swiper class="swiper-box" @change="swiperChange" :current="swiperDotIndex" :autoplay="true">
-					<swiper-item v-for="(item, index) in swiper_info" :key="index">
+					<swiper-item v-for="(item, index) in swiper_info" :key="index" @click="swiperClick(item.link)">
 						<view :class="item.colorClass" class="swiper-item">
 							<image class="swiper-image" :src="item.url" mode="aspectFill" />
 						</view>
@@ -43,7 +43,7 @@
 		</view>
 		<!-- 通告栏 notice-->
 		<view>
-			<uni-notice-bar :show-icon="true" :scrollable="true" :single="true" v-if="true" @click="noticeClick" text="小葵花课堂开课啦" /> 
+			<uni-notice-bar :show-icon="true" :scrollable="true" :single="true" v-if="true" @click="noticeClick" :text="notice_text" /> 
 		</view>
 		<!-- 热门推荐 hot-->
 		
@@ -87,29 +87,39 @@
 				 swiperDotIndex: 0,
 				 //选项卡
 				 tag_DataList: [],
+				 //通告栏
+				 notice_text:"欢迎来到食约APP~",
 				 //窗口列表
 				 list:[]
 			}
 		},
 		onLoad() {
-			//alert("load");
-			this.loadData();
+			//加载头部导航
+			this.loadNavList();
+			//加载选项卡
+			this.loadTagList();
+			//加载地点选择器
+			this.loadPickerList();
+			//加载通告栏
+			this.loadNotice();
 		},
 		methods: {
 			//异步加载方法
-			async loadData() {
+			async loadNavList(){
+				let swiper_info = await this.$request('test','getSwiper',{});
+				this.swiper_info = swiper_info.data;
+			},
+			async loadPickerList(){
 				let pickerValueArray = await this.$api.json('pickerArray');
 				this.pickerValueArray = pickerValueArray;
-				
-				//let swiper_info = await this.$api.json('swiperInfo');
-				//this.swiper_info = swiper_info;
-				const swiper_info = await this.$request('test','getSwiper',{});
-				this.swiper_info = swiper_info;
-				
+			},
+			async loadTagList(){
 				let tag_DataList = await this.$api.json('tagDataList');
 				this.tag_DataList = tag_DataList;
-				
-				
+			},
+			async loadNotice(){
+				let notice_text = "云端数据";
+				this.notice_text=notice_text;
 			},
 			//头部导航方法
 			picker_showLocationPicker() {
@@ -153,25 +163,32 @@
 			},
 			//轮播图方法
 			swiperChange(e) {
-			            this.swiper_current = e.detail.current;
+			    this.swiper_current = e.detail.current;
+				//console.log(e.detail.current);
 			        },
 			swiperClickItem(e) {
 				this.swiperDotIndex = e;
-				//alert("test")
+				/* this.swiperDotIndex = e;
+				alert(this.swiperDotIndex); */
+				console.log("test:"+this.swiperDotIndex);
+			},
+			swiperClick(e){
+				alert("跳转地址"+e);
 			},
 			//通告栏
 			noticeClick(e){
-				alert("test");
+				alert("跳转地址");
 			},
 			//选项卡
 			tagGoList(value) {
-				uni.navigateTo({
+				alert("跳转地址");
+				/* uni.navigateTo({
 					//url:'../list/list?type=' + value.type + '&id=' + value.id
-				})
+				}) */
 			}
 		},
+		//头部按钮方法
 		onNavigationBarButtonTap(e) {
-			//头部按钮方法
 			//alert(e.index);
 			if(e.index == 0){//第一个按钮-抽屉式导航
 				if (this.drawer_showLeft) {
@@ -179,7 +196,7 @@
 				} else {
 					this.$refs.drawer_showLeft.open()
 				} 
-			}else if(e.index == 1){//第二个按钮-地点选择
+			}else if(e.index == 1){//第二个按钮-地点选择器
 				this.picker_showLocationPicker();
 				//alert("test");
 			}

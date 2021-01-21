@@ -12,6 +12,7 @@ const moduleMap = {
 export const request = (module, operation, data={})=>{
 	return new Promise((resolve, reject) => {
 		const cloudFnName = moduleMap[module] || 'test';
+		//alert(cloudFnName);
 		uniCloud.callFunction({
 		    name: cloudFnName,
 		    data: {
@@ -24,7 +25,9 @@ export const request = (module, operation, data={})=>{
 			  /* if(res.result){
 				  
 			  } */
-			  alert(res.result);
+			  //alert(res.result.code);
+			  //alert(JSON.stringify(res.result.data));
+			  resolve(res.result);
 		  })
 		  .catch((err) => {
 			  
