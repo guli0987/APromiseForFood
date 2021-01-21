@@ -35,6 +35,10 @@ exports.main = async (event, context) => {
 			collection = db.collection(tabName_n);
 			res = await collection.limit(1).get(); 
 			break;
+		case 'getWindow':
+			//collection = db.collection(tabName_n);
+			//res = await collection.limit(1).get(); 
+			break;
 		default:
 			console.log("default");
 			break;
