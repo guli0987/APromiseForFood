@@ -20,5 +20,81 @@
 					"link":"3"
 				}
 			]
+		},
+		"apff-tag_data_list":{
+				"data":[
+					{
+						"type": "食物",
+						"id": 1,
+						"icon": "/static/tag-food.png",
+						"link":"到达食物列表"
+					},
+					{
+						"type": "饮品",
+						"id": 2,
+						"icon": "/static/tag-drink.png",
+						"link":"到达饮品列表"
+					},
+					{
+						"type": "水果",
+						"id": 3,
+						"icon": "/static/tag-fruit.png",
+						"link":"到达水果列表"
+					},
+					{
+						"type": "卡券",
+						"id": 4,
+						"icon": "/static/tag-gift.png",
+						"link":"到达卡券列表"
+					}
+				]
+		},
+		"apff-picker_array":{
+				"data":[
+					{"label":"洛阳","children":[
+						{"label":"河南科技大学","children":[
+							{"label":"西苑第一食堂"},{"label":"重庆饭店"},{"label":"西苑北院食堂"}
+							]},
+						{"label":"洛阳理工学院","children":[
+							{"label":"洛理第一食堂"},{"label":"洛理第二食堂"},{"label":"洛理第三食堂"}]},
+						{"label":"洛阳师范学院","children":[
+							{"label":"洛师第一食堂"},{"label":"洛师第二食堂"},{"label":"洛师第三食堂"}]}
+											]
+					},
+					{"label":"郑州","children":[
+						{"label":"郑州大学","children":[
+							{"label":"郑大第一食堂"},{"label":"郑大第二食堂"},{"label":"郑大第三食堂"}
+							]},
+						{"label":"河南工业大学","children":[
+							{"label":"河工第一食堂"},{"label":"河工第二食堂"},{"label":"河工第三食堂"}]},
+						{"label":"中原科技学院","children":[
+							{"label":"中科第一食堂"},{"label":"中科第二食堂"},{"label":"中科第三食堂"}]}
+											]
+					},
+					{"label":"开封","children":[
+						{"label":"河南大学","children":[
+							{"label":"河大第一食堂"},{"label":"河大第二食堂"},{"label":"河大第三食堂"}
+							]},
+						{"label":"开封大学","children":[
+							{"label":"开大第一食堂"},{"label":"开大第二食堂"},{"label":"开大第三食堂"}]},
+						{"label":"开封职业技术学院","children":[
+							{"label":"开职第一食堂"},{"label":"开职第二食堂"},{"label":"开职第三食堂"}]}
+											]
+					}
+				]
+		},
+		"apff-notice_text":{
+				"data":[
+					{
+						"text": "大家早上好中午好下午好晚上好",
+						"id": 1,
+						"link":"到达信息列表"
+					},
+					{
+						"text": "欢迎来到食约APP~",
+						"id": 2,
+						"link":"到达饮品列表"
+					}
+				]
 		}
 }

@@ -1,8 +1,7 @@
 //云函数映射 默认apff-uni
 const moduleMap = {
 	user: 'apff-user',
-	payment: 'apff-pay',
-	swiper:'apff-swiper_info'
+	payment: 'apff-pay'
 }
 /**
  * @param {String} module  
@@ -11,8 +10,9 @@ const moduleMap = {
  */
 export const request = (module, operation, data={})=>{
 	return new Promise((resolve, reject) => {
-		const cloudFnName = moduleMap[module] || 'test';
+		const cloudFnName = moduleMap[module] || 'apff-uniapp';
 		//alert(cloudFnName);
+		//alert(operation)
 		uniCloud.callFunction({
 		    name: cloudFnName,
 		    data: {

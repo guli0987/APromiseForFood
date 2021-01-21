@@ -106,20 +106,21 @@
 		methods: {
 			//异步加载方法
 			async loadNavList(){
-				let swiper_info = await this.$request('test','getSwiper',{});
+				let swiper_info = await this.$request('swiper','getSwiper',{});
 				this.swiper_info = swiper_info.data;
 			},
 			async loadPickerList(){
-				let pickerValueArray = await this.$api.json('pickerArray');
-				this.pickerValueArray = pickerValueArray;
+				let pickerValueArray = await this.$request('picker','getPicker',{});
+				this.pickerValueArray = pickerValueArray.data;
 			},
 			async loadTagList(){
-				let tag_DataList = await this.$api.json('tagDataList');
-				this.tag_DataList = tag_DataList;
+				let tag_DataList = await this.$request('tag','getTag',{});
+				this.tag_DataList = tag_DataList.data;
 			},
 			async loadNotice(){
-				let notice_text = "云端数据";
-				this.notice_text=notice_text;
+				let notice_text = await this.$request('notice','getNotice',{});
+				//alert(JSON.stringify(notice_text.data[0].text))
+				this.notice_text=notice_text.data[0].text;
 			},
 			//头部导航方法
 			picker_showLocationPicker() {
