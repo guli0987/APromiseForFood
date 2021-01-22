@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import App from './App'
 import Json from './Json' //测试虚拟数据
+// 注册全局组件
 import {request} from 'common/js/request.js'
-Vue.config.productionTip = false
+import MescrollBody from "@/components/mescroll-uni/mescroll-body.vue"
+
+
 
 const json = type=>{
 	//模拟异步请求数据
@@ -14,7 +17,9 @@ const json = type=>{
 }
 Vue.prototype.$api = {json};
 Vue.prototype.$request=request;
+Vue.component('mescroll-body', MescrollBody)
 
+Vue.config.productionTip = false
 App.mpType = 'app'
 const app = new Vue({
     ...App

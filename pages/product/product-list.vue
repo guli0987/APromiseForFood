@@ -1,6 +1,5 @@
 <template>
 	<view>
-		<!-- <view v-for="(item, index) in renderList" :key="index" class="list-item row b-b"> -->
 		<view class="window-body">
 			<view v-for="item in productList">
 				<uni-card :isShadow="true" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard">
@@ -23,9 +22,7 @@
 					</template>
 				</uni-card>
 				</view>
-			<!-- @click="navTo('/pages/product/detail?id=' + item._id)" -->
 			</view>
-		<!-- </view> -->
 	</view>
 </template>
 
@@ -68,6 +65,7 @@
 		},
 		methods: {
 			clickCard() {
+				//@click="navTo('/pages/product/detail?id=' + item._id)"
 				uni.showToast({
 					title: '点击卡片',
 					icon: 'none'

@@ -20,6 +20,14 @@
 				:pickerValueArray="pickerValueArray"
 			></mpvue-picker>
 		</view>
+		<!-- 上拉加载下拉刷新 -->
+	<!-- <mescroll-body 
+			ref="mescrollRef" 
+			@init="mescrollInit" 
+			@down="downCallback" 
+			@up="loadHotList" 
+			:down="downOption" 
+			:up="upOption"> -->
 		<!-- 轮播图 swiper-->
 		<view>
 			<uni-swiper-dot @clickItem="swiperClickItem" :info="swiper_info" :current="swiper_current" :mode="swiper_mode" :dots-styles="swiper_dotsStyles" field="swiper_content">
@@ -31,7 +39,7 @@
 					</swiper-item>
 				</swiper>
 			</uni-swiper-dot>
-			</view>
+		</view>
 		<!-- 选项卡 tag-->
 		<view>
 			<view class="tag-section">
@@ -51,17 +59,15 @@
 		<view>
 			<product-list ref="productList" :list="windowList"></product-list><!--  -->
 			<!-- 上拉加载更多 -->
-			<uni-load-more :status="window_status" @clickLoadMore="loadWindowList"></uni-load-more>
+			<!-- <uni-load-more :status="window_status" @clickLoadMore="loadWindowList"></uni-load-more> -->
 		</view>
-<!-- 		<view class="container">
-			<view class="intro">本项目已包含uni ui组件，无需import和注册，可直接使用。在代码区键入字母u，即可通过代码助手列出所有可用组件。光标置于组件名称处按F1，即可查看组件文档。</view>
-		</view> -->
+	<!-- </mescroll-body> -->
 	</view>
 </template>
 
 <script>
 	import mpvuePicker from '../../../components/mpvue-picker/mpvuePicker.vue';
-	import productList from '../../product/product-list.vue'
+	import productList from '../../product/product-list.vue';
 	export default {
 		components: {
 			mpvuePicker,
@@ -90,8 +96,7 @@
 				 //通告栏
 				 notice_text:"欢迎来到食约APP~",
 				 //窗口列表
-				 windowList:[],
-				 window_status: 'more'//more,loading,noMore
+				 windowList:[]
 			}
 		},
 		onLoad() {
@@ -189,12 +194,12 @@
 				}) */
 			},
 			//上拉加载更多
-			loadWindowList(e) {
+			/* loadWindowList(e) {
 				uni.showToast({
 					icon: 'none',
 					title: "当前状态：" + e.detail.status
 				})
-			}
+			} */
 		},
 		//头部按钮方法
 		onNavigationBarButtonTap(e) {
