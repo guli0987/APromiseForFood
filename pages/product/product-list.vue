@@ -34,11 +34,8 @@
 		components: {},
 		data() {
 			return {
-				list: [],
-				Tips: [],
 				loadType: 'add',//标记加载还是刷新数据
-				productList: [
-	{
+				productList: [{
 		id:1,
 		icon:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png",
 		title:"窗口号1",
@@ -48,42 +45,26 @@
 		imgB:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
 		imgC:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
 		content:"布告"
-	},
-	{
-		id:2,
-		icon:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png",
-		title:"窗口号2",
-		subTitle:"口味",
-		extra:"宣传语",
-		imgA:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		imgB:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		imgC:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		content:"布告"
-	},
-	{
-		id:3,
-		icon:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png",
-		title:"窗口号3",
-		subTitle:"口味",
-		extra:"宣传语",
-		imgA:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		imgB:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		imgC:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		content:"布告"
-	}
-	
-],
-				List:[]
+	}]
+			}
+		},
+		props:{
+			list: {
+				type: Array,
+				default:()=>{
+					return []
+				}
 			}
 		},
 		watch: {
-			/* list(list){
+			list(val,oldValue){
 				if(this.loadType === 'add'){
-					this.renderList = this.renderList.concat(list.slice(this.renderList.length));
+					alert("test")
+					//this.productList = this.productList.concat(val.slice(this.productList.length));
 				}else{
-					this.renderList = list;
+					this.productList = val;
 				}
-			} */
+			}
 		},
 		methods: {
 			clickCard() {

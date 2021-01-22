@@ -49,13 +49,13 @@
 		
 		<!-- 窗口列表 window-->
 		<view>
-			<product-list ref="productList" ></product-list><!-- :list="list" -->
+			<product-list ref="productList" :list="windowList"></product-list><!--  -->
 			<!-- 上拉加载更多 -->
-			<!-- <uni-load-more :status="more"></uni-load-more> -->
+			<uni-load-more :status="window_status" @clickLoadMore="loadWindowList"></uni-load-more>
 		</view>
-		<view class="container">
+<!-- 		<view class="container">
 			<view class="intro">本项目已包含uni ui组件，无需import和注册，可直接使用。在代码区键入字母u，即可通过代码助手列出所有可用组件。光标置于组件名称处按F1，即可查看组件文档。</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -90,7 +90,8 @@
 				 //通告栏
 				 notice_text:"欢迎来到食约APP~",
 				 //窗口列表
-				 list:[]
+				 windowList:[],
+				 window_status: 'more'//more,loading,noMore
 			}
 		},
 		onLoad() {
@@ -186,6 +187,13 @@
 				/* uni.navigateTo({
 					//url:'../list/list?type=' + value.type + '&id=' + value.id
 				}) */
+			},
+			//上拉加载更多
+			loadWindowList(e) {
+				uni.showToast({
+					icon: 'none',
+					title: "当前状态：" + e.detail.status
+				})
 			}
 		},
 		//头部按钮方法
