@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="window-body">
-			<view v-for="item in productList">
+			<view v-for="(item,index) in productLists" :key="index">
 				<uni-card :isShadow="true" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard">
 					<view>
 						<view class="window-image-box">
@@ -32,17 +32,18 @@
 		data() {
 			return {
 				loadType: 'add',//标记加载还是刷新数据
-				productList: [{
-		id:1,
-		icon:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png",
-		title:"窗口号1",
-		subTitle:"口味",
-		extra:"宣传语",
-		imgA:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		imgB:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		imgC:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
-		content:"布告"
-	}]
+				productLists: [],
+				testList:[{
+							id:1,
+							icon:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png",
+							title:"新",
+							subTitle:"口味",
+							extra:"宣传语",
+							imgA:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
+							imgB:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
+							imgC:"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png",
+							content:"布告"
+						}]
 			}
 		},
 		props:{
@@ -54,12 +55,17 @@
 			}
 		},
 		watch: {
-			list(val,oldValue){
+			list(val,oldValue){//val=newVal
 				if(this.loadType === 'add'){
-					alert("test")
-					//this.productList = this.productList.concat(val.slice(this.productList.length));
+					alert("this.loadType === 'add'");
+					//this.productLists = this.productLists.concat(val.slice(this.productLists.length));
+					//this.productLists=this.productLists.concat(this.testList);
+					//this.productLists=this.productLists.concat(val);
+					//alert(val.slice(this.productLists.length));
+					this.productLists=val;
 				}else{
-					this.productList = val;
+					alert("this.loadType === 'refresh'");
+					this.productLists = val;
 				}
 			}
 		},

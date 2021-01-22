@@ -11,6 +11,9 @@ const {
 const {
 	tabName_n
 } = require('./notice');
+const {
+	tabName_w
+} = require('./window');
 const db=uniCloud.database();
 exports.main = async (event, context) => {
 	//event为客户端上传的参数
@@ -36,8 +39,12 @@ exports.main = async (event, context) => {
 			res = await collection.limit(1).get(); 
 			break;
 		case 'getWindow':
-			//collection = db.collection(tabName_n);
-			//res = await collection.limit(1).get(); 
+			//event.data.offset
+			//event.data.limit
+			collection = db.collection(tabName_w);
+			//res = await collection.limit(8).get(); 
+			res = await collection.skip(event.data.offset).limit(event.data.limit).get();
+			//https://uniapp.dcloud.io/uniCloud/cf-database skip有缺陷，权宜之计
 			break;
 		default:
 			console.log("default");

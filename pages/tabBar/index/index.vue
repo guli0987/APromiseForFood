@@ -21,14 +21,14 @@
 			></mpvue-picker>
 		</view>
 		<!-- 上拉加载下拉刷新 -->
-	<!-- <mescroll-body 
+	<mescroll-body 
 			ref="mescrollRef" 
 			@init="mescrollInit" 
 			@down="downCallback" 
-			@up="loadHotList" 
-			:down="downOption" 
-			:up="upOption"> -->
-		<!-- 轮播图 swiper-->
+			@up="loadHotWindowList" 
+			:up="upOption"
+			:down="downOption">
+		<!-- 轮播图 swiper -->
 		<view>
 			<uni-swiper-dot @clickItem="swiperClickItem" :info="swiper_info" :current="swiper_current" :mode="swiper_mode" :dots-styles="swiper_dotsStyles" field="swiper_content">
 				<swiper class="swiper-box" @change="swiperChange" :current="swiperDotIndex" :autoplay="true">
@@ -40,7 +40,7 @@
 				</swiper>
 			</uni-swiper-dot>
 		</view>
-		<!-- 选项卡 tag-->
+		<!-- 选项卡 tag -->
 		<view>
 			<view class="tag-section">
 				<view class="tag-item" v-for="item in tag_DataList" :key="item.id" @tap="tagGoList(value)">
@@ -49,23 +49,23 @@
 				</view>
 			</view>
 		</view>
-		<!-- 通告栏 notice-->
+		<!-- 通告栏 notice -->
 		<view>
 			<uni-notice-bar :show-icon="true" :scrollable="true" :single="true" v-if="true" @click="noticeClick" :text="notice_text" /> 
 		</view>
-		<!-- 热门推荐 hot-->
+		<!-- 热门推荐 hot -->
 		
-		<!-- 窗口列表 window-->
+		<!-- 窗口列表 window -->
 		<view>
-			<product-list ref="productList" :list="windowList"></product-list><!--  -->
+			<product-list ref="productList" :list="windowList"></product-list>
 			<!-- 上拉加载更多 -->
-			<!-- <uni-load-more :status="window_status" @clickLoadMore="loadWindowList"></uni-load-more> -->
 		</view>
-	<!-- </mescroll-body> -->
+	</mescroll-body>
 	</view>
 </template>
 
 <script>
+	import indexMiXin from './index.js'
 	import mpvuePicker from '../../../components/mpvue-picker/mpvuePicker.vue';
 	import productList from '../../product/product-list.vue';
 	export default {
@@ -73,6 +73,7 @@
 			mpvuePicker,
 			productList
 		},
+		mixins: [indexMiXin],
 		data() {
 			return {
 				//头部导航
@@ -108,6 +109,9 @@
 			this.loadPickerList();
 			//加载通告栏
 			this.loadNotice();
+			/* setTimeout(()=>{
+				//this.navTo('/pages/address/list')
+			}, 1000) */
 		},
 		methods: {
 			//异步加载方法
