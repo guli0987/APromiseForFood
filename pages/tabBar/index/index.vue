@@ -153,6 +153,7 @@
 					//text = text.substr(0, 3) + '...';
 					text = text.split("-")[text.split("-").length-1];
 				}
+				//app-plus 配置编译到 App 平台时的特定样式，部分常用配置 H5 平台也支持。
 				// #ifdef APP-PLUS
 				let currentWebview = page.$getAppWebview();
 				let titleNView = currentWebview.getStyle().titleNView;
