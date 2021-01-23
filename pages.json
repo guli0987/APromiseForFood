@@ -20,7 +20,7 @@
 							"width": "auto"
 						}
 						],
-						"titleText":"首页"
+						"titleText":""
 						
 					},
 					"bounce": "none"
@@ -30,7 +30,37 @@
 		{
 			"path": "pages/tabBar/square/square",
 			"style": {
-				"navigationBarTitleText": "广场"
+				"navigationBarTitleText": "广场",
+				"app-plus": {
+					"titleNView": {
+						"type": "default",//导航栏样式。"default"-默认样式；"transparent"-滚动透明渐变；"float"-悬浮导航栏。
+						"titleColor": "#fff",//#fff
+						"backgroundColor": "#007AFF",
+						"buttons": [{
+							"fontSrc": "/static/uni.ttf",
+							"text": "\ue537",
+							"width": "40px",
+							"fontSize": "28px",
+							"color": "#fff",
+							"background": "rgba(0,0,0,0)",
+							"float":"left"
+							}
+							,{
+							"fontSrc": "/static/uni.ttf",
+							"text": "\ue263",
+							"width": "40px",
+							"fontSize": "28px",
+							"color": "#fff",
+							"background": "rgba(0,0,0,0)"
+						}],
+						"searchInput": {
+							"backgroundColor": "#fff",
+							"borderRadius": "6px",
+							"placeholder": "输入关键词检索",
+							"disabled": true
+						}
+					}
+				}
 			}
 		},
 		{
@@ -49,6 +79,43 @@
 			"path": "pages/product/product-list",
 			"style": {
 				"navigationBarTitleText": "产品"
+			}
+		},
+		{
+			"path": "pages/tabBar/square/news-item",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/tabBar/square/detail/detail",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},
+		{
+			"path": "pages/tabBar/square/detail/history",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"app-plus": {
+					"titleNView": {
+						"titleColor": "#fff",
+						"backgroundColor": "#007AFF",
+						"buttons": [{
+							"fontSrc": "/static/uni.ttf",
+							"text": "\ue537",
+							"width": "auto",
+							"fontSize": "28px",
+							"color": "#fff"
+						}],
+						"searchInput": {
+							"backgroundColor": "#fff",
+							"borderRadius": "6px",
+							"placeholder": "开始搜索",
+							"autoFocus": true
+						}
+					}
+				}
 			}
 		},
 		{

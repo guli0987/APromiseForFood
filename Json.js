@@ -1,3 +1,56 @@
+const newsData = [
+        {
+            "datetime": "40分钟前",
+            "article_type": 0,
+            "title": "uni-app行业峰会频频亮相，开发者反响热烈!",
+            "source": "DCloud",
+            "comment_count": 639
+        },
+        {
+            "datetime": "一天前",
+            "article_type": 1,
+            "title": "DCloud完成B2轮融资，uni-app震撼发布!",
+            "image_url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b7c7f970-517d-11eb-97b7-0dc4655d6e68.jpg",
+            "source": "DCloud",
+            "comment_count": 11395
+        },
+        {
+            "datetime": "一天前",
+            "article_type": 2,
+            "title": "中国技术界小奇迹：HBuilder开发者突破200万",
+            "image_url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b4cd3000-517d-11eb-a16f-5b3e54966275.jpg",
+            "source": "DCloud",
+            "comment_count": 11395
+        },
+        {
+            "article_type": 3,
+            "image_list": [{
+                "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+                "width": 563,
+                "height": 316
+            }, {
+                "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b4cd3000-517d-11eb-a16f-5b3e54966275.jpg",
+                "width": 641,
+                "height": 360
+            }, {
+                "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b7c7f970-517d-11eb-97b7-0dc4655d6e68.jpg",
+                "width": 640,
+                "height": 360
+            }],
+            "datetime": "5分钟前",
+            "title": "uni-app 支持使用 npm 安装第三方包，生态更趋丰富",
+            "source": "DCloud",
+            "comment_count": 11
+        },
+        {
+            "datetime": "2小时前",
+            "article_type": 4,
+            "title": "uni-app 支持原生小程序自定义组件，更开放、更自由",
+            "image_url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+            "source": "DCloud",
+            "comment_count": 69
+        }
+    ]
 /* 头部导航挑选城市 */
 const pickerArray=[
 					{label:"洛阳","children":[
@@ -801,6 +854,7 @@ export default {
 	swiperInfo,
 	tagDataList,
 	productList,
+	newsData,
 	
 	carouselList,
 	cartList,
