@@ -79,7 +79,7 @@ export default{
 			let pageSize = page.size; // 页长, 默认每页10条
 			if(pageNum === 1){
 				//第一页清空数据重载，第一页刷新
-				//this.windowList = [];
+				this.windowList = [];
 				//alert("刷新数据");
 				/* this.$nextTick(() => {
 					 alert(this.$refs.productList);
