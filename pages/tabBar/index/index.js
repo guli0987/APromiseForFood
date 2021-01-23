@@ -90,7 +90,7 @@ export default{
 					}
 				 }) 
 			}else{//第二页往上增加
-				alert("增加数据");
+				//alert("增加数据");
 				this.$refs.productList.loadType = 'add';
 			}
 			const res = await this.$request('window', 'getWindow', {

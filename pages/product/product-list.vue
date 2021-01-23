@@ -57,14 +57,14 @@
 		watch: {
 			list(val,oldValue){//val=newVal
 				if(this.loadType === 'add'){
-					alert("this.loadType === 'add'");
+					//alert("this.loadType === 'add'");
 					//this.productLists = this.productLists.concat(val.slice(this.productLists.length));
 					//this.productLists=this.productLists.concat(this.testList);
 					//this.productLists=this.productLists.concat(val);
 					//alert(val.slice(this.productLists.length));
 					this.productLists=val;
 				}else{
-					alert("this.loadType === 'refresh'");
+					//alert("this.loadType === 'refresh'");
 					this.productLists = val;
 				}
 			}
