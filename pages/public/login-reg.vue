@@ -21,32 +21,31 @@
 						@input="inputChange"
 					/>
 				</view>
-				<view class="input-item" v-if="true">
-					<text class="tit">密码</text>
-					<input 
-						type="mobile" 
-						value="" 
-						placeholder="8-18位不含特殊字符的数字、字母组合"
-						placeholder-class="input-empty"
-						maxlength="20"
-						password 
-						data-key="password"
-						@input="inputChange"
-						@confirm="toLogin"
-					/>
+				<view class="input-item-code" v-if="true">
+					<text class="tit">验证码</text>
+					<view class="row">
+						<input
+							v-model="code"
+							type="number"
+							maxlength="6"
+							placeholder="请输入手机验证码"
+							placeholder-style="color: #909399"
+						/>
+						<mix-code :mobile="mobile" templateCode="SMS_194050994"></mix-code>
+					</view>
 				</view>
 			</view>
 			<button class="confirm-btn" @click="toLogin" :disabled="logining">登录</button>
-			<view class="forget-section">
-				忘记密码?
-			</view>
 			<view class="login-other">
+				已有账号?<br>
 				<text @click="toLoginOther">换种方式登录</text>
 			</view>
 		</view>
-		<view class="register-section">
-			还没有账号?
-			<text @click="toRegist">马上注册</text>
+		<view class="agreement center">
+			<text class="mix-icon icon-xuanzhong" :class="{active: agreement}" @click="checkAgreement"></text>
+			<text @click="checkAgreement">请认真阅读并同意</text>
+			<text class="tit" @click="navToAgreementDetail(1)">《用户服务协议》</text>
+			<text class="tit" @click="navToAgreementDetail(2)">《隐私权政策》</text>
 		</view>
 	</view>
 </template>
@@ -62,7 +61,9 @@
 			return {
 				mobile: '',
 				password: '',
-				logining: false
+				logining: false,
+				code: '',
+				agreement: true
 			}
 		},
 		onLoad(){
@@ -217,6 +218,40 @@
 			width: 100%;
 		}	
 	}
+	/* 验证码登录 */
+	.input-item-code{
+		display:flex;
+		flex-direction: column;
+		align-items:flex-start;
+		justify-content: center;
+		padding: 0 30rpx;
+		background: #f8f6fc;
+		height: 120rpx;
+		border-radius: 4px;
+		margin-bottom: 50rpx;
+		
+		&:last-child{
+			margin-bottom: 0;
+		}
+		.row{
+			width: 100%;
+		}
+		.tit{
+			height: 50rpx;
+			line-height: 56rpx;
+			font-size: 26rpx;
+			color: #606266;
+		}
+		input{
+			flex: 1;
+			height: 60rpx;
+			font-size: 30rpx;
+			color: #303133;
+			width: 100%;
+			margin-bottom: -46rpx;/* 勉强解决验证码位置错误的问题 */
+		}	
+	}
+
 	.confirm-btn{
 		width: 630upx;
 		height: 76upx;
@@ -230,21 +265,16 @@
 			border-radius: 100px;
 		}
 	}
-	.forget-section{
+	/* 换种方式登录  手机验证码*/
+	/* .login-other{
 		font-size: $font-sm+2upx;
 		color: $font-color-spec;
 		text-align: center;
 		margin-top: 40upx;
-	}
-	/* 换种方式登录  手机验证码*/
+	} */
 	.login-other{
-		font-size: $font-sm+2upx;
-		color: $uni-color-success;
-		text-align: center;
 		margin-top: 40upx;
-	}
-	.register-section{
-		position:absolute;
+		/* position:absolute; */
 		left: 0;
 		bottom: 50upx;
 		width: 100%;
@@ -256,5 +286,32 @@
 			margin-left: 10upx;
 		}
 	}
-	
+	/* 协议 */
+	.center{
+		text-align: center;
+	}
+	.agreement{
+		position: absolute;
+		left: 0;
+		bottom: 6vh;
+		z-index: 1;
+		width: 750rpx;
+		height: 90rpx;
+		font-size: 24rpx;
+		color: #999;
+		
+		.mix-icon{
+			font-size: 36rpx;
+			color: #ccc;
+			margin-right: 8rpx;
+			margin-top: 1px;
+			
+			&.active{
+				color: $base-color;
+			}
+		}
+		.tit{
+			color: #40a2ff;
+		}
+	}
 </style>

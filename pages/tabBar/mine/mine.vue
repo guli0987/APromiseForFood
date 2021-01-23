@@ -29,7 +29,7 @@
 									});
 								}else{
 									uni.navigateTo({
-										url:"../../public/login"
+										url:"../../public/login-reg"
 									});
 								}
 							}

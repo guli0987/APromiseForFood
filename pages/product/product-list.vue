@@ -27,6 +27,7 @@
 </template>
 
 <script>
+	/* 拓展:窗口图片可滑动 */
 	export default {
 		components: {},
 		data() {

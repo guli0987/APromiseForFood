@@ -14,6 +14,6 @@
 
 <style>
 	/*每个页面公共css */
-	@import './common/common.css';
-	
+	@import './common/css/common.css';
+	@import url("./common/css/icon.css");
 </style>
