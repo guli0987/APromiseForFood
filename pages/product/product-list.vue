@@ -4,6 +4,7 @@
 			<view v-for="(item,index) in productLists" :key="index">
 				<uni-card :isShadow="true" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard">
 					<view>
+						<!-- 图片可以滑动 -->
 						<view class="window-image-box">
 							<image class="window-image" mode="aspectFill" :src="item.imgA" />
 							<image class="window-image" mode="aspectFill" :src="item.imgB" />
