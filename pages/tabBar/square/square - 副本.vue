@@ -6,20 +6,19 @@
 		        </view>
 		    </scroll-view>
 			<view class="line-h"></view><!-- 分割线 -->
-			<swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
+			<swiper :current="tabIndex" class="swiper-box" :duration="300" @change="ontabchange">
 			    <swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
 					<!-- #ifndef APP-NVUE -->
-					<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y @scrolltolower="loadMore(index1)">
+					<scroll-view class="scroll-v list" enableBackToTop="true" scroll-y="true" @scrolltolower="loadMore(index1)">
 						<view v-for="(newsitem,index2) in tab.data" :key="newsitem.id">
-							<!-- 列表详情 只有7个，最后三个不显示-->
-							{{newsitem.datetime}}
-							<!-- <media-item :options="newsitem" @close="close(index1,index2)" @click="goDetail(newsitem)"></media-item> -->
+							<!-- {{newsitem.datetime}} -->
+							<media-item :options="newsitem" @close="close(index1,index2)" @click="goDetail(newsitem)"></media-item>
 						</view>
 						<view class="loading-more" v-if="tab.isLoading || tab.data.length > 4">
 							<text class="loading-more-text">{{tab.loadingText}}</text>
 						</view>
 					</scroll-view>
-					<!-- #endif -->
+					 <!-- #endif -->
 			    </swiper-item>
 			</swiper>
 		</view>
@@ -79,6 +78,13 @@ export default {
 			refreshIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg=="
 		};
 	},
+	/* mounted() {
+	    let info = uni.createSelectorQuery().in(this).select('.swiper-box').boundingClientRect()
+	    info.exec(res => {
+	        this.scrollHeight = res[0].height
+	        console.log(this.scrollHeight)
+	    })
+	}, */
 	onLoad() {
 		this.loadList();
 	    setTimeout(()=>{
@@ -103,7 +109,7 @@ export default {
 	    getList(index) {//加载列表文章
 	        let activeTab = this.newsList[index];
 	        let list = [];
-	        for (let i = 1; i <= 10; i++) {
+	        for (let i = 1; i <= 100; i++) {
 				let ranIndex=Math.floor(Math.random() * 5);
 	            let item = Object.assign({}, this.newsData[ranIndex]);
 	            item.id = this.newGuid();
@@ -257,9 +263,11 @@ export default {
 	}
 	
 	/* #endif */
+	
 	.tabs {
 	    flex: 1;
 	    flex-direction: column;
+		/* display: flex; */
 	    overflow: hidden;
 	    background-color: #ffffff;
 	    /* #ifdef MP-ALIPAY || MP-BAIDU */
@@ -311,6 +319,7 @@ export default {
 	.uni-tab-item-title-active {
 	    color: #007AFF;
 	}
+	
 	.swiper-box {
 	    flex: 1;
 	}
@@ -399,4 +408,5 @@ export default {
 	    font-size: 28rpx;
 	    color: #999;
 	}
+	
 </style>

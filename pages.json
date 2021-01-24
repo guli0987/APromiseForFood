@@ -47,7 +47,7 @@
 							}
 							,{
 							"fontSrc": "/static/uni.ttf",
-							"text": "\ue263",
+							"text": "\ue203",
 							"width": "40px",
 							"fontSize": "28px",
 							"color": "#fff",
@@ -66,13 +66,35 @@
 		{
 			"path": "pages/tabBar/order/order",
 			"style": {
-				"navigationBarTitleText": "订单"
+				"navigationBarTitleText": "订单",
+				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh": true,
+				"titleImage": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b3e4cbd0-517d-11eb-a16f-5b3e54966275.png"
 			}
 		},
 		{
 			"path": "pages/tabBar/mine/mine",
 			"style": {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
 			}
 		},
 		{
