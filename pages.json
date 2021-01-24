@@ -38,7 +38,7 @@
 						"backgroundColor": "#007AFF",
 						"buttons": [{
 							"fontSrc": "/static/uni.ttf",
-							"text": "\ue537",
+							"text": "\ue203",
 							"width": "40px",
 							"fontSize": "28px",
 							"color": "#fff",
@@ -47,7 +47,7 @@
 							}
 							,{
 							"fontSrc": "/static/uni.ttf",
-							"text": "\ue203",
+							"text": "\ue537",
 							"width": "40px",
 							"fontSize": "28px",
 							"color": "#fff",

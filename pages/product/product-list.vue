@@ -6,11 +6,21 @@
 					<view>
 						<!-- 图片可以滑动 -->
 						<view class="window-image-box">
-							<image class="window-image" mode="aspectFill" :src="item.imgA" />
+							<!-- <view v-for="img in item.imgs">
+								<image class="window-image-swiper" mode="aspectFill" :src="img.url" />
+							</view> -->
+
+							
+							<swiper>
+								<swiper-item v-for="(img, key) in item.imgs" :key="key">
+									<image class="window-image-swiper" mode="aspectFill" :src="img.url" />
+								</swiper-item>
+							</swiper>
+							<!-- <image class="window-image" mode="aspectFill" :src="item.imgA" />
 							<image class="window-image" mode="aspectFill" :src="item.imgB" />
-							<image class="window-image" mode="aspectFill" :src="item.imgC" />
+							<image class="window-image" mode="aspectFill" :src="item.imgC" /> -->
 						</view>
-						<view class="content-box">
+						<view class="content-box" v-if="false">
 							<text class="content-box-text">
 								{{item.content}}
 								</text>
@@ -86,17 +96,33 @@
 <style>
 	.window-image-box {
 		/* #ifndef APP-NVUE */
-		display: flex;
+		/* display: flex; */
 		flex-direction: row;/* column为列 */
 		align-items: center;
 		flex-wrap:wrap;
 		/* #endif */
-		height: 180rpx;
+		/* height: 180rpx; */
+		height: 100%;
 		/* overflow: hidden; */
 		/* padding: 10rpx 16rpx; */
+		/* flex: 1; */
 		
 	}
-	
+	.swiper{
+		height: 100%;
+		width: 100%;
+	}
+	.window-image-swiper{
+		/* #ifndef APP-NVUE */
+		width: 100%;
+		height: 100%;
+		/* #endif */
+		/* flex: 1; */
+		/* display: flex; */
+		flex-direction: column;
+		align-items: center;
+		/* margin: 0 16rpx; */
+	}
 	.window-image {
 		/* #ifndef APP-NVUE */
 		width: 30%;
