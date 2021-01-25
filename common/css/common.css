@@ -15,7 +15,10 @@
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
-
+	.icon-about:before{/* 没用 */
+		/* content: "\e626"; */
+		content: url('././static/about.svg');/* size:20 */
+	}
 	.icon-yiguoqi1:before {
 		content: "\e700";
 	}

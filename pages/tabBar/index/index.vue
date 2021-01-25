@@ -5,7 +5,19 @@
 			<!-- 抽屉 drawer-->
 			<uni-drawer ref="drawer_showLeft" mode="left" ><!-- mask="true" maskClick="true" -->
 			    <view style="padding:30rpx;">
-			        <view class="uni-title">抽屉式导航</view>
+			        <view class="sys-set-title">系统设置</view>
+					<view class="scroll-view">
+						<scroll-view class="scroll-view-box" scroll-y="true">
+							<view class="info-content" v-for="(sys_set,index_sys) in sysSettingsList" :key="index_sys">
+								<uni-list>
+									<uni-list-item :show-extra-icon="true" showArrow :extra-icon="sys_set.extraIcon" :title="sys_set.title" clickable @click="sysSettingsClick(sys_set.link)"/>
+								</uni-list>	
+							</view>
+							<view class="close">
+								<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('drawer_showLeft')"><text class="word-btn-white">关闭抽屉</text></view>
+							</view>
+						</scroll-view>
+					</view>
 			    </view>
 			</uni-drawer>
 			<!-- 三级联动 picker-->
@@ -32,9 +44,9 @@
 		<view>
 			<uni-swiper-dot @clickItem="swiperClickItem" :info="swiper_info" :current="swiper_current" :mode="swiper_mode" :dots-styles="swiper_dotsStyles" field="swiper_content">
 				<swiper class="swiper-box" @change="swiperChange" :current="swiperDotIndex" :autoplay="true">
-					<swiper-item v-for="(item, index) in swiper_info" :key="index" @click="swiperClick(item.link)">
-						<view :class="item.colorClass" class="swiper-item">
-							<image class="swiper-image" :src="item.url" mode="aspectFill" />
+					<swiper-item v-for="(item_swiper, index_swiper) in swiper_info" :key="index_swiper" @click="swiperClick(item_swiper.link)">
+						<view :class="item_swiper.colorClass" class="swiper-item">
+							<image class="swiper-image" :src="item_swiper.url" mode="aspectFill" />
 						</view>
 					</swiper-item>
 				</swiper>
@@ -43,9 +55,9 @@
 		<!-- 选项卡 tag -->
 		<view>
 			<view class="tag-section">
-				<view class="tag-item" v-for="item in tag_DataList" :key="item.id" @tap="tagGoList(value)">
-					<image class="tag-icon" :src="item.icon"></image>
-					<text>{{ item.type }}</text>
+				<view class="tag-item" v-for="item_tag in tag_DataList" :key="item_tag.id" @tap="tagGoList(value)">
+					<image class="tag-icon" :src="item_tag.icon"></image>
+					<text>{{ item_tag.type }}</text>
 				</view>
 			</view>
 		</view>
@@ -76,6 +88,108 @@
 		mixins: [indexMiXin],
 		data() {
 			return {
+				sysSettingsList:[
+					{
+						"title":"浏览播放",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'eye'
+						},
+						"link":""
+					},
+					{
+						"title":"网络设置",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'spinner-cycle'
+						},
+						"link":""
+					},
+					{
+						"title":"通知管理",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'chatbubble'
+						},
+						"link":""
+					},
+					{
+						"title":"应用布局",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'map'
+						},
+						"link":""
+					},
+					{
+						"title":"夜间模式",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'starhalf'
+						},
+						"link":""
+					},
+					{
+						"title":"省流量模式",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'flag'
+						},
+						"link":""
+					},
+					{
+						"title":"清除缓存",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'trash'
+						},
+						"link":""
+					},
+					{
+						"title":"分享",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'redo'
+						},
+						"link":""
+					},
+					{
+						"title":"去评价",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'hand-thumbsup'
+						},
+						"link":""
+					},
+					{
+						"title":"开源许可",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'paperclip'
+						},
+						"link":""
+					},
+					{
+						"title":"隐私协议",
+						"extraIcon": {
+							color: '#000000',
+							size: '20',
+							type: 'eye-slash-filled'
+						},
+						"link":""
+					}
+				],
+				
 				//头部导航
 				pickerValueArray:[],
 				picker_themeColor: '#007AFF',
@@ -205,6 +319,16 @@
 					title: "当前状态：" + e.detail.status
 				})
 			} */
+			// 关闭窗口
+			closeDrawer(e) {
+				this.$refs[e].close()
+			},
+			sysSettingsClick(e){
+				uni.showToast({
+					icon: 'none',
+					title: "你点击了设置选项"
+				})
+			}
 		},
 		//头部按钮方法
 		onNavigationBarButtonTap(e) {
@@ -284,7 +408,60 @@
 			border-radius: 50%;
 		}
 	/* 热门推荐 */
-
 	
+	
+	/* drawer布局 */
+	.word-btn-white {
+		font-size: 16px;
+		color: #FFFFFF;
+	}
+	
+	.word-btn {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		border-radius: 6px;
+		height: 40px;
+		margin: 15px;
+		background-color: #007AFF;
+	}
+	
+	.word-btn--hover {
+		background-color: #4ca2ff;
+	}
+	.sys-set-title{
+		 font-family:Arial, Helvetica, sans-serif;
+		 font-size: large;
+		 position: absolute;	 
+	}
+	.scroll-view {
+		/* #ifndef APP-NVUE */
+		width: 100%;
+		height: 100%;
+		/* #endif */
+		flex: 1;
+	}
+	
+	.scroll-view-box {
+		margin-top: 60px;
+		flex: 1;
+		position: absolute;
+		/* position: relative; */
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	
+	.info-content {
+		padding: 5px 15px;
+	}
+	
+	.close {
+		padding: 15px;
+	}
 	
 </style>

@@ -88,9 +88,10 @@
 				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包"></list-cell>
 				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="我的收藏"></list-cell>
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
-				<list-cell icon="icon-app" iconColor="#e07472" title="关于手机" tips="版本1.0" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
-				<list-cell icon="icon-logout" iconColor="#e07472" title="退出登录" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
-				
+				<list-cell icon="icon-about" iconColor="#bababa" title="关于" tips="版本1.0" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
+				<uni-list>
+					<uni-list-item class="mine-text-direction" title="退出登录" clickable @click="loggout"/>
+				</uni-list>
 			</view>
 		</view>
 	</view>
@@ -138,6 +139,12 @@
 				} */
 		},
 		methods:{
+			loggout(e) {
+				console.log('执行click事件', e.data)
+				uni.showToast({
+					title: '退出成功'
+				});
+			},
 			/**
 			 * 统一跳转接口,拦截未登录路由
 			 * navigator标签现在默认没有转场动画，所以用view
@@ -209,6 +216,10 @@
 	}
 </script>
 <style lang='scss'>
+	.mine-text-direction{
+		text-align: center;
+		/* font-size:100upx; 无效*/
+	}
 	%flex-center {
 	 display:flex;
 	 flex-direction: column;
