@@ -98,7 +98,7 @@
 </template>
 <script>
 	import listCell from '@/components/mix-list-cell/mix-list-cell.vue';
-	//导入mapState方法
+	//引入mapState,mapState 为辅助函数 当一个组件需要获取多个状态的时候，将这些状态都声明为计算属性会有些重复和冗余。
 	import {
 	    mapState 
 	} from 'vuex';  
@@ -106,8 +106,15 @@
 		components: {
 			listCell
 		},
-		computed: {
-			...mapState(['forceLogin','hasLogin','userName','userInfo']),//对全局变量进行监控
+		computed: {//计算属性
+		//当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组
+			//...mapState(['forceLogin','hasLogin','userName','userInfo']),//对全局变量进行监控，//映射 this.username 为 store.state.username
+			...mapState({
+				forceLogin:state=>state.user.forceLogin,
+				hasLogin:state=>state.user.hasLogin,
+				userName:state=>state.user.userName,
+				userInfo:state=>state.user.userInfo
+			}),
 		},
 		data(){
 			return{
@@ -117,7 +124,8 @@
 			}
 		},
 		onLoad(){
-				/* if(!this.hasLogin){
+				/* alert("show:"+this.hasLogin+"————"+this.forceLogin); */
+				if(!this.hasLogin){
 					uni.showModal({
 						title:"登录提醒",
 						content:"您还未登录，需要登录后才能正常使用",
@@ -125,7 +133,7 @@
 						success: (res) => {
 							if(res.confirm){
 								if(this.forceLogin){
-									uni.reLaunch({
+									uni.navigateTo({
 										url:"../../public/login"
 									});
 								}else{
@@ -136,7 +144,7 @@
 							}
 						}
 					});
-				} */
+				}
 		},
 		methods:{
 			loggout(e) {

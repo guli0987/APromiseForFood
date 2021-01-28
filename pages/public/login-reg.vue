@@ -76,7 +76,7 @@
 				this[key] = e.detail.value;
 			},
 			navBack(){
-				//uni.navigateBack();
+				uni.navigateBack();
 				//alert("back")
 			},
 			toRegist(){

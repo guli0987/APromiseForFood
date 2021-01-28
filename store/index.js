@@ -1,44 +1,28 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import user from '@/store/modules/user'
+import moduleA from '@/store/modules/cart'
+import moduleB from '@/store/modules/products'
+
 Vue.use(Vuex)
-
-const store = new Vuex.Store({
+const store=new Vuex.Store({
 	state:{
-		forceLogin:false,//是否需要强制登录
-		hasLogin:false,//已经登录
-		userName:"",
-		userId:"",
-		userInfo: {},
-		token:"",
-		pointId:""
+		
 	},
-	getters: {},
+	getters:{
+		
+	},
 	mutations:{
-		login(state,user){
-			state.userName=user.username || '';
-			state.hasLogin = true;
-			state.userId = user.id || '';
-			state.token = user.token || '';
-			state.pointId = user.pointId || '';
-			/* uni.setStorage({//缓存用户登陆状态 App.vue中也可运用
-			    key: 'userInfo',  
-			    data: provider  
-			}) */
-		},
-		logout(user){
-			state.userName = "";
-		    state.hasLogin = false;
-		    state.userId = '';
-		    state.token = '';
-		    state.pointId = '';
-			/* uni.removeStorage({
-			    key: 'userInfo'  
-			}) */
-		}
+		
 	},
-	actions:{}
+	actions:{
+		
+	},
+	modules:{
+		user,
+		moduleA,
+		moduleB
+	}
 })
-
-
 export default store
