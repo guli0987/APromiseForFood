@@ -2,8 +2,208 @@
 
 // 编写完毕后对本文件点右键，可按配置规则创建表和添加数据
 
-{
-
+{	
+	"apff-id-users": {
+	        "data": [
+	            {
+	                "username": "test",
+	                "password": "123",
+	                "password_secret_version": 1,
+	                "nickname": "helloTest2",
+	                "gender": 1,
+	                "status": 0,
+	                "mobile": "none",
+	                "mobile_confirmed": 0,
+	                "email": "none",
+	                "email_confirmed": 0,
+	                "avatar": "none",
+	                "wx_unionid": "none",
+					"wx_openid":{
+						"app-plus":"none",
+						"mp-weixin":"none"
+					},
+	                "ali_openid": "none",
+	                "comment": "nihao",
+					"realname_auth": {
+						"type": 0,
+						"auth_status":0,
+						"auth_date":1611819289 ,
+						"real_name":"0",
+						"identity":"0",
+						"id_card_front":"0",
+						"id_card_back":"0",
+						"in_hand":"0",
+						"license": "0",
+						"contact_person":"tess",
+						"contact_mobile":"123",
+						"contact_email":"123"
+					},
+					"register_date":1611819289,
+					"register_ip":"31312",
+					"last_login_date": 1611819289,
+					"last_login_ip":"123",
+	                "token": ""
+	            }
+	        ],
+			 "index": [
+			            {
+			                "IndexName": "username",// 索引名称
+			                "MgoKeySchema": {// 索引规则
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "username",// 索引字段
+			                            "Direction": "1"//索引方向，1：ASC-升序，-1：DESC-降序，2dsphere：地理位置
+			                        }
+			                    ],
+			                    "MgoIsUnique": true// 索引是否唯一
+			                }
+			            },
+			            {
+			                "IndexName": "mobile",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "mobile",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "email",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "email",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "wx_openid.app-plus",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "wx_openid.app-plus",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "wx_openid.mp-weixin",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "wx_openid.mp-weixin",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "wx_unionid",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "wx_unionid",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "ali_openid",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "ali_openid",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "apple_openid",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "apple_openid",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "my_invite_code",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "my_invite_code",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "inviter_uid",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "inviter_uid",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "invite_time",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "invite_time",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "role",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "role",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            },
+			            {
+			                "IndexName": "department",
+			                "MgoKeySchema": {
+			                    "MgoIndexKeys": [
+			                        {
+			                            "Name": "department_id",
+			                            "Direction": "1"
+			                        }
+			                    ],
+			                    "MgoIsUnique": false
+			                }
+			            }
+			        ]
+	},
 	"apff-swiper_info": {
 		"data": [{
 			"colorClass": "uni-bg-red",

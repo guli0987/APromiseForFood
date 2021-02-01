@@ -2,6 +2,7 @@
 	<view class="container">
 		<view class="left-bottom-sign"></view>
 		<view class="back-btn yticon icon-zuojiantou-up" @click="navBack"></view><!-- 右边“验证码登录选项” -->
+		<view class="back-btn-right" @click="navSwitchToOtherLogin">换种方式登录</view>
 		<view class="right-top-sign"></view>
 		<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 		<view class="wrapper">
@@ -40,9 +41,9 @@
 			<view class="forget-section">
 				忘记密码?
 			</view>
-			<view class="login-other">
+			<!-- <view class="login-other">
 				<text @click="toLoginOther">换种方式登录</text>
-			</view>
+			</view> -->
 		</view>
 		<view class="register-section">
 			还没有账号?
@@ -79,11 +80,19 @@
 				//alert("back")
 			},
 			toRegist(){
-				this.$api.msg('去注册');
+				//this.$api.msg('去注册');
+				uni.navigateTo({
+					url:"login-reg"
+				});
 			},
-			toLoginOther(){
+			navSwitchToOtherLogin(){//换种方式登录
+				uni.navigateTo({
+					url:"login-reg"
+				});
+			},
+			/* toLoginOther(){
 				alert("切换登录方式")
-			},
+			}, */
 			async toLogin(){
 				this.logining = true;
 				const {mobile, password} = this;
@@ -139,6 +148,15 @@
 		padding-top: var(--status-bar-height);
 		top: 40upx;
 		font-size: 40upx;
+		color: $font-color-dark;
+	}
+	.back-btn-right{
+		position:absolute;
+		right: 20upx;
+		z-index: 9999;
+		padding-top: var(--status-bar-height);
+		top: 40upx;
+		font-size: 20upx;
 		color: $font-color-dark;
 	}
 	.left-top-sign{
@@ -237,12 +255,12 @@
 		margin-top: 40upx;
 	}
 	/* 换种方式登录  手机验证码*/
-	.login-other{
+	/* .login-other{
 		font-size: $font-sm+2upx;
 		color: $uni-color-success;
 		text-align: center;
 		margin-top: 40upx;
-	}
+	} */
 	.register-section{
 		position:absolute;
 		left: 0;

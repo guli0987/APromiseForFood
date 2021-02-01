@@ -5,7 +5,9 @@ import store from './store' //引入vuex
 // 注册全局组件
 import {request} from 'common/js/request.js'
 import MescrollBody from "@/components/mescroll-uni/mescroll-body.vue"
-
+import {
+	msg
+} from '@/common/js/util'
 
 //
 const json = type=>{
@@ -18,6 +20,9 @@ const json = type=>{
 }
 Vue.prototype.$api = {json};
 Vue.prototype.$request=request;
+Vue.prototype.$util = {
+	msg
+}
 Vue.prototype.$store = store;//把vuex定义成全局组件
 Vue.component('mescroll-body', MescrollBody)
 

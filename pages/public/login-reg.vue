@@ -21,7 +21,7 @@
 						@input="inputChange"
 					/>
 				</view>
-				<view class="input-item-code" v-if="true">
+				<view class="input-item-code">
 					<text class="tit">验证码</text>
 					<view class="row">
 						<input
@@ -35,7 +35,7 @@
 					</view>
 				</view>
 			</view>
-			<button class="confirm-btn" @click="toLogin" :disabled="logining">登录</button>
+			<button class="confirm-btn" @click="toLogin" :loading="logining" :disabled="logining">{{loginText}}</button>
 			<view class="login-other">
 				已有账号?<br>
 				<text @click="toLoginOther">换种方式登录</text>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-	/* import {checkStr} from '@/common/js/util' */
+	import {checkStr} from '@/common/js/util'
 	import {  
         mapMutations  
     } from 'vuex';
@@ -60,8 +60,9 @@
 		data(){
 			return {
 				mobile: '',
-				password: '',
+				/* password: '', */
 				logining: false,
+				loginText:"注册或登录",
 				code: '',
 				agreement: true
 			}
@@ -76,39 +77,65 @@
 				this[key] = e.detail.value;
 			},
 			navBack(){
-				uni.navigateBack();
+				uni.navigateBack({
+					delta:2
+				});
 				//alert("back")
 			},
 			toRegist(){
 				this.$api.msg('去注册');
 			},
 			toLoginOther(){
-				alert("切换登录方式")
+				uni.navigateTo({
+					url:"login"
+				});
 			},
 			async toLogin(){
 				this.logining = true;
-				const {mobile, password} = this;
-				/* 数据验证模块
-				if(!this.$api.match({
-					mobile,
-					password
-				})){
+				this.loginText = "Loading...";
+				//数据验证模块
+				const {mobile, code} = this;
+				if(!checkStr(mobile, 'mobile')){
+					this.$util.msg('请输入正确的手机号码');
 					this.logining = false;
+					this.loginText = "注册或登录";
 					return;
 				}
-				*/
-				const sendData = {
-					mobile,
-					password
-				};
-				const result = await this.$api.json('userInfo');
-				if(result.status === 1){
-					this.login(result.data);
-                    uni.navigateBack();  
-				}else{
-					this.$api.msg(result.msg);
+				if(!checkStr(code, 'mobileCode')){
+					this.$util.msg('验证码错误');
 					this.logining = false;
+					this.loginText = "注册或登录";
+					return;
 				}
+				const result = await this.$request('user', 'login', {mobile,code});
+				if(result.status === 1){
+					this.loginSuccessCallBack(res.data);
+				}else{
+					this.$util.msg(res.msg);
+				}
+				this.logining = false;
+				this.loginText = "注册或登录";
+			},
+			loginSuccessCallBack(data){
+				this.$util.msg('登录成功');
+				/* this.$store.commit('setToken', data);
+				setTimeout(()=>{
+					uni.navigateBack();
+				}, 1000) */
+			},
+			//同意协议
+			checkAgreement(){
+				this.agreement = !this.agreement;
+			},
+			//打开协议
+			navToAgreementDetail(type){
+				this.navTo('/pages/public/article?param=' + JSON.stringify({
+					module: 'article',
+					operation: 'getAgreement',
+					data: {
+						type
+					}
+				}))
 			}
 		},
 
@@ -248,7 +275,7 @@
 			font-size: 30rpx;
 			color: #303133;
 			width: 100%;
-			margin-bottom: -46rpx;/* 勉强解决验证码位置错误的问题 */
+			margin-bottom: -48rpx;/* 勉强解决验证码位置错误的问题 */
 		}	
 	}
 
@@ -273,7 +300,7 @@
 		margin-top: 40upx;
 	} */
 	.login-other{
-		margin-top: 40upx;
+		margin-top: 50upx;
 		/* position:absolute; */
 		left: 0;
 		bottom: 50upx;
@@ -298,14 +325,12 @@
 		width: 750rpx;
 		height: 90rpx;
 		font-size: 24rpx;
-		color: #999;
-		
+		color: #999;	
 		.mix-icon{
-			font-size: 36rpx;
+			font-size: 32rpx;
 			color: #ccc;
 			margin-right: 8rpx;
 			margin-top: 1px;
-			
 			&.active{
 				color: $base-color;
 			}

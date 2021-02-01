@@ -1,6 +1,6 @@
 export default {
     state: {
-        forceLogin:false,//是否需要强制登录
+        forceLogin:true,//是否需要强制登录
         hasLogin:false,//已经登录
         userName:"",
         userId:"",

@@ -129,7 +129,7 @@
 					uni.showModal({
 						title:"登录提醒",
 						content:"您还未登录，需要登录后才能正常使用",
-						showCancel:!this.forceLogin,
+						showCancel:!this.forceLogin,//是否展示取消按钮
 						success: (res) => {
 							if(res.confirm){
 								if(this.forceLogin){
