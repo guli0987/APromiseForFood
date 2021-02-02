@@ -38,15 +38,15 @@
 	},
 	"service": {
 		"sms": {
-			"name": "DCloud",
-			"codeExpiresIn": 300,
-			"smsKey": "your sms key",
-			"smsSecret": "your sms secret"
+			"name": "食约APP短信验证精简版",
+			"codeExpiresIn": 86400,
+			"smsKey": "f4bec88956803a72a2c62f83b9e3e4ef",
+			"smsSecret": "f8a2cac284514776646331d2aaf690cb"
 		},
 		"univerify": {
-			"appid":"your appid",
-			"apiKey": "your apiKey",
-			"apiSecret": "your apiSecret"
+			"appid":"__UNI__50650A1",
+			"apiKey": "501b9ad8da9707b5cd83a6bdb281d318",
+			"apiSecret": "441f15df929f85447b4ea3c4e3fe9ac2"
 		}
 	}
 }

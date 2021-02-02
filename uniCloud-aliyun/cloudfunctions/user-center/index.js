@@ -17,9 +17,7 @@ exports.main = async (event, context) => {
 	let noCheckAction = ['register', 'loginByWeixin', 'checkToken', 'login', 'logout', 'sendSmsCode', 'loginBySms',
 		'inviteLogin', 'loginByUniverify'
 	]
-/* 	event.operation = 'sendSmsCode';//测试
-	params.mobile = "18436097288";//测试
-	params.type = 'login';//测试 */
+	
 	if (noCheckAction.indexOf(event.operation) === -1) {
 		if (!event.uniIdToken) {
 			return {

@@ -1,7 +1,8 @@
 <template>
 	<view class="mix-get-code" @click="getCode">
 		<view v-if="loading" class="loading">
-			<mix-icon-loading size="28rpx" color="#0083ff"></mix-icon-loading>
+			<mix-icon-loading size="40rpx" color="#0083ff"></mix-icon-loading>
+			<view class="icon-text">获取中..</view>
 		</view>
 		<text class="text" :class="{disabled: timeDown > 0}">
 			{{ timeDown > 0 ? '重新获取 ' + timeDown + 's' : '获取验证码' }}
@@ -111,7 +112,18 @@
 			border-right: 1px solid #f0f0f0;
 		}
 		.loading{
-			margin-right: 8rpx;
+			padding: 40upx;
+			border: #3B4144 solid 1px;
+			background-color: #9e9ea1;
+			opacity: 0.6;
+			margin-left: 80rpx;
+			margin-bottom: 60rpx;
+			z-index: 1;
+			.icon-text{
+				margin-top: 10rpx;
+				font-size: 16rpx;
+				color: #4c4c4c;
+			}
 		}
 		.text{
 			line-height: 28rpx;
