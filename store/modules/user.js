@@ -10,7 +10,15 @@ export default {
         token:""
     },
     getters: {
-
+		getUserAllInfo(state){
+			return {
+				forceLogin:state.forceLogin,
+				hasLogin:state.hasLogin,
+				userName:state.userName,
+				userId:state.userId,
+				userInfo:state.userInfo
+			};
+		}
     },
     mutations: {
 		login(state,user){

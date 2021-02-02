@@ -38,19 +38,19 @@
 			
 			<view class="tj-sction">
 				<view class="tj-item">
-					<text class="num">128.8</text>
+					<text class="num">{{userInfo.money || 0}}</text>
 					<text>余额</text>
 				</view>
 				<view class="tj-item">
-					<text class="num">0</text>
+					<text class="num">{{userInfo.coupon || 0}}</text>
 					<text>优惠券</text>
 				</view>
 				<view class="tj-item">
-					<text class="num">20</text>
-					<text>积分</text>
+					<text class="num">{{userInfo.food_level || '萌新'}}({{userInfo.food_point || 0}})</text>
+					<text>评级(积分)</text>
 				</view>
 			</view>
-			<view class="order-section">
+			<!-- <view class="order-section">
 				<view class="order-item" @click="navTo('/pages/order/order?state=0')" hover-class="common-hover"  :hover-stay-time="50">
 					<text class="yticon icon-shouye"></text>
 					<text>全部订单</text>
@@ -67,7 +67,7 @@
 					<text class="yticon icon-shouhoutuikuan"></text>
 					<text>退款/售后</text>
 				</view>
-			</view>
+			</view> -->
 			<!-- 浏览历史 -->
 			<view class="history-section icon">
 				<view class="sec-header">
@@ -100,7 +100,7 @@
 	import listCell from '@/components/mix-list-cell/mix-list-cell.vue';
 	//引入mapState,mapState 为辅助函数 当一个组件需要获取多个状态的时候，将这些状态都声明为计算属性会有些重复和冗余。
 	import {
-	    mapState 
+	    mapState,mapGetters
 	} from 'vuex';  
 	export default{
 		components: {
@@ -115,6 +115,9 @@
 				userName:state=>state.user.userName,
 				userInfo:state=>state.user.userInfo
 			}),
+			...mapGetters({
+				getUserInformation:'getUserAllInfo'
+			})
 		},
 		data(){
 			return{
