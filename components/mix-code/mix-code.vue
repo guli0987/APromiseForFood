@@ -42,18 +42,22 @@
 		methods: {
 			//获取验证码
 			async getCode(){
+				
 				if(this.timeDown > 0){
 					return;
 				}
 				this.$util.throttle(()=>{
-					const mobile = this.mobile || this.$store.state.userInfo.username;;
+					const mobile = this.mobile
+					//const mobile = this.mobile || this.$store.state.userInfo.username;
 					if(!checkStr(mobile, 'mobile')){
 						this.$util.msg('手机号码格式不正确');
 						return;
 					}
 					this.loading = true;
-					this.$request('smsCode', 'send', {
+					
+					this.$request('user-center', 'sendSmsCode', {
 						mobile,
+						type:"login",//不存在则注册
 						action: this.action, //uni短信必填
 						TemplateCode: this.templateCode, //阿里云必填
 					}).then(response=>{
@@ -65,7 +69,7 @@
 					}).catch(err=>{
 						this.$util.msg('验证码发送失败');
 						this.loading = false;
-						console.log(err);
+						console.log(err);//null
 					})
 				}, 2000)
 			},

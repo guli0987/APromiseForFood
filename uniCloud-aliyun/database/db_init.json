@@ -204,6 +204,84 @@
 			            }
 			        ]
 	},
+	"uni-verify": {
+		"data": [],
+		"index": [{
+			"IndexName": "mobile",
+			"MgoKeySchema": {
+				"MgoIndexKeys": [{
+					"Name": "mobile",
+					"Direction": "1"
+				}, {
+					"Name": "code",
+					"Direction": "1"
+				}],
+				"MgoIsUnique": false
+			}
+		}, {
+			"IndexName": "email",
+			"MgoKeySchema": {
+				"MgoIndexKeys": [{
+					"Name": "email",
+					"Direction": "1"
+				}, {
+					"Name": "code",
+					"Direction": "1"
+				}],
+				"MgoIsUnique": false
+			}
+		}]
+	},
+	"uni-id-roles": {
+		"data": [],
+		"index": [{
+				"IndexName": "role_id",
+				"MgoKeySchema": {
+					"MgoIndexKeys": [{
+						"Name": "role_id",
+						"Direction": "1"
+					}],
+					"MgoIsUnique": true
+				}
+			},
+			{
+				"IndexName": "permission",
+				"MgoKeySchema": {
+					"MgoIndexKeys": [{
+						"Name": "permission",
+						"Direction": "1"
+					}],
+					"MgoIsUnique": false
+				}
+			}
+		]
+	},
+	"uni-id-permissions": {
+		"data": [],
+		"index": [{
+			"IndexName": "permission_id",
+			"MgoKeySchema": {
+				"MgoIndexKeys": [{
+					"Name": "permission_id",
+					"Direction": "1"
+				}],
+				"MgoIsUnique": true
+			}
+		}]
+	},
+	"opendb-admin-menu": {
+		"data": [],
+		"index": [{
+			"IndexName": "parent_id",
+			"MgoKeySchema": {
+				"MgoIndexKeys": [{
+					"Name": "parent_id",
+					"Direction": "1"
+				}],
+				"MgoIsUnique": false
+			}
+		}]
+	},
 	"apff-swiper_info": {
 		"data": [{
 			"colorClass": "uni-bg-red",

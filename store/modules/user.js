@@ -4,7 +4,9 @@ export default {
         hasLogin:false,//已经登录
         userName:"",
         userId:"",
-        userInfo: {},
+        userInfo: {
+			
+		},
         token:""
     },
     getters: {

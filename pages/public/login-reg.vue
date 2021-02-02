@@ -31,7 +31,7 @@
 							placeholder="请输入手机验证码"
 							placeholder-style="color: #909399"
 						/>
-						<mix-code :mobile="mobile" templateCode="SMS_194050994"></mix-code>
+						<mix-code :mobile="mobile" action="sendSmsCode" templateCode="SMS_194050994"></mix-code>
 					</view>
 				</view>
 			</view>
@@ -107,7 +107,11 @@
 					this.loginText = "注册或登录";
 					return;
 				}
-				const result = await this.$request('user', 'login', {mobile,code});
+				/* const data = {
+					username: this.mobile,
+					password: this.password
+				} */
+				const result = await this.$request('user-center', 'register', {mobile,code});
 				if(result.status === 1){
 					this.loginSuccessCallBack(res.data);
 				}else{
@@ -274,7 +278,7 @@
 			height: 60rpx;
 			font-size: 30rpx;
 			color: #303133;
-			width: 100%;
+			width: 72%;
 			margin-bottom: -48rpx;/* 勉强解决验证码位置错误的问题 */
 		}	
 	}
