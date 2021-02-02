@@ -1,7 +1,8 @@
 //云函数映射 默认apff-uni
 const moduleMap = {
 	user: 'apff-user',
-	payment: 'apff-pay'
+	payment: 'apff-pay',
+	userCenter:'user-center'
 }
 /**
  * @param {String} module  
@@ -12,7 +13,8 @@ export const request = (module,operation, data={})=>{
 	return new Promise((resolve, reject) => {
 		const cloudFnName = moduleMap[module] || 'apff-uniapp';
 		//alert(cloudFnName);
-		//alert(operation)
+		//console.log(module+"-"+cloudFnName+"-"+operation+"-"+JSON.stringify(data));
+		
 		uniCloud.callFunction({
 		    name: cloudFnName,
 		    data: {
@@ -22,15 +24,18 @@ export const request = (module,operation, data={})=>{
 			   }
 		  })
 		  .then(res => {
-			  /* if(res.result){
+			   if(res.result){
 				  
-			  } */
-			  //alert(res.result.code);
+			  } 
+			  console.log("云函数回调："+JSON.stringify(res));
+			  //console.log("云函数回调【NoJSON】："+res.success+"/"+res.result.type);
 			  //alert(JSON.stringify(res.result.data));
-			  resolve(res.result);
+			  //resolve(res.result);
+			  //const {success,fail,result}=res;
+			  resolve(res);
 		  })
 		  .catch((err) => {
-			  
+			  reject(err);
 		  });
 	});
 }

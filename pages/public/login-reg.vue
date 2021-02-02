@@ -59,11 +59,11 @@
 	export default{
 		data(){
 			return {
-				mobile: '',
+				mobile: '18436097288',
 				/* password: '', */
 				logining: false,
 				loginText:"注册或登录",
-				code: '',
+				code: '264154',
 				agreement: true
 			}
 		},
@@ -71,7 +71,10 @@
 			
 		},
 		methods: {
-			...mapMutations(['login']),
+			...mapMutations({
+				loginORreg:'login',
+				loginToken:'setToken'
+				}),
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
@@ -111,21 +114,38 @@
 					username: this.mobile,
 					password: this.password
 				} */
-				const result = await this.$request('user-center', 'register', {mobile,code});
-				if(result.status === 1){
-					this.loginSuccessCallBack(res.data);
+				const res = await this.$request('userCenter', 'loginBySms', {mobile,code});
+				if(res.success){
+					if(res.result.code === 0){
+						this.loginSuccessCallBack(res.result.type,res.result);
+					}
 				}else{
-					this.$util.msg(res.msg);
+					this.$util.msg('出错啦 ErrorCode:'+res.result.code);
 				}
+				//console.log(JSON.stringify(res));
 				this.logining = false;
 				this.loginText = "注册或登录";
 			},
-			loginSuccessCallBack(data){
-				this.$util.msg('登录成功');
-				/* this.$store.commit('setToken', data);
+			loginSuccessCallBack(type,result){
+				this.logining = false;
+				this.loginText = "注册或登录";
+				if(type === 'register'){
+					this.$util.msg('注册成功，热烈欢迎新用户~');
+				}else if(type === 'login'){
+					this.$util.msg('登录成功，欢迎回来~');
+				}
+				/* console.log("type——"+JSON.stringify(type));
+				console.log("token——"+JSON.stringify(result.token));
+				console.log("info——"+JSON.stringify(result.userInfo)); */
+				
+				this.loginORreg(result.userInfo);
+				this.loginToken(result);
+				//或者this.$store.commit('setToken', token,info);
 				setTimeout(()=>{
-					uni.navigateBack();
-				}, 1000) */
+					uni.reLaunch({
+						url:'../tabBar/index/index'
+					});
+				}, 1000)
 			},
 			//同意协议
 			checkAgreement(){

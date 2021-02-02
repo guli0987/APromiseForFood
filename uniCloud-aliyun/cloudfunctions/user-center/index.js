@@ -52,7 +52,7 @@ exports.main = async (event, context) => {
 			res = await uniID.logout(event.uniIdToken)
 			break;
 		case 'sendSmsCode':
-			// 简单限制一下客户端调用频率
+			// 简单限制一下客户端调用频率，避免频繁获取以致使开发者破产
 			const ipLimit = await db.collection('uni-verify').where({
 				ip: context.CLIENTIP,
 				created_at: dbCmd.gt(Date.now() - 60000)
@@ -63,7 +63,7 @@ exports.main = async (event, context) => {
 					msg: '请求过于频繁'
 				}
 			}
-			const templateId = '11091'; // 替换为自己申请的模板id
+			const templateId = '11101'; // 替换为自己申请的模板id
 			if (!templateId) {
 				return {
 					code: 500,
@@ -72,7 +72,7 @@ exports.main = async (event, context) => {
 			}
 			const randomStr = '00000' + Math.floor(Math.random() * 1000000)
 			const code = randomStr.substring(randomStr.length - 6)
-			/* console.log("code:"+code+"/type:"+params.type) */
+			//console.log("code:"+code+"/type:"+params.type+"/phone:"+params.mobile+"/templateId:"+templateId); + {"code":code,"type":params.type,"phone":params.mobile,"templateId":templateId};
 			res = await uniID.sendSmsCode({
 				mobile: params.mobile,
 				code,

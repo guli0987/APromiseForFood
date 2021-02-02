@@ -55,16 +55,25 @@
 					}
 					this.loading = true;
 					
-					this.$request('user-center', 'sendSmsCode', {
+					this.$request('userCenter', 'sendSmsCode', {
 						mobile,
 						type:"login",//不存在则注册
 						action: this.action, //uni短信必填
 						TemplateCode: this.templateCode, //阿里云必填
 					}).then(response=>{
-						this.$util.msg(response.msg);
+						/* this.$util.msg(response.msg);
+						console.log(response.msg);
 						this.loading = false;
 						if(response.status === 1){
 							this.countDown(60);
+						} */
+						if(response.success && response.result.code === 0){
+							this.$util.msg("验证码请求成功");
+							this.loading = false;
+							this.countDown(60);
+						}else{
+							this.$util.msg('验证码请求失败');
+							this.loading = false;
 						}
 					}).catch(err=>{
 						this.$util.msg('验证码发送失败');

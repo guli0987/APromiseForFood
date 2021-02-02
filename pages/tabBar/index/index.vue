@@ -231,20 +231,20 @@
 			//异步加载方法
 			async loadNavList(){
 				let swiper_info = await this.$request('swiper','getSwiper',{});
-				this.swiper_info = swiper_info.data;
+				this.swiper_info = swiper_info.result.data;
 			},
 			async loadPickerList(){
 				let pickerValueArray = await this.$request('picker','getPicker',{});
-				this.pickerValueArray = pickerValueArray.data;
+				this.pickerValueArray = pickerValueArray.result.data;
 			},
 			async loadTagList(){
 				let tag_DataList = await this.$request('tag','getTag',{});
-				this.tag_DataList = tag_DataList.data;
+				this.tag_DataList = tag_DataList.result.data;
 			},
 			async loadNotice(){
 				let notice_text = await this.$request('notice','getNotice',{});
 				//alert(JSON.stringify(notice_text.data[0].text))
-				this.notice_text=notice_text.data[0].text;
+				this.notice_text=notice_text.result.data[0].text;
 			},
 			//头部导航方法
 			picker_showLocationPicker() {

@@ -97,12 +97,12 @@ export default{
 				offset: (pageNum - 1) * pageSize,//偏移量
 				limit: pageSize//数据数
 			});
-			const currentList = res.data;
+			const currentList = res.result.data;
 			//alert(JSON.stringify(currentList))
 			this.windowList = this.windowList.concat(currentList); //追加新数据
 			this.mescroll.endSuccess(currentList.length); //结束加载状态
 			
-			console.log(JSON.parse(JSON.stringify(res.data)));
+			console.log(JSON.parse(JSON.stringify(res.result.data)));
 		},
 		mescrollInit(mescroll){
 			this.isLoading = true;
