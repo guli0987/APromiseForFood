@@ -64,11 +64,11 @@
 				<view v-else class="h-list h-list-text">还没有浏览哦</view>
 				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" title="我的钱包" tips="您还未开通会员"></list-cell>
 				<list-cell icon="icon-dizhi" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/address/address')"></list-cell>
-				<list-cell icon="icon-share" iconColor="#9789f7" title="推广" tips="邀请好友赢10万大礼"></list-cell>
+				<list-cell icon="icon-share" iconColor="#9789f7" title="有奖推广" tips="邀请好友赢10万大礼"></list-cell>
 				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包"></list-cell>
 				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="收藏夹"></list-cell>
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
-				<list-cell icon="icon-about" iconColor="#bababa" title="关于" tips="版本1.0" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
+				<list-cell icon="icon-about" iconColor="#bababa" title="关于" tips="版本1.0.0" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 				<uni-list v-if="hasLogin">
 					<uni-list-item class="mine-text-direction" title="退出登录" clickable @click="loggout"/>
 				</uni-list>
@@ -82,6 +82,7 @@
 	import {
 	    mapState,mapGetters
 	} from 'vuex';  
+	let startY = 0, moveY = 0, pageAtTop = true;
 	export default{
 		components: {
 			listCell
@@ -142,11 +143,11 @@
 			 */
 			navTo(url){
 				if(!this.hasLogin){
-					url = '/pages/public/login';
+					url = "../../public/login"
 				}
 				uni.navigateTo({  
 					url
-				})  
+				});
 			}, 
 				
 			/**

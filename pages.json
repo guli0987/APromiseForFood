@@ -161,6 +161,18 @@
 					"animationType": "slide-in-bottom"
 				}
 			}
+		},
+		{
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/userInfo/userinfo",
+			"style": {
+				"navigationBarTitleText": "个人资料"
+			}
 		}
 	],
 	"globalStyle": {
