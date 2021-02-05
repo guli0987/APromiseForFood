@@ -21,10 +21,10 @@ export default {
 		}
     },
     mutations: {
-		login(state,user){
+		login(state,user,id){
 			state.userName=user.mobile || '';
 			state.hasLogin = true;
-			state.userId = user.id || '';
+			state.userId = user._id || id;
 			state.userInfo = user;
 			//state.token = user.token || '';
 			/* uni.setStorage({//缓存用户登陆状态 App.vue中也可运用

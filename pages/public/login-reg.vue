@@ -63,7 +63,7 @@
 				/* password: '', */
 				logining: false,
 				loginText:"注册或登录",
-				code: '504973',
+				code: '835112',
 				agreement: true
 			}
 		},
@@ -129,8 +129,10 @@
 			loginSuccessCallBack(type,result){
 				this.logining = false;
 				this.loginText = "注册或登录";
+				let id='';
 				if(type === 'register'){
 					this.$util.msg('注册成功，热烈欢迎新用户~');
+					id=result.uid;
 				}else if(type === 'login'){
 					this.$util.msg('登录成功，欢迎回来~');
 				}
@@ -138,7 +140,7 @@
 				console.log("token——"+JSON.stringify(result.token));
 				console.log("info——"+JSON.stringify(result.userInfo)); */
 				
-				this.loginORreg(result.userInfo);
+				this.loginORreg(result.userInfo,id);
 				this.loginToken(result);
 				//或者this.$store.commit('setToken', token,info);
 				setTimeout(()=>{

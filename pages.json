@@ -169,6 +169,30 @@
 			}
 		},
 		{
+			"path": "pages/set/cutImage/cut",
+			"style": {
+				/* "navigationStyle":"default",
+				"animationType": "none",
+				"navigationBarTextStyle":"white", */
+				"navigationBarTitleText": "剪裁",
+				/* "transparentTitle": "auto", */
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"autoBackButton":true,
+						"buttons": [{
+							"text": "预览",
+							"width": "80rpx",
+							"fontSize": "28rpx",
+							"color": "#fff",
+							"background": "rgba(0,0,0,0)",
+							"float":"right"
+						}]
+					}
+				}
+			}
+		},
+		{
 			"path": "pages/userInfo/userinfo",
 			"style": {
 				"navigationBarTitleText": "个人资料"

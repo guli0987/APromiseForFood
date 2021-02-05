@@ -7,6 +7,7 @@ import {request} from 'common/js/request.js'
 import MescrollBody from "@/components/mescroll-uni/mescroll-body.vue"
 import {
 	msg,
+	prePage,
 	throttle
 } from '@/common/js/util'
 
@@ -23,6 +24,7 @@ Vue.prototype.$api = {json};
 Vue.prototype.$request=request;
 Vue.prototype.$util = {
 	msg,
+	prePage,
 	throttle
 }
 Vue.prototype.$store = store;//把vuex定义成全局组件
