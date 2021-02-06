@@ -21,6 +21,17 @@ export default {
 		}
     },
     mutations: {
+		//更新state数据
+		//你可以向 store.commit 传入额外的参数，即 mutation 的 载荷（payload）,在这里为param 在大多数情况下，载荷应该是一个对象，这样可以包含多个字段并且记录的 mutation 会更易读
+		setStateAttr(state, param){
+			if(param instanceof Array){
+				for(let item of param){
+					state[item.key] = item.val;
+				}
+			}else{
+				state[param.key] = param.val;
+			}
+		},
 		login(state,user,id){
 			state.userName=user.mobile || '';
 			state.hasLogin = true;
@@ -55,6 +66,19 @@ export default {
 		}
     },
     actions: { 
-		
+		//更新用户信息
+		async getUserInfo({state, commit}){
+			/* const res = await request('user', 'get', {}, {
+				checkAuthInvalid: false
+			});
+			if(res.status === 1){
+				const userInfo = res.data;
+				commit('setStateAttr', {
+					key: 'userInfo',
+					val: userInfo
+				})
+			}
+			console.log(res); */
+		}
     }
 }

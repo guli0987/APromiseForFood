@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
 	let params = event.data || {}//event.params
 	let payload = {}
 	let noCheckAction = ['register', 'loginByWeixin', 'checkToken', 'login', 'logout', 'sendSmsCode', 'loginBySms',
-		'inviteLogin', 'loginByUniverify'
+		'inviteLogin', 'loginByUniverify','updateUser'
 	]
 	
 	if (noCheckAction.indexOf(event.operation) === -1) {
@@ -45,6 +45,9 @@ exports.main = async (event, context) => {
 			break;
 		case 'checkToken':
 			res = uniID.checkToken(event.uniIdToken);
+			break;
+		case 'createToken':
+			res = uniID.createToken(event.uniIdToken);
 			break;
 		case 'logout':
 			res = await uniID.logout(event.uniIdToken)
@@ -126,6 +129,30 @@ exports.main = async (event, context) => {
 				uid: params.uid,
 				...params
 			})
+			break;
+		case 'setAvatar':
+			res = await uniID.setAvatar({
+				uid: params.uid,
+				avatar:params.avatar
+			})
+			break;
+		case 'updateUser':
+			res = await uniID.updateUser({
+				uid: params.uid,
+				nickname:params.nickname,
+				gender:params.gender,
+				comment:params.comment,
+				avatar:params.avatar
+			})
+			break;
+		case 'getUserInfo':
+			res = await uniID.getUserInfo({
+			    uid: params.uid,
+			    field: ['mobile']
+			  })
+			break;
+		case 'getUserInfoByToken':
+			res = await uniID.getUserInfoByToken(params.token);
 			break;
 		default:
 			res = {

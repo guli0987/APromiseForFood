@@ -385,6 +385,55 @@
 	.b-t:after {
 		top: 0;
 	}
+	/* 新加 */
+	.b-bs:after{
+		position: absolute;
+		z-index: 3;
+		left: 0;
+		top: auto;
+		bottom: 0;
+		right: 0;
+		height: 0;
+		content: '';
+		transform: scaleY(.5);
+		border-bottom: 1px solid #e0e0e0;
+	}
+	.b-ts:before{
+		position: absolute;
+		z-index: 3;
+		left: 0;
+		top: 0;
+		right: 0;
+		height: 0;
+		content: '';
+		transform: scaleY(.5);
+		border-bottom: 1px solid #e5e5e5;
+	}
+	.b-rs:after{
+		position: absolute;
+		z-index: 3;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 0;
+		content: '';
+		transform: scaleX(.5);
+		border-right: 1px solid #e5e5e5;
+	}
+	.b-ls:before{
+		position: absolute;
+		z-index: 3;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 0;
+		content: '';
+		transform: scaleX(.5);
+		border-left: 1px solid #e5e5e5;
+	}
+	.b-bs, .b-ts, .b-ls, .b-rs{
+		position: relative;
+	}
 	
 	/* button样式改写 */
 	uni-button,

@@ -18,21 +18,23 @@
 				></view>
 			</view>
 		</view>
-		<view class="cell b-b">
+		<view class="cell b-bs">
 			<text class="tit fill">昵称</text>
 			<input class="input" v-model="uInfo.nickname" type="text" maxlength="12" placeholder="请输入昵称,不超过16字符" placeholder-class="placeholder">
 		</view>
-		<view class="cell b-b">
+		<view class="cell b-bs">
 			<text class="tit fill">性别</text>
-				<view class="checkbox sex-position-male" @click="changeGender(1)">
-					<text v-if="uInfo.gender == 1" class="mix-icon icon-xuanzhong"></text>
-					<text v-else class="mix-icon icon-yk_yuanquan"></text>
-					<text>男</text>
-				</view>
-				<view class="checkbox sex-position-female" @click="changeGender(2)">
-					<text v-if="uInfo.gender == 2" class="mix-icon icon-xuanzhong"></text>
-					<text v-else class="mix-icon icon-yk_yuanquan"></text>
-					<text>女</text>
+				<view class="sex-position">
+					<view class="checkbox" @click="changeGender(1)">
+						<text v-if="uInfo.gender == 1" class="mix-icon icon-xuanzhong"></text>
+						<text v-else class="mix-icon icon-yk_yuanquan"></text>
+						<text>男</text>
+					</view>
+					<view class="checkbox" @click="changeGender(2)">
+						<text v-if="uInfo.gender == 2" class="mix-icon icon-xuanzhong"></text>
+						<text v-else class="mix-icon icon-yk_yuanquan"></text>
+						<text>女</text>
+					</view>
 				</view>
 		</view>
 		<!-- <view class="cell b-b">
@@ -40,25 +42,30 @@
 			<text class="tip fill">评价、晒单等 在隐私保护里面</text>
 			<switch :checked="!userInfo.anonymous" color="#FF536F" @change="onSwitch" />
 		</view> -->
-		<view class="cell b-b" @click="changeComment">
+		<view class="cell b-bs" @click="changeComment">
 			<text class="tit">个人介绍</text>
-			<text class="tip fill text-position-right">{{uInfo.comment || '无'}}</text>
+			<text class="tip fill text-position-right">{{uInfo.comment ? uInfo.comment.substring(0,12) : '无'}}</text>
+			<!-- 提交信息 -->
+			<uni-popup ref="dialogInput" type="dialog" @change="change">
+				<uni-popup-dialog mode="input" title="个人介绍填写" :value="uInfo.comment" placeholder="简短有力,不失生气 一句话概括你自己" @confirm="dialogInputConfirm"></uni-popup-dialog>
+			</uni-popup>
 		</view>
-		<view class="cell b-b">
+		<view class="cell b-bs">
 			<text class="tit">手机号码</text>
-			<text class="tip fill text-position-right">{{uInfo.mobile || '未设置'}}</text>
+			<text class="tip fill">{{uInfo.mobile || '未设置'}}</text>
 		</view>
-		<view class="cell b-b">
+		<view class="cell b-bs">
 			<text class="tit">密码修改</text>
-			<text class="tip fill text-position-center">需进行身份验证</text>
+			<text class="tip fill">需进行身份验证</text>
 		</view>
 		<view class="cell b-b">
 			<text class="tit">邮箱地址</text>
-			<text class="tip fill text-position-right">{{uInfo.email || '未设置'}}</text>
+			<text class="tip fill">{{uInfo.email || '未设置'}}</text>
 		</view>
 		
 		<!-- <mix-button ref="confirmBtn" text="保存资料" marginTop="80rpx" @onConfirm="confirm"></mix-button> -->
 		<button type="primary" @click="confirm" class="btn-confirm" :loading="isLoading">保存资料</button>
+
 	</view>
 </template>
 
@@ -83,18 +90,11 @@
 				return this.userInfo;
 			}
 		},
-		/* watch: {
-			uInfo:(newInfo,oldInfo){
-				//alert("发生变化："+JSON.stringify(newInfo));
-				//alert("change"+this.uInfo.gender)
-				const {avatar, nickname, gender, mobile,email,comment}  = this.curUserInfo;
-				this.uInfo = {avatar, nickname, gender, mobile,email,comment};
-				//alert("change"+this.uInfo.gender)
-			}
-		}, */
 		onLoad() {
-			const {avatar, nickname, gender, mobile,email,comment}  = this.curUserInfo;
-			this.uInfo = {avatar, nickname, gender, mobile,email,comment};
+			//alert(JSON.stringify(this.curUserInfo))
+			const {_id:uid,avatar, nickname, gender, mobile,email,comment}  = this.curUserInfo;
+			this.uInfo = {uid,avatar, nickname, gender, mobile,email,comment};
+			//alert(JSON.stringify(this.uInfo))
 			//alert("加载："+this.curUserInfo.nickname+"/"+this.curUserInfo.eamil);
 		},
 		methods: {
@@ -104,7 +104,7 @@
 				const {uploadProgress, userInfo, curUserInfo,uInfo} = this;
 				let isUpdate = false;
 				for(let key in uInfo){
-					if(userInfo[key] !== uInfo[key]){
+					if(key !== 'uid' && uInfo[key] !== userInfo[key]){
 						console.log(userInfo[key]+"/"+uInfo[key])
 						isUpdate = true;
 						break;
@@ -141,6 +141,9 @@
 					this.isLoading=false;
 					return;
 				}
+				const res = await this.$request('userCenter', 'updateUser', this.uInfo);
+				console.log(JSON.stringify(uInfo)+"-【反馈】-"+JSON.stringify(res))
+				this.isLoading=false;
 				/* const res = await this.$request('user-center', 'update', userInfo);
 				this.isLoading=false;
 				this.$util.msg(res.msg);
@@ -150,6 +153,12 @@
 						uni.navigateBack();
 					}, 1000)
 				} */
+				if(res.result.code === 0){
+					this.$util.msg("修改成功！");
+					this.$store.dispatch('getUserInfo'); //刷新用户信息
+				}else{
+					this.$util.msg("错误信息:"+res.result.msg);
+				}
 			},
 			//选择头像
 			chooseImage(){
@@ -206,7 +215,31 @@
 				this.$set(this.uInfo, 'gender', gender)
 			},
 			changeComment(){
-				alert("com")
+				this.$refs.dialogInput.open();
+			},
+			/**
+			 * 输入对话框的确定事件
+			 */
+			dialogInputConfirm(done, val) {
+				uni.showLoading({
+					title: 'loading...'
+				})
+				this.uInfo.comment = val;
+				uni.hideLoading();
+				done();
+				//console.log(val);
+				/* setTimeout(() => {
+					uni.hideLoading()
+					// 关闭窗口后，恢复默认内容
+					done()
+				}, 3000) */
+			},
+			/**
+			 * popup 状态发生变化触发
+			 * @param {Object} e
+			 */
+			change(e) {
+				console.log('popup ' + e.type + ' 状态', e.show)
 			}
 			/* //公开信息
 			onSwitch(e){
@@ -226,15 +259,15 @@
 		min-height: 110rpx;
 		padding: 0 40rpx;
 		
-		&:first-child{
+		&:first-child{//父元素的首个子元素
 			margin-bottom: 10rpx;
 		}
-		&:after{
+		&:after{//每个元素后面
 			left: 40rpx;
 			right: 40rpx;
 			border-color: #d8d8d8;
 		}
-		.tit{
+		.tit{//左边文本样式
 			font-size: 30rpx;
 			color: #333;
 		}
@@ -277,55 +310,61 @@
 			font-size: 28rpx;
 			color: #333;
 		}
-		.sex-position-male{
-			position: absolute;
-			right: 60rpx;
-			
-		}
-		.sex-position-female{
-			position: absolute;
-			right: 160rpx;
-			
-		}
 		switch{
 			margin: 0;
 			transform: scale(0.8) translateX(10rpx);
 			transform-origin: center right;
 		}
 		.tip{
-			margin-left: 20rpx;
+			/* margin-left: 20rpx; */
+			position: absolute;
+			right: 60rpx;
 			font-size: 28rpx;
 			color: #999;
 		}
-		.checkbox{
-			padding: 12rpx 0 12rpx 40rpx;
-			font-size: 28rpx;
-			color: #333;
-			
-			.mix-icon{
-				margin-right: 12rpx;
-				font-size: 36rpx;
-				color: #ccc;
-			}
-			.icon-xuanzhong{
-				color: $base-color;
-			}
-		}
-		.text-position-center{
-			position: relative;
-			left: 50%;
-		}
-		.text-position-right{
-			position: absolute;
-			right: 60rpx;
+		.sex-position{
+			width: 90%;
+			display: flex;
+			justify-content: flex-end;
+			.checkbox{
+				padding: 12rpx 0 12rpx 40rpx;
+				font-size: 28rpx;
+				color: #333;
+					.mix-icon{
+						margin-right: 12rpx;
+						font-size: 36rpx;
+						color: #ccc;
+					}
+					.icon-xuanzhong{
+						color: $base-color;
+					}
 
-		}
-		.text-position-left{
-			position: absolute;
-			left: 40rpx;
-		}
-		.btn-confirm{
-			
+			}
 		}
 	}
+	
+	.btn-confirm{
+		width: 80%;
+		margin: 30rpx auto 0rpx;
+		border-radius: 50rpx;
+	
+	
+	
+	}
 </style>
+<!--    display: flex;
+		flex-direction: row | row-reverse | column | column-reverse;//属性决定主轴的方向（即项目的排列方向）
+		flex-wrap: nowrap | wrap | wrap-reverse;//如果一条轴线排不下，如何换行。
+		 flex-flow: <flex-direction> || <flex-wrap>;//flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
+		justify-content: flex-start | flex-end | center | space-between | space-around;//属性定义了项目在主轴上的对齐方式。
+		align-items: flex-start | flex-end | center | baseline | stretch;//属性定义项目在交叉轴上如何对齐。
+		align-content: flex-start | flex-end | center | space-between | space-around | stretch;//定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+		
+		order: <integer>;//属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+		flex-grow: <number>;//属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
+		flex-shrink: <number>;//定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+		flex-basis: <length> | auto;//定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。
+		flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]//flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto)。建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。
+		align-self: auto | flex-start | flex-end | center | baseline | stretch;//允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+		
+ -->

@@ -1,3 +1,5 @@
+import store from '@/store'
+import cache from './cache'
 //云函数映射 默认apff-uni
 const moduleMap = {
 	user: 'apff-user',
@@ -9,9 +11,16 @@ const moduleMap = {
  * @param {String} operation  
  * @param {Object} data 请求参数
  */
-export const request = (module,operation, data={})=>{
+export const request = (module,operation, data={},ext={})=>{
 	return new Promise((resolve, reject) => {
 		const cloudFnName = moduleMap[module] || 'apff-uniapp';
+		/* if(ext.cache > 0){
+			const cacheResult = cache.get(cloudFnName + '-' + module+ '-' +operation);
+			if(cacheResult !== false && cacheResult.status !== 0){
+				resolve(cacheResult);
+				return;
+			}
+		} */
 		//alert(cloudFnName);
 		//console.log(module+"-"+cloudFnName+"-"+operation+"-"+JSON.stringify(data));
 		
@@ -24,9 +33,9 @@ export const request = (module,operation, data={})=>{
 			   }
 		  })
 		  .then(res => {
-			   if(res.result){
+			   /* if(res.result){
 				  
-			  } 
+			  } */
 			  console.log("云函数回调："+JSON.stringify(res));
 			  //console.log("云函数回调【NoJSON】："+res.success+"/"+res.result.type);
 			  //alert(JSON.stringify(res.result.data));
