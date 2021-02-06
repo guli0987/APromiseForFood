@@ -58,9 +58,12 @@
 			<text class="tit">密码修改</text>
 			<text class="tip fill">需进行身份验证</text>
 		</view>
-		<view class="cell b-b">
+		<view class="cell b-b" @click="changeEmail">
 			<text class="tit">邮箱地址</text>
 			<text class="tip fill">{{uInfo.email || '未设置'}}</text>
+			<uni-popup ref="dialogInputEmail" type="dialog" @change="change">
+				<uni-popup-dialog-bt mode="input" title="邮箱绑定" :value="uInfo.eamil" placeholder="" @confirm="dialogInputConfirmEmail"></uni-popup-dialog-bt>
+			</uni-popup>
 		</view>
 		
 		<!-- <mix-button ref="confirmBtn" text="保存资料" marginTop="80rpx" @onConfirm="confirm"></mix-button> -->
@@ -217,6 +220,9 @@
 			changeComment(){
 				this.$refs.dialogInput.open();
 			},
+			changeEmail(){
+				this.$refs.dialogInputEmail.open();
+			},
 			/**
 			 * 输入对话框的确定事件
 			 */
@@ -233,6 +239,9 @@
 					// 关闭窗口后，恢复默认内容
 					done()
 				}, 3000) */
+			},
+			dialogInputConfirmEmail(done,val){
+				alert("test")
 			},
 			/**
 			 * popup 状态发生变化触发
