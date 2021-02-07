@@ -55,7 +55,7 @@
 		<!-- 选项卡 tag -->
 		<view>
 			<view class="tag-section">
-				<view class="tag-item" v-for="item_tag in tag_DataList" :key="item_tag.id" @tap="tagGoList(value)">
+				<view class="tag-item" v-for="item_tag in tag_DataList" :key="item_tag.id" @tap="tagGoList(item_tag.link)">
 					<image class="tag-icon" :src="item_tag.icon"></image>
 					<text>{{ item_tag.type }}</text>
 				</view>
@@ -299,18 +299,19 @@
 				console.log("test:"+this.swiperDotIndex);
 			},
 			swiperClick(e){
-				alert("跳转地址"+e);
+				//alert("跳转地址"+e);
+				this.navTo('pages/swiper/swiper?url='+e,{noCheckLogin:true})
 			},
 			//通告栏
 			noticeClick(e){
-				alert("跳转地址");
+				//alert("跳转地址");
+				this.navTo('pages/tag/tag',{noCheckLogin:true});
 			},
 			//选项卡
 			tagGoList(value) {
-				alert("跳转地址");
-				/* uni.navigateTo({
-					//url:'../list/list?type=' + value.type + '&id=' + value.id
-				}) */
+				//alert("跳转地址");
+				this.navTo('pages/tag/tag');
+				//this.navTo('pages/tag/tag?type='+value.type+'&id=' + value.id);
 			},
 			//上拉加载更多
 			/* loadWindowList(e) {

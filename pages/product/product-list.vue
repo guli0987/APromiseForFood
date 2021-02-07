@@ -84,10 +84,11 @@
 		methods: {
 			clickCard() {
 				//@click="navTo('/pages/product/detail?id=' + item._id)"
-				uni.showToast({
+				/* uni.showToast({
 					title: '点击卡片',
 					icon: 'none'
-				})
+				}) */
+				this.navTo('/pages/list/list?productid=');
 			}
 		}
 	}

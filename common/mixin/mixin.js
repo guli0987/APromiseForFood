@@ -18,11 +18,11 @@ export default{
 		 * 统一跳转接口,拦截未登录路由
 		 * navigator标签现在默认没有转场动画，所以用view
 		 */
-		navTo(url){
-			console.log("navTo:"+url);
-			if(!this.$store.state.user.hasLogin){
+		navTo(url, options={}){
+			if(!options.noCheckLogin && !this.$store.state.user.hasLogin){
 				url = "/pages/public/login"
 			}
+			console.log("navTo:"+url);
 			uni.navigateTo({  
 				url
 			});
