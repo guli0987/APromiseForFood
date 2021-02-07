@@ -1,20 +1,31 @@
-import {request} from '@/common/js/request'
+/* import {request} from '@/common/js/request' */
 
 export default{
 	data(){
 		return {
-			page: 0, //页码
+			/* page: 0, //页码
 			pageNum: 6, //每页加载数据量
 			loadingType: 1, //0加载前 1加载中 2没有更多
 			isLoading: false, //刷新数据
-			loaded: false, //加载完毕
+			loaded: false, //加载完毕 */
 		}
 	},
 	methods: {
 		log(data){
 			console.log(JSON.parse(JSON.stringify(data)))
 		},
-		
+		/**
+		 * 统一跳转接口,拦截未登录路由
+		 * navigator标签现在默认没有转场动画，所以用view
+		 */
+		navTo(url){
+			if(!this.$store.state.user.hasLogin){
+				url = "/pages/public/login"
+			}
+			uni.navigateTo({  
+				url
+			});
+		}, 
 		
 		/**
 		 * navigatorTo跳转页面
@@ -22,7 +33,7 @@ export default{
 		 * @param {Object} options
 		 * @param {Boolean} options.login 是否检测登录  
 		 */
-		navTo(url, options={}){
+		/* navTo(url, options={}){
 			this.$util.throttle(()=>{
 				if(!url){
 					return;
@@ -34,7 +45,7 @@ export default{
 					url
 				})
 			}, 300)
-		},
+		}, */
 		/**
 		 * $request云函数请求
 		 * @param {String} module
@@ -46,7 +57,7 @@ export default{
 		 * @param {Boolean} ext.login 未登录拦截
 		 * @param {Boolean} ext.setLoaded 加载完成是设置页面加载完毕
 		 */
-		$request(module, operation, data={}, ext={}){
+		/* $request(module, operation, data={}, ext={}){
 			if(ext.login && !this.$util.isLogin()){
 				return;
 			}
@@ -86,6 +97,6 @@ export default{
 		hidePopup(key){
 			this.$refs[key].close();
 		},
-		stopPrevent(){},
+		stopPrevent(){}, */
 	},
 }

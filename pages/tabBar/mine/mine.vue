@@ -64,11 +64,11 @@
 				<view v-else class="h-list h-list-text">还没有浏览哦</view>
 				<list-cell icon="icon-iconfontweixin" iconColor="#e07472" title="我的钱包" tips="您还未开通会员"></list-cell>
 				<list-cell icon="icon-dizhi" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/address/address')"></list-cell>
-				<list-cell icon="icon-share" iconColor="#9789f7" title="有奖推广" tips="邀请好友赢10万大礼"></list-cell>
-				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包"></list-cell>
-				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="收藏夹"></list-cell>
+				<list-cell icon="icon-share" iconColor="#9789f7" title="有奖推广" tips="邀请好友赢10万大礼" @eventClick="navTo('/pages/mine/share')"></list-cell>
+				<list-cell icon="icon-pinglun-copy" iconColor="#ee883b" title="晒单" tips="晒单抢红包" @eventClick="navTo('/pages/mine/show')"></list-cell>
+				<list-cell icon="icon-shoucang_xuanzhongzhuangtai" iconColor="#54b4ef" title="收藏夹" @eventClick="navTo('/pages/mine/favorites')"></list-cell>
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
-				<list-cell icon="icon-about" iconColor="#bababa" title="关于" tips="版本1.0.0" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
+				<list-cell icon="icon-about" iconColor="#bababa" title="关于" tips="版本1.0.0" border="" @eventClick="navTo('/pages/mine/about')"></list-cell>
 				<uni-list v-if="hasLogin">
 					<uni-list-item class="mine-text-direction" title="退出登录" clickable @click="loggout"/>
 				</uni-list>
@@ -97,7 +97,7 @@
 				userInfo:state=>state.user.userInfo
 			}),
 			...mapGetters({
-				getUserInformation:'getUserAllInfo'
+				/* getUserInformation:'getUserAllInfo' */
 			})
 		},
 		data(){
@@ -118,11 +118,11 @@
 							if(res.confirm){
 								if(this.forceLogin){
 									uni.navigateTo({
-										url:"../../public/login"
+										url:"/pages/public/login"
 									});
 								}else{
 									uni.navigateTo({
-										url:"../../public/login-reg"
+										url:"/pages/public/login-reg"
 									});
 								}
 							}
@@ -137,18 +137,6 @@
 					title: '退出成功'
 				});
 			},
-			/**
-			 * 统一跳转接口,拦截未登录路由
-			 * navigator标签现在默认没有转场动画，所以用view
-			 */
-			navTo(url){
-				if(!this.hasLogin){
-					url = "../../public/login"
-				}
-				uni.navigateTo({  
-					url
-				});
-			}, 
 				
 			/**
 			 *  会员卡下拉和回弹

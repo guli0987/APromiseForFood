@@ -37,11 +37,6 @@
 					</view>
 				</view>
 		</view>
-		<!-- <view class="cell b-b">
-			<text class="tit">公开信息</text>
-			<text class="tip fill">评价、晒单等 在隐私保护里面</text>
-			<switch :checked="!userInfo.anonymous" color="#FF536F" @change="onSwitch" />
-		</view> -->
 		<view class="cell b-bs" @click="changeComment">
 			<text class="tit">个人介绍</text>
 			<text class="tip fill text-position-right">{{uInfo.comment ? uInfo.comment.substring(0,12) : '无'}}</text>
@@ -66,7 +61,6 @@
 			</uni-popup>
 		</view>
 		
-		<!-- <mix-button ref="confirmBtn" text="保存资料" marginTop="80rpx" @onConfirm="confirm"></mix-button> -->
 		<button type="primary" @click="confirm" class="btn-confirm" :loading="isLoading">保存资料</button>
 
 	</view>
@@ -93,6 +87,12 @@
 				return this.userInfo;
 			}
 		},
+		/* watch: {
+			curUserInfo(curUserInfoBest){//监听计算属性curUserInfo是否发生变化，如果更新信息成功重置uInfo，失败
+				const {_id:uid,avatar, nickname, gender, mobile,email,comment}  = this.curUserInfoBest;
+				this.uInfo = {uid,avatar, nickname, gender, mobile,email,comment};
+			}
+		}, */
 		onLoad() {
 			//alert(JSON.stringify(this.curUserInfo))
 			const {_id:uid,avatar, nickname, gender, mobile,email,comment}  = this.curUserInfo;
@@ -104,11 +104,11 @@
 			//提交修改
 			async confirm(){
 				this.isLoading=true;
-				const {uploadProgress, userInfo, curUserInfo,uInfo} = this;
+				const {uploadProgress, curUserInfo,uInfo} = this;
 				let isUpdate = false;
 				for(let key in uInfo){
-					if(key !== 'uid' && uInfo[key] !== userInfo[key]){
-						console.log(userInfo[key]+"/"+uInfo[key])
+					if(key !== 'uid' && uInfo[key] !== curUserInfo[key]){
+						console.log(curUserInfo[key]+"/"+uInfo[key])
 						isUpdate = true;
 						break;
 					}
@@ -146,22 +146,14 @@
 				}
 				const res = await this.$request('userCenter', 'updateUser', this.uInfo);
 				console.log(JSON.stringify(uInfo)+"-【反馈】-"+JSON.stringify(res))
-				this.isLoading=false;
-				/* const res = await this.$request('user-center', 'update', userInfo);
-				this.isLoading=false;
-				this.$util.msg(res.msg);
-				if(res.status === 1){
-					this.$store.dispatch('getUserInfo'); //刷新用户信息
-					setTimeout(()=>{
-						uni.navigateBack();
-					}, 1000)
-				} */
 				if(res.result.code === 0){
 					this.$util.msg("修改成功！");
 					this.$store.dispatch('getUserInfo'); //刷新用户信息
 				}else{
 					this.$util.msg("错误信息:"+res.result.msg);
+					this.uInfo = curUserInfo;//失败信息“回滚”
 				}
+				this.isLoading=false;
 			},
 			//选择头像
 			chooseImage(){
@@ -250,10 +242,6 @@
 			change(e) {
 				console.log('popup ' + e.type + ' 状态', e.show)
 			}
-			/* //公开信息
-			onSwitch(e){
-				this.userInfo.anonymous = !e.detail.value;
-			} */
 		}
 	}
 </script>

@@ -1,16 +1,15 @@
+import {request} from '@/common/js/request'
 export default {
     state: {
-        forceLogin:true,//是否需要强制登录
+        forceLogin:false,//是否需要强制登录
         hasLogin:false,//已经登录
         userName:"",
         userId:"",
-        userInfo: {
-			
-		},
+        userInfo: {},
         token:""
     },
     getters: {
-		getUserAllInfo(state){
+		/* getUserAllInfo(state){
 			return {
 				forceLogin:state.forceLogin,
 				hasLogin:state.hasLogin,
@@ -18,13 +17,13 @@ export default {
 				userId:state.userId,
 				userInfo:state.userInfo
 			};
-		}
+		} */
     },
     mutations: {
 		//更新state数据
 		//你可以向 store.commit 传入额外的参数，即 mutation 的 载荷（payload）,在这里为param 在大多数情况下，载荷应该是一个对象，这样可以包含多个字段并且记录的 mutation 会更易读
 		setStateAttr(state, param){
-			if(param instanceof Array){
+			if(param instanceof Array){//是否是数组
 				for(let item of param){
 					state[item.key] = item.val;
 				}
@@ -67,18 +66,27 @@ export default {
     },
     actions: { 
 		//更新用户信息
-		async getUserInfo({state, commit}){
-			/* const res = await request('user', 'get', {}, {
-				checkAuthInvalid: false
-			});
-			if(res.status === 1){
-				const userInfo = res.data;
+		async updateUserInfo({state, commit}){
 				commit('setStateAttr', {
 					key: 'userInfo',
 					val: userInfo
 				})
+			console.log(res);
+		},
+		//获取云端用户信息并更新state
+		async getUserInfo({state, commit}){
+			const res = await request('userCenter', 'getUserInfo', {
+				uid:state.userId
+			}, {});
+			if(res.result.code === 0){
+				const userInfo = res.result.userInfo;
+				console.log("更新state"+userInfo);
+				commit('setStateAttr', {
+					key: 'userInfo',
+					val: userInfo
+				});
 			}
-			console.log(res); */
+			console.log(res);
 		}
     }
 }

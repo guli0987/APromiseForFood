@@ -20,9 +20,9 @@
 const postfix = '_apffapp'; // 缓存前缀   
 /**  
  * 设置缓存   同步
- * @param  {[type]} k [键名]  
- * @param  {[type]} v [键值]  
- * @param  {[type]} t [时间、单位秒]  
+ * @param  {[type]} k [键名]  key
+ * @param  {[type]} v [键值]  value
+ * @param  {[type]} t [时间、单位秒]  time
  */  
 function putSync(k, v, t) {  
     uni.setStorageSync(k, v)   

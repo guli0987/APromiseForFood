@@ -20,7 +20,11 @@ const json = type=>{
 		}, 500)
 	})
 }
+
 Vue.prototype.$api = {json};
+import mixin from './common/mixin/mixin'
+Vue.mixin(mixin) 
+
 Vue.prototype.$request=request;
 Vue.prototype.$util = {
 	msg,

@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
 	let params = event.data || {}//event.params
 	let payload = {}
 	let noCheckAction = ['register', 'loginByWeixin', 'checkToken', 'login', 'logout', 'sendSmsCode', 'loginBySms',
-		'inviteLogin', 'loginByUniverify','updateUser'
+		'inviteLogin', 'loginByUniverify','updateUser','getUserInfo'
 	]
 	
 	if (noCheckAction.indexOf(event.operation) === -1) {
@@ -148,7 +148,7 @@ exports.main = async (event, context) => {
 		case 'getUserInfo':
 			res = await uniID.getUserInfo({
 			    uid: params.uid,
-			    field: ['mobile']
+			    /* field: ['mobile'] *///指定返回的字段，不传则返回所有
 			  })
 			break;
 		case 'getUserInfoByToken':
