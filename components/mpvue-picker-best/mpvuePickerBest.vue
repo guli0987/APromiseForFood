@@ -256,7 +256,7 @@
 					    let num = this.pickerValueDefault[0];
 					    for (let i = 0, length = pickerValueArray[num].children.length; i < length; i++) {
 					        pickerValueMulFourTwo.push(pickerValueArray[num].children[i]);
-							console.log("三级联动第二列："+JSON.stringify(pickerValueArray[num].children[i]));
+							//console.log("三级联动第二列："+JSON.stringify(pickerValueArray[num].children[i]));
 					    }
 					    // 第三列
 					    let numSecond = this.pickerValueDefault[1];
@@ -264,7 +264,7 @@
 					        pickerValueMulFourThree.push(
 					            pickerValueArray[num].children[numSecond].children[i]
 					        );
-							console.log("三级联动第三列："+JSON.stringify(pickerValueArray[num].children[numSecond].children[i]));
+							//console.log("三级联动第三列："+JSON.stringify(pickerValueArray[num].children[numSecond].children[i]));
 					    }
 						// 第四列
 						let numThird = this.pickerValueDefault[2];
@@ -272,7 +272,7 @@
 						    pickerValueMulFourFour.push(
 						        pickerValueArray[num].children[numSecond].children[numThird].children[i]
 						    );
-							console.log("三级联动第四列："+JSON.stringify(pickerValueArray[num].children[numSecond].children[numThird].children[i]))
+							//console.log("三级联动第四列："+JSON.stringify(pickerValueArray[num].children[numSecond].children[numThird].children[i]))
 						}
 					}
 					this.pickerValueMulFourOne = pickerValueMulFourOne;
@@ -394,21 +394,21 @@
 					    this.pickerValueMulFourTwo = [];
 					    for (let i = 0, length = pickerValueArray[changeValue[0]].children.length; i < length; i++) {
 					        pickerValueMulFourTwo.push(pickerValueArray[changeValue[0]].children[i]);
-							console.log("渲染第二列："+JSON.stringify(pickerValueArray[changeValue[0]].children[i]));
+							//console.log("渲染第二列："+JSON.stringify(pickerValueArray[changeValue[0]].children[i]));
 					    }
 					    // 重新渲染第三列
 						this.pickerValueMulFourThree = [];
 					    for (let i = 0, length = pickerValueArray[changeValue[0]].children[0].children.length; i <
 					        length; i++) {
 					        pickerValueMulFourThree.push(pickerValueArray[changeValue[0]].children[0].children[i]);
-							console.log("渲染第三列："+JSON.stringify(pickerValueArray[changeValue[0]].children[0].children[i]));
+							//console.log("渲染第三列："+JSON.stringify(pickerValueArray[changeValue[0]].children[0].children[i]));
 					    }
 						// 重新渲染第四列
 						this.pickerValueMulFourFour = [];
 						for (let i = 0, length = pickerValueArray[changeValue[0]].children[0].children[0].children.length; i <
 						    length; i++) {
 						    pickerValueMulFourFour.push(pickerValueArray[changeValue[0]].children[0].children[0].children[i]);
-							console.log("渲染第四列："+JSON.stringify(pickerValueArray[changeValue[0]].children[0].children[0].children[i]));
+							//console.log("渲染第四列："+JSON.stringify(pickerValueArray[changeValue[0]].children[0].children[0].children[i]));
 							
 						}
 					    changeValue[1] = 0;
@@ -426,14 +426,14 @@
 					    for (let i = 0, length = pickerValueArray[changeValue[0]].children[changeValue[1]].children.length; i <
 					        length; i++) {
 					        pickerValueMulFourThree.push(pickerValueArray[changeValue[0]].children[changeValue[1]].children[i]);
-							console.log("渲染第三列："+JSON.stringify(pickerValueArray[changeValue[0]].children[changeValue[1]].children[i]));
+							//console.log("渲染第三列："+JSON.stringify(pickerValueArray[changeValue[0]].children[changeValue[1]].children[i]));
 					    }
 						// 重新渲染第四列
 						this.pickerValueMulFourFour = [];
 						for (let i = 0, length = pickerValueArray[changeValue[0]].children[changeValue[1]].children[0].children.length; i <
 						    length; i++) {
 						    pickerValueMulFourFour.push(pickerValueArray[changeValue[0]].children[changeValue[1]].children[0].children[i]);
-							console.log("渲染第四列："+JSON.stringify(pickerValueArray[changeValue[0]].children[changeValue[1]].children[0].children[i]));
+							//console.log("渲染第四列："+JSON.stringify(pickerValueArray[changeValue[0]].children[changeValue[1]].children[0].children[i]));
 						}
 						
 					    changeValue[2] = 0;
@@ -447,7 +447,7 @@
 						for (let i = 0, length = pickerValueArray[changeValue[0]].children[changeValue[1]].children[changeValue[2]].children.length; i <
 						    length; i++) {
 						    pickerValueMulFourFour.push(pickerValueArray[changeValue[0]].children[changeValue[1]].children[changeValue[2]].children[i]);
-							console.log("渲染第四列："+JSON.stringify(pickerValueArray[changeValue[0]].children[changeValue[1]].children[changeValue[2]].children[i]));
+							//console.log("渲染第四列："+JSON.stringify(pickerValueArray[changeValue[0]].children[changeValue[1]].children[changeValue[2]].children[i]));
 						}
 						this.pickerValueMulFourFour = pickerValueMulFourFour;
 					}
