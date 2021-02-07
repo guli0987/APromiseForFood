@@ -330,104 +330,71 @@
 	"apff-picker_array": {
 		"data": [{
 				"label": "洛阳",
-				"children": [{
-						"label": "河南科技大学",
-						"children": [{
-							"label": "西苑第一食堂"
-						}, {
-							"label": "重庆饭店"
-						}, {
-							"label": "西苑北院食堂"
-						}]
-					},
-					{
-						"label": "洛阳理工学院",
-						"children": [{
-							"label": "洛理第一食堂"
-						}, {
-							"label": "洛理第二食堂"
-						}, {
-							"label": "洛理第三食堂"
-						}]
-					},
-					{
-						"label": "洛阳师范学院",
-						"children": [{
-							"label": "洛师第一食堂"
-						}, {
-							"label": "洛师第二食堂"
-						}, {
-							"label": "洛师第三食堂"
-						}]
-					}
+				"children": [
+					{"label":"高校","children":[
+						{"label":"河南科技大学","children":[
+							{"label":"西苑第一食堂"},{"label":"重庆饭店"},{"label":"西苑北院食堂"}
+							]},
+						{"label":"洛阳理工学院","children":[
+							{"label":"洛理第一食堂"},{"label":"洛理第二食堂"},{"label":"洛理第三食堂"}]},
+						{"label":"洛阳师范学院","children":[
+							{"label":"洛师第一食堂"},{"label":"洛师第二食堂"},{"label":"洛师第三食堂"}]}
+					]},
+					{"label":"小城","children":[
+						{"label":"涧西区","children":[
+							{"label":"1"},{"label":"1"},{"label":"1"}
+							]},
+						{"label":"洛龙区","children":[
+							{"label":"2"},{"label":"2"},{"label":"2"}]},
+						{"label":"老城区","children":[
+							{"label":"3"},{"label":"3"},{"label":"3"}]}
+					]}
 				]
 			},
 			{
 				"label": "郑州",
-				"children": [{
-						"label": "郑州大学",
-						"children": [{
-							"label": "郑大第一食堂"
-						}, {
-							"label": "郑大第二食堂"
-						}, {
-							"label": "郑大第三食堂"
-						}]
-					},
-					{
-						"label": "河南工业大学",
-						"children": [{
-							"label": "河工第一食堂"
-						}, {
-							"label": "河工第二食堂"
-						}, {
-							"label": "河工第三食堂"
-						}]
-					},
-					{
-						"label": "中原科技学院",
-						"children": [{
-							"label": "中科第一食堂"
-						}, {
-							"label": "中科第二食堂"
-						}, {
-							"label": "中科第三食堂"
-						}]
-					}
+				"children": [
+					{"label":"高校","children":[
+						{"label":"郑州大学","children":[
+							{"label":"郑大第一食堂"},{"label":"郑大第二食堂"},{"label":"郑大第三食堂"}
+							]},
+						{"label":"河南工业大学","children":[
+							{"label":"河工第一食堂"},{"label":"河工第二食堂"},{"label":"河工第三食堂"}]},
+						{"label":"中原科技学院","children":[
+							{"label":"中科第一食堂"},{"label":"中科第二食堂"},{"label":"中科第三食堂"}]}
+					]},
+					{"label":"小城","children":[
+						{"label":"涧西区","children":[
+							{"label":"4"},{"label":"4"},{"label":"4"}
+							]},
+						{"label":"洛龙区","children":[
+							{"label":"5"},{"label":"5"},{"label":"5"}]},
+						{"label":"老城区","children":[
+							{"label":"6"},{"label":"6"},{"label":"6"}]}
+					]}
 				]
 			},
 			{
 				"label": "开封",
-				"children": [{
-						"label": "河南大学",
-						"children": [{
-							"label": "河大第一食堂"
-						}, {
-							"label": "河大第二食堂"
-						}, {
-							"label": "河大第三食堂"
-						}]
-					},
-					{
-						"label": "开封大学",
-						"children": [{
-							"label": "开大第一食堂"
-						}, {
-							"label": "开大第二食堂"
-						}, {
-							"label": "开大第三食堂"
-						}]
-					},
-					{
-						"label": "开封职业技术学院",
-						"children": [{
-							"label": "开职第一食堂"
-						}, {
-							"label": "开职第二食堂"
-						}, {
-							"label": "开职第三食堂"
-						}]
-					}
+				"children": [
+					{"label":"高校","children":[
+						{"label":"河南大学","children":[
+							{"label":"河大第一食堂"},{"label":"河大第二食堂"},{"label":"河大第三食堂"}
+							]},
+						{"label":"开封大学","children":[
+							{"label":"开大第一食堂"},{"label":"开大第二食堂"},{"label":"开大第三食堂"}]},
+						{"label":"开封职业技术学院","children":[
+							{"label":"开职第一食堂"},{"label":"开职第二食堂"},{"label":"开职第三食堂"}]}
+					]},
+					{"label":"小城","children":[
+						{"label":"涧西区","children":[
+							{"label":"7"},{"label":"7"},{"label":"7"}
+							]},
+						{"label":"洛龙区","children":[
+							{"label":"8"},{"label":"8"},{"label":"8"}]},
+						{"label":"老城区","children":[
+							{"label":"9"},{"label":"9"},{"label":"9"}]}
+					]}
 				]
 			}
 		]

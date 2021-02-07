@@ -21,7 +21,7 @@
 			    </view>
 			</uni-drawer>
 			<!-- 三级联动 picker-->
-			<mpvue-picker-best
+			<mpvue-picker
 				:themeColor="picker_themeColor"
 				ref="picker_locationPicker"
 				:mode="picker_mode"
@@ -30,7 +30,7 @@
 				@onConfirm="picker_onConfirm"
 				@onCancel="picker_onCancel"
 				:pickerValueArray="pickerValueArray"
-			></mpvue-picker-best>
+			></mpvue-picker>
 		</view>
 		<!-- 上拉加载下拉刷新 -->
 	<mescroll-body 
@@ -78,11 +78,11 @@
 
 <script>
 	import indexMiXin from './index.js'
-	import mpvuePickerBest from '../../../components/mpvue-picker-best/mpvuePickerBest.vue';
+	import mpvuePicker from '../../../components/mpvue-picker/mpvuePicker.vue';
 	import productList from '../../product/product-list.vue';
 	export default {
 		components: {
-			mpvuePickerBest,
+			mpvuePicker,
 			productList
 		},
 		mixins: [indexMiXin],
@@ -194,8 +194,8 @@
 				pickerValueArray:[],
 				picker_themeColor: '#007AFF',
 				picker_mode: 'multiLinkageSelector',
-				picker_deepLength: 4,
-				pickerValueDefault: [0,0,0,0],
+				picker_deepLength: 3,
+				pickerValueDefault: [0,0,0],
 				//index: 0,
 				//轮播图
 				 swiper_info: [],
@@ -248,11 +248,9 @@
 			},
 			//头部导航方法
 			picker_showLocationPicker() {
-				/* this.mode = 'multiLinkageSelector';//selector，multiLinkageSelector，multiSelector
-				this.deepLength = 4; */
-				this.picker_mode ="multiLinkageSelector";
-				this.picker_deepLength = 4;
-				this.pickerValueDefault = [0,0,0,0];
+				this.mode = 'multiLinkageSelector';//selector，multiLinkageSelector，multiSelector
+				this.deepLength = 3;
+				this.pickerValueDefault = [0,0,0];
 				this.$refs.picker_locationPicker.show();
 			},
 			picker_onChange(e) {
