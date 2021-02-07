@@ -6,7 +6,7 @@
 				<view class="portrait-box">
 					<image class="portrait" :src="userInfo.avatar || '/static/missing-face.png'"></image>
 				</view>
-				<view class="info-box">
+				<view class="info-box" @click="loginReminder">
 					<text class="username">{{userInfo.nickname || '未登录'}}</text>
 				</view>
 			</view>
@@ -137,7 +137,11 @@
 					title: '退出成功'
 				});
 			},
-				
+			loginReminder(){
+				if(!this.hasLogin){
+					this.navTo('/pages/public/login');
+				}
+			},
 			/**
 			 *  会员卡下拉和回弹
 			 *  1.关闭bounce避免ios端下拉冲突
@@ -180,6 +184,7 @@
 		onNavigationBarButtonTap(e) {
 			const index = e.index;
 			if(index === 0){
+				this.navTo('/pages/mine/messages');
 				// #ifdef APP-PLUS
 				/* const pages = getCurrentPages();
 				const page = pages[pages.length - 1];

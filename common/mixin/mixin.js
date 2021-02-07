@@ -19,6 +19,7 @@ export default{
 		 * navigator标签现在默认没有转场动画，所以用view
 		 */
 		navTo(url){
+			console.log("navTo:"+url);
 			if(!this.$store.state.user.hasLogin){
 				url = "/pages/public/login"
 			}

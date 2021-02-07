@@ -29,7 +29,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="list">
+		<view class="list" v-if="hasLogin">
 			<!-- 刷新页面后的顶部提示框 -->
 			<!-- 当前弹出内容没有实际逻辑 ，可根据当前业务修改弹出提示 -->
 			<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
@@ -75,14 +75,31 @@
 				<uni-load-more v-if="loading || options.status === 'noMore' " :status="options.status" />
 			</unicloud-db>
 		</view>
+		<view v-else>
+			<view class="order-haslogin-no">
+				<text>您还没有登录哦</text>
+				<button type="primary" @click="onOrderBtnClick">先去登录</button>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import {
+	    mapState
+	} from 'vuex';
 	import listCell from '@/components/mix-list-cell/mix-list-cell.vue';
+	let startY = 0, moveY = 0, pageAtTop = true;
 	export default {
 		components: {
 			listCell
+		},
+		computed: {
+			...mapState({
+				forceLogin:state=>state.user.forceLogin,
+				hasLogin:state=>state.user.hasLogin,
+				userInfo:state=>state.user.userInfo
+			}),
 		},
 		data(){
 			return {
@@ -103,20 +120,12 @@
 		},
 		onLoad() {},
 		methods: {
-		
-			/**
-			 * 统一跳转接口,拦截未登录路由
-			 * navigator标签现在默认没有转场动画，所以用view
-			 */
-			navTo(url){
-				if(!this.hasLogin){
-					url = '/pages/public/login';
-				}
-				uni.navigateTo({  
-					url
-				})  
-			}, 
-			
+			onOrderBtnClick(){
+				this.navTo('/pages/public/login');
+				/* uni.switchTab({
+					url: '/pages/tabbar/index'
+				}) */
+			},
 			/**
 			 *  会员卡下拉和回弹
 			 *  1.关闭bounce避免ios端下拉冲突
@@ -184,6 +193,15 @@
 </script>
 
 <style lang='scss'>
+	.order-haslogin-no{
+		display: flex;
+		flex-direction:column;
+		margin-top: 160rpx;
+		text{
+			text-align: center;
+			margin-bottom: 30rpx;
+		}
+	}
 	%flex-center {
 	 display:flex;
 	 flex-direction: column;

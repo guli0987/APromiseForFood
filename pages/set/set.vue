@@ -57,12 +57,6 @@
 		},
 		methods:{
 			...mapMutations(['logout']),
-
-			navTo(url){
-				uni.navigateTo({
-					url
-				});
-			},
 			//退出登录
 			toLogout(){
 				uni.showModal({
