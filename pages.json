@@ -197,12 +197,6 @@
 			"style": {
 				"navigationBarTitleText": "个人资料"
 			}
-		},
-		{
-			"path": "pages/tabBar/index/test",
-			"style": {
-				"navigationBarTitleText": "测试"
-			}
 		}
 	],
 	"globalStyle": {

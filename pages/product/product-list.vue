@@ -2,10 +2,10 @@
 	<view>
 		<view class="window-body">
 			<view v-for="(item,index) in productLists" :key="index">
-				<uni-card :isShadow="true" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard">
+				<uni-card class="uni-card" :isShadow="false" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard">
 					<view>
 						<view class="window-image-box">	
-							<scroll-view  scroll-x class="r-scroll" show-scrollbar="false">
+							<scroll-view  scroll-x="true" class="r-scroll" scroll-left="0" @scroll="scrollChange">
 								<view class="window-image-scroll">
 									<image 
 										class="scroll-image"
@@ -103,6 +103,9 @@
 					title: types,
 					icon: 'none'
 				})
+			},
+			scrollChange(e) {
+				console.log(e)
 			}
 		}
 	}
@@ -110,24 +113,52 @@
 
 <style scoped lang="scss">
 	.window-body{
+		.uni-card{
+			overflow: visible;//解决滚动条不能自动隐藏问题，因与uni-card插件的overflow:hidden属性冲突
 		.window-image-box {
 			.r-scroll{
 				white-space: nowrap;
 				width: 100%;
 				.window-image-scroll{
-					/* flex-wrap: nowrap;
-					padding: 20rpx 0 12rpx; */
-					/* display: inline-block;
-					width: 60px;
-					height: 200rpx; */
 					.scroll-image{
 						flex-shrink: 0;
 						width: 200rpx;
 						height: 160rpx;
 						margin-right: 16rpx;
-						/* border-radius: 8rpx; */
 					}
 				}
+				//隐藏滚动条
+				/* ::-webkit-scrollbar{
+					display: none;
+					width: 0 !important;
+					height: 0 !important;
+					-webkit-appearance: none;
+					background: transparent;
+					color: transparent;
+				} */
+				/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+				   /* ::-webkit-scrollbar
+				    {
+				        width: 12rpx!important;
+				        height: 1rpx!important;
+				        background-color: #F5F5F5;
+				    } */
+				      
+				    /*定义滚动条轨道 内阴影+圆角*/
+				    /* ::-webkit-scrollbar-track
+				    {
+				        // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+				        border-radius: 10px;
+				        background-color: #fff;
+				    } */
+				      
+				    /*定义滑块 内阴影+圆角*/
+				   /* ::-webkit-scrollbar-thumb
+				    {
+				        border-radius: 10rpx;
+				        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+				        background-color: #d3d3d3;
+				    } */
 			}
 				
 		}
@@ -146,6 +177,8 @@
 			font-size: 12px;
 			color: #666;
 		}
+	}
 		
 	}
+	
 </style>
