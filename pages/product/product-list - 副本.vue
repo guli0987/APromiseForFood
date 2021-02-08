@@ -4,28 +4,14 @@
 			<view v-for="(item,index) in productLists" :key="index">
 				<uni-card :isShadow="true" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard">
 					<view>
-						<view class="window-image-box">	
-							<scroll-view  scroll-x class="r-scroll" show-scrollbar="false">
-								<view class="window-image-scroll">
-									<image 
-										class="scroll-image"
-										v-for="(img, key) in item.imgs"
-										:key="key"
-										:src="img.url" 
-										mode="aspectFill"
-										@click="navTo('/pages/product/detail?id=')"
-									></image>
-								</view>
-							</scroll-view>
-						</view>
 						<!-- 图片可以滑动 -->
-						<!-- <view class="window-image-box">				
+						<view class="window-image-box">				
 							<swiper>
 								<swiper-item v-for="(img, key) in item.imgs" :key="key">
 									<image class="window-image-swiper" mode="aspectFill" :src="img.url" />
 								</swiper-item>
 							</swiper>
-						</view> -->
+						</view>
 						<view class="content-box" v-if="false">
 							<text class="content-box-text">
 								{{item.content}}
@@ -34,14 +20,12 @@
 					</view>
 					<template slot="footer">
 						<view class="footer-box">
-							<view @click.stop="footerClick('喜欢')"><view class="footer-box__item"><!-- 喜欢 --><uni-icons type="heart" size="18" color=""></uni-icons></view></view>
-							<view @click.stop="footerClick('评论')"><view class="footer-box__item"><!-- 评论 --><uni-icons type="chat" size="18" color=""></uni-icons></view></view>
-							<view @click.stop="footerClick('分享')"><view class="footer-box__item"><!-- 分享 --><uni-icons type="redo" size="18" color=""></uni-icons></view></view>
+							
 						</view>
 					</template>
 				</uni-card>
+				</view>
 			</view>
-		</view>
 	</view>
 </template>
 
@@ -97,55 +81,51 @@
 					icon: 'none'
 				}) */
 				this.navTo('/pages/list/list?productid=');
-			},
-			footerClick(types) {
-				uni.showToast({
-					title: types,
-					icon: 'none'
-				})
 			}
 		}
 	}
 </script>
 
-<style scoped lang="scss">
-	.window-body{
-		.window-image-box {
-			.r-scroll{
-				white-space: nowrap;
-				width: 100%;
-				.window-image-scroll{
-					/* flex-wrap: nowrap;
-					padding: 20rpx 0 12rpx; */
-					/* display: inline-block;
-					width: 60px;
-					height: 200rpx; */
-					.scroll-image{
-						flex-shrink: 0;
-						width: 200rpx;
-						height: 160rpx;
-						margin-right: 16rpx;
-						/* border-radius: 8rpx; */
-					}
-				}
-			}
-				
-		}
+<style>
+	.window-image-box {
+		/* #ifndef APP-NVUE */
+		/* display: flex; */
+		flex-direction: row;/* column为列 */
+		align-items: center;
+		flex-wrap:wrap;
+		/* #endif */
+		/* height: 180rpx; */
+		height: 100%;
+		/* overflow: hidden; */
+		/* padding: 10rpx 16rpx; */
+		/* flex: 1; */
 		
-		.footer-box {
-			/* #ifndef APP-NVUE */
-			display: flex;
-			/* #endif */
-			justify-content: space-between;
-			flex-direction: row;
-		}
-		
-		.footer-box__item {
-			align-items: center;
-			padding: 2px 0;
-			font-size: 12px;
-			color: #666;
-		}
+	}
+	.swiper{
+		height: 100%;
+		width: 100%;
+	}
+	.window-image-swiper{
+		/* #ifndef APP-NVUE */
+		width: 100%;
+		height: 100%;
+		/* #endif */
+		/* flex: 1; */
+		/* display: flex; */
+		flex-direction: column;
+		align-items: center;
+		/* margin: 0 16rpx; */
+	}
+	.window-image {
+		/* #ifndef APP-NVUE */
+		width: 30%;
+		height: 100%;
+		/* #endif */
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: 0 10rpx;
 		
 	}
 </style>
