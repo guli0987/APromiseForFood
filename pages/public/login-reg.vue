@@ -118,6 +118,8 @@
 				if(res.success){
 					if(res.result.code === 0){
 						this.loginSuccessCallBack(res.result.type,res.result);
+					}else{
+						this.$util.msg('出了点小差错：'+res.result.msg);
 					}
 				}else{
 					this.$util.msg('出错啦 ErrorCode:'+res.result.code);

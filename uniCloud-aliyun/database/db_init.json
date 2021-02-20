@@ -345,74 +345,18 @@
 			    "height": 316
 			}],
 			"source": "DCloud",
-			"content": "内容 A",
 			"comment_count": 639,
+			"datetime": "时间戳",
 			"article_type": 1
-			},
+			}
+			
+		]
+	},
+	"apff-square_article_list_info": {
+		"data": [
 			{
-			"id": 1,
-			"title": "如此这般",
-			"image_list": [{
-			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
-			    "width": 563,
-			    "height": 316
-			}],
-			"source": "DCloud",
-			"content": "内容 A",
-			"comment_count": 639,
-			"article_type": 1
-			},
-			{
-			"id": 1,
-			"title": "如此这般",
-			"image_list": [{
-			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
-			    "width": 563,
-			    "height": 316
-			}],
-			"source": "DCloud",
-			"content": "内容 A",
-			"comment_count": 639,
-			"article_type": 1
-			},
-			{
-			"id": 1,
-			"title": "如此这般",
-			"image_list": [{
-			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
-			    "width": 563,
-			    "height": 316
-			}],
-			"source": "DCloud",
-			"content": "内容 A",
-			"comment_count": 639,
-			"article_type": 1
-			},
-			{
-			"id": 1,
-			"title": "如此这般",
-			"image_list": [{
-			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
-			    "width": 563,
-			    "height": 316
-			}],
-			"source": "DCloud",
-			"content": "内容 A",
-			"comment_count": 639,
-			"article_type": 1
-			},
-			{
-			"id": 1,
-			"title": "如此这般",
-			"image_list": [{
-			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
-			    "width": 563,
-			    "height": 316
-			}],
-			"source": "DCloud",
-			"content": "内容 A",
-			"comment_count": 639,
-			"article_type": 1
+			"id": 1
+			
 			}
 			
 		]
