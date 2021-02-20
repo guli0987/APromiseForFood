@@ -59,7 +59,7 @@
 	export default{
 		data(){
 			return {
-				mobile: '18338687468',
+				mobile: '18436097288',
 				/* password: '', */
 				logining: false,
 				loginText:"注册或登录",
