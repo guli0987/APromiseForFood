@@ -7,7 +7,7 @@
 					<image class="portrait" :src="userInfo.avatar || '/static/missing-face.png'"></image>
 				</view>
 				<view class="info-box" @click="loginReminder">
-					<text class="username">{{userInfo.nickname || '未登录'}}</text>
+					<text class="username">{{hasLogin ? (userInfo.nickname ? userInfo.nickname:'未设置') : '未登录'}}</text>
 				</view>
 			</view>
 			<view class="vip-card-box">
