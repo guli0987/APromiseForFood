@@ -6,6 +6,10 @@
             </view>
         </scroll-view>
         <view class="line-h"></view>
+		<!-- 消息提示 -->
+		<uni-popup id="popupMessage" ref="popupMessage" type="message" @change="change">
+			<uni-popup-message :type="msgType" :message="message" :duration="2000"></uni-popup-message>
+		</uni-popup>
         <swiper :current="tabIndex" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
             <swiper-item class="swiper-item" v-for="(tab,index1) in newsList" :key="index1">
 				<!-- #ifdef APP-NVUE -->
@@ -146,8 +150,14 @@
                 showTips: false,
                 navigateFlag: false,
                 pulling: false,
-                refreshIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg=="
-            }
+                refreshIcon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAMAAABg3Am1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAB5QTFRFcHBw3Nzct7e39vb2ycnJioqK7e3tpqam29vb////D8oK7wAAAAp0Uk5T////////////ALLMLM8AAABxSURBVHja7JVBDoAgDASrjqj//7CJBi90iyYeOHTPMwmFZrHjYyyFYYUy1bwUZqtJIYVxhf1a6u0R7iUvWsCcrEtwJHp8MwMdvh2amHduiZD3rpWId9+BgPd7Cc2LIkPyqvlQvKxKBJ//Qwq/CacAAwDUv0a0YuKhzgAAAABJRU5ErkJggg==",
+				//菜单处理结果提示
+				//type: 'top',
+				msgType: 'success',
+				message: 'success',
+				//value: '默认输入的内容'
+			
+			}
         },
         onLoad() {
             setTimeout(()=>{
@@ -189,15 +199,39 @@
                 }, 200)
             },
             close(index1, index2) {
-                uni.showModal({
-                    content: '是否删除本条信息？',
-                    success: (res) => {
-                        if (res.confirm) {
-                            this.newsList[index1].data.splice(index2, 1);
-                        }
-                    }
-                })
+				const that = this
+				uni.showActionSheet({
+					title:'<<菜单>>',
+					itemList: ['屏蔽', '举报', '分享'],
+					
+					success: (e) => {
+						console.log(e.tapIndex);
+						if(e.tapIndex === 0){
+							this.newsList[index1].data.splice(index2, 1);
+							this.msgType = 'info'//success warn info error
+							this.message = '屏蔽'
+						}else if(e.tapIndex === 1){
+							this.msgType = 'warn'//success warn info error
+							this.message = '举报成功'
+						}else{
+							uni.showToast({
+								title:"点击了第" + e.tapIndex + "个选项",
+								icon:"none"
+							})
+							this.msgType = 'success'//success warn info error
+							this.message = '欢迎你的分享~'
+						}
+						this.$refs.popupMessage.open();
+					}
+				})
             },
+			/**
+			 * popup 状态发生变化触发
+			 * @param {Object} e
+			 */
+			change(e) {
+				console.log('popup ' + e.type + ' 状态', e.show)
+			},
             loadMore(e) {
                 setTimeout(() => {
                     this.getList(this.tabIndex);

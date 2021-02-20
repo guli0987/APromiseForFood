@@ -282,6 +282,141 @@
 			}
 		}]
 	},
+	"apff-square_category": {
+		"data": [{
+			"title":"推荐",
+			"id":1,
+			"other":""
+		}, 
+		{
+			"title":"当前",
+			"id":2,
+			"other":""
+		},
+		{
+			"title":"同城",
+			"id":3,
+			"other":""
+		},
+		{
+			"title":"闲聊",
+			"id":4,
+			"other":""
+		}, 
+		{
+			"title":"灌水",
+			"id":5,
+			"other":""
+		}, 
+		{
+			"title":"反馈",
+			"id":6,
+			"other":""
+		},
+		{
+			"title":"投诉",
+			"id":7,
+			"other":""
+		}, 
+		{
+			"title":"杂谈",
+			"id":8,
+			"other":""
+		},
+		{
+			"title":"美食",
+			"id":9,
+			"other":""
+		}, 
+		{
+			"title":"分享",
+			"id":10,
+			"other":""
+		}]
+	},
+	"apff-square_article_list": {
+		"data": [
+			{
+			"id": 1,
+			"title": "如此这般",
+			"image_list": [{
+			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+			    "width": 563,
+			    "height": 316
+			}],
+			"source": "DCloud",
+			"content": "内容 A",
+			"comment_count": 639,
+			"article_type": 1
+			},
+			{
+			"id": 1,
+			"title": "如此这般",
+			"image_list": [{
+			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+			    "width": 563,
+			    "height": 316
+			}],
+			"source": "DCloud",
+			"content": "内容 A",
+			"comment_count": 639,
+			"article_type": 1
+			},
+			{
+			"id": 1,
+			"title": "如此这般",
+			"image_list": [{
+			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+			    "width": 563,
+			    "height": 316
+			}],
+			"source": "DCloud",
+			"content": "内容 A",
+			"comment_count": 639,
+			"article_type": 1
+			},
+			{
+			"id": 1,
+			"title": "如此这般",
+			"image_list": [{
+			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+			    "width": 563,
+			    "height": 316
+			}],
+			"source": "DCloud",
+			"content": "内容 A",
+			"comment_count": 639,
+			"article_type": 1
+			},
+			{
+			"id": 1,
+			"title": "如此这般",
+			"image_list": [{
+			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+			    "width": 563,
+			    "height": 316
+			}],
+			"source": "DCloud",
+			"content": "内容 A",
+			"comment_count": 639,
+			"article_type": 1
+			},
+			{
+			"id": 1,
+			"title": "如此这般",
+			"image_list": [{
+			    "url": "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/b2e201d0-517d-11eb-8a36-ebb87efcf8c0.jpg",
+			    "width": 563,
+			    "height": 316
+			}],
+			"source": "DCloud",
+			"content": "内容 A",
+			"comment_count": 639,
+			"article_type": 1
+			}
+			
+		]
+	},
 	"apff-swiper_info": {
 		"data": [{
 			"colorClass": "uni-bg-red",

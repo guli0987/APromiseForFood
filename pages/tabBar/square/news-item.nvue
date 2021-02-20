@@ -20,10 +20,14 @@
 				<text class="info-text">{{options.comment_count}}条评论</text>
 				<text class="info-text">{{options.datetime}}</text>
 			</view>
-			<view class="max-close-view" @click.stop="close">
+			<view class="max-close-view-new" @click.stop="close">
+				<uni-icons type="more-filled" size="16"></uni-icons>
+			</view>
+			<!-- <view class="max-close-view" @click.stop="close">
 				<view class="close-l close-h"></view>
 				<view class="close-l close-v"></view>
-			</view>
+			</view> -->
+			
 		</view>
 		<view class="media-item-line" style="position: absolute;"></view>
 	</view>
@@ -178,7 +182,9 @@
 		align-items: center;
 		justify-content: space-between;
 	}
-
+	.max-close-view-new{
+		/* 自定义文章右下角选项样式 */
+	}
 	.max-close-view {
 		position: relative;
 		align-items: center;
