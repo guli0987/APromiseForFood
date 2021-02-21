@@ -77,6 +77,7 @@
 			},
 			navBack(){
 				uni.navigateBack();
+				//bug:双击两次才返回首页
 				//alert("back")
 			},
 			toRegist(){

@@ -2,7 +2,7 @@
 	<view>
 		<view class="window-body">
 			<view v-for="(item,index) in productLists" :key="index">
-				<uni-card class="uni-card" :isShadow="false" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard">
+				<uni-card class="uni-card" :isShadow="false" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard(item.id)">
 					<view>
 						<view class="window-image-box">	
 							<scroll-view  scroll-x="true" class="r-scroll" scroll-left="0" @scroll="scrollChange">
@@ -90,13 +90,13 @@
 			}
 		},
 		methods: {
-			clickCard() {
+			clickCard(windowid) {
 				//@click="navTo('/pages/product/detail?id=' + item._id)"
 				/* uni.showToast({
 					title: '点击卡片',
 					icon: 'none'
 				}) */
-				this.navTo('/pages/list/list?productid=');
+				this.navTo('/pages/window/window-checklist?windowid='+windowid,{noCheckLogin:true});//设置为不检查登录
 			},
 			footerClick(types) {
 				uni.showToast({

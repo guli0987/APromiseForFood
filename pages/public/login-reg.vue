@@ -63,7 +63,7 @@
 				/* password: '', */
 				logining: false,
 				loginText:"注册或登录",
-				code: '729113',
+				code: '743983',
 				agreement: true
 			}
 		},

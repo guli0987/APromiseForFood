@@ -197,6 +197,36 @@
 			"style": {
 				"navigationBarTitleText": "个人资料"
 			}
+		},
+		{
+			"path": "pages/product/detail/product",
+			"style": {
+				"navigationBarTitleText": "商品详情",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		},
+		{
+			"path": "pages/window/window-checklist",
+			"style": {
+				"navigationBarTitleText": "窗口列表"
+				/* "navigationStyle":"custom" */
+			}
+		},
+		{
+			"path": "pages/window/detail/window-list",
+			"style": {
+				"navigationBarTitleText": "窗口"
+			}
+		},
+		{
+			"path": "pages/window/detail/window-comment",
+			"style": {
+				"navigationBarTitleText": "评价"
+			}
 		}
 	],
 	"globalStyle": {
