@@ -3,26 +3,16 @@
 		<view class="window-options">
 				<uni-segmented-control :current="current" :values="items" :style-type="styleType" :active-color="activeColor" @clickItem="onClickItem" />
 		</view>
-		<swiper  class="swiper-box" style=""  >
-		    <swiper-item class="swiper-item" v-for="(tab,index1) in 10" :key="index1">
-				
-				<scroll-view class="" enableBackToTop="true" scroll-y >
-						    <view v-for="i in 100">1</view>
-				</scroll-view>
-			</swiper-item>
-		</swiper>
-		<!-- <view class="content">
-			<mescroll-body
+		<view class="content">
+			<!-- <mescroll-body
 					ref="mescrollRef" 
 					@init="mescrollInit" 
 					@down="downCallback" 
 					@up="loadHotWindowList" 
 					:up="upOption"
-					:down="downOption">
+					:down="downOption"> -->
 				<view class="content-cuisine" v-if="current === 0">
-					<scroll-view class="scroll-v list" scroll-y="false">
-						<window-list ref="windowList"></window-list>
-					</scroll-view>
+					<window-list ref="windowList"></window-list>
 				</view>
 				<view class="content-other" v-if="current === 1">
 					<text class="content-text">
@@ -32,9 +22,9 @@
 				<view class="" v-if="current === 2">
 					<window-comment ref="windowComment"></window-comment>
 				</view>
-			</mescroll-body>
+			<!-- </mescroll-body> -->
 			
-		</view> -->
+		</view>
 	</view>
 </template>
 
@@ -50,7 +40,6 @@
 		mixins: [windowMiXin],
 		data() {
 			return {
-				scrollTop: 0,
 				items: ['菜系', '推荐', '评价'],//菜系可设置推荐
 				styles: [{
 						value: 'button',
@@ -126,15 +115,12 @@
 	/* #endif */
 	/* #ifndef APP-NVUE */
 	page {
-		/* display: flex;
+		display: flex;
 		flex-direction: column;
 		box-sizing: border-box;
 		background-color: #efeff4;
 		min-height: 100%;
-		height: auto; */
-		width: 100%;
-		min-height: 100%;
-		display: flex;
+		height: auto;
 	}
 
 	view {
@@ -162,23 +148,7 @@
 	.word-btn--hover {
 		background-color: #4ca2ff;
 	}
-	.window-list-body{
-		flex: 1;
-		flex-direction: column;
-		overflow: hidden;
-		background-color: #ffffff;
-		/* #ifdef MP-ALIPAY || MP-BAIDU */
-		height: 200vh;
-		/* #endif */
-	}
-	.swiper-box {
-	    flex: 1;
-	}
-	
-	.swiper-item {
-	    flex: 1;
-	    flex-direction: row;
-	}
+
 	.window-options{
 		padding: 0px 30px;
 		margin-top: 20px;
@@ -188,20 +158,21 @@
 		left: 0;
 		right: 0;
 		z-index: 999; */
-		/* position: fixed;
+		position: fixed;
 		left: 0;
 		right: 0;
-		z-index: 999; */
+		z-index: 999;
 	}
 	.content {
-		margin-top: 10px;
-		/* width: 100%;
-		height: 100%; */
+		/* margin-top: 10px; */
+		width: 100%;
+		height: 100%;
+		
 		
 		&-cuisine {
 			/* margin-top: 20rpx; */
-			/* display: flex;
-			flex-direction: column; */
+			display: flex;
+			flex-direction: column;
 		}
 		&-other {
 			/* #ifndef APP-NVUE */
