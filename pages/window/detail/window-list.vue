@@ -1,29 +1,39 @@
 <template>
 	<view>
 		<uni-list class="window-list-size">
-			<view v-for="(item,index) in 10" :key="index">
-				<uni-list-item-best 
-					class="window-list-style" 
-					title="菜品名称" 
-					note="菜品特色概括" 
-					thumb="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" 
-					thumb-size="best" 
-					clickable
-					@click="clickWindowList" 
-					/>
+			<mescroll-body
+					ref="mescrollRef" 
+					@init="mescrollInit" 
+					@down="downCallback" 
+					@up="loadHotWindowList" 
+					:up="upOption"
+					:down="downOption">
+				<view v-for="(item,index) in 20" :key="index">
+					<uni-list-item-best 
+						class="window-list-style" 
+						title="菜品名称" 
+						note="菜品特色概括" 
+						thumb="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" 
+						thumb-size="best" 
+						clickable
+						@click="clickWindowList" 
+						/>
 				</view>
+			</mescroll-body>
 		</uni-list>
 		
 	</view>
 </template>
 
 <script>
+	import windowListMiXin from './window-list.js'
 	export default{
 		data() {
 			return {
 				
 			}
 		},
+		mixins: [windowListMiXin],
 		computed: {
 			
 		},

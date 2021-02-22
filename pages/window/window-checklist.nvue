@@ -1,0 +1,128 @@
+<template>
+    <view class="window-checklist-body">
+		<view class="window-options">
+				<uni-segmented-control :current="current" :values="items" :style-type="styleType" :active-color="activeColor" @clickItem="onClickItem" />
+		</view>
+        <view class="line-h"></view>
+        <swiper :current="current" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
+			<swiper-item class="swiper-item">
+				<scroll-view class="scroll-v list" scroll-y>
+					<view class="content-cuisine" v-if="current === 0">
+							<window-list ref="windowList"></window-list>
+					</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item class="swiper-item">
+				<scroll-view class="scroll-v list" scroll-y>
+					<view class="content-other" v-if="current === 1">
+						<text class="content-text">
+							选项卡2的内容
+						</text>
+					</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item class="swiper-item">
+				<scroll-view class="scroll-v list" scroll-y>
+					<view class="" v-if="current === 2">
+						<window-comment ref="windowComment"></window-comment>
+					</view>
+				</scroll-view>
+			</swiper-item>
+        </swiper>
+    </view>
+</template>
+<script>
+
+/*    // 缓存每页最多
+    const MAX_CACHE_DATA = 100;
+    // 缓存页签数量
+    const MAX_CACHE_PAGE = 3; */
+	//import windowMiXin from './window-checklist.js'
+	import windowList from './detail/window-list.vue';
+	import windowComment from './detail/window-comment.vue';
+    export default {
+        components: {
+            windowList,
+			windowComment
+        },
+        data() {
+            return {
+				current: 0,
+				items: ['菜系', '推荐', '评价'],//菜系可设置推荐
+				activeColor: '#4cd964',
+				styleType: 'button',
+            }
+        },
+        onLoad() {
+            
+        },
+        methods: {
+			onClickItem(e) {
+				if (this.current !== e.currentIndex) {
+					this.current = e.currentIndex
+					console.log("current"+this.current);
+				}
+			},
+            ontabchange(e) {
+				//alert("tabChange")
+				console.log("tabIndex:"+e.target.current)
+                let index = e.target.current || e.detail.current;
+                this.switchTab(index);
+            },
+            switchTab(index) {
+                if (this.current === index) {
+                    return;
+                }
+                this.current = index;
+            }  
+        }
+    }
+</script>
+
+<style>
+    /* #ifndef APP-PLUS */
+    page {
+        width: 100%;
+        min-height: 100%;
+        display: flex;
+    }
+
+    /* #endif */
+
+    .window-checklist-body {
+        flex: 1;
+        flex-direction: column;
+        overflow: hidden;
+        background-color: #ffffff;
+        /* #ifdef MP-ALIPAY || MP-BAIDU */
+        height: 100vh;
+        /* #endif */
+    }
+
+	.window-options{
+		padding: 0px 30px;
+		margin-top: 20px;
+		}
+    .line-h {
+        /* height: 1rpx;
+        background-color: #cccccc; */
+		margin-bottom: 10rpx;
+    }
+	.swiper-box {
+	    flex: 1;
+	}
+	
+	.swiper-item {
+	    flex: 1;
+	    flex-direction: row;
+	}
+	.scroll-v {
+			flex: 1;
+			/* #ifndef MP-ALIPAY */
+			flex-direction: column;
+			/* #endif */
+			width: 750rpx;
+			width:100%;
+		}
+
+</style>

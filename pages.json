@@ -217,13 +217,6 @@
 			}
 		},
 		{
-			"path": "pages/window/testwindow",
-			"style": {
-				"navigationBarTitleText": "窗口列表"
-				/* "navigationStyle":"custom" */
-			}
-		},
-		{
 			"path": "pages/window/detail/window-list",
 			"style": {
 				"navigationBarTitleText": "窗口"
