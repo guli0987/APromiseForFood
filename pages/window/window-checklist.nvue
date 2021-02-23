@@ -4,11 +4,11 @@
 				<uni-segmented-control :current="current" :values="items" :style-type="styleType" :active-color="activeColor" @clickItem="onClickItem" />
 		</view>
         <view class="line-h"></view>
-        <swiper :current="current" class="swiper-box" style="flex: 1;" :duration="300" @change="ontabchange">
+        <swiper :current="current" class="swiper-box" :duration="300" @change="ontabchange">
 			<swiper-item class="swiper-item">
 				<scroll-view class="scroll-v list" scroll-y>
 					<view class="content-cuisine" v-if="current === 0">
-							<window-list ref="windowList"></window-list>
+							<window-food ref="windowFood"></window-food>
 					</view>
 				</scroll-view>
 			</swiper-item>
@@ -16,7 +16,7 @@
 				<scroll-view class="scroll-v list" scroll-y>
 					<view class="content-other" v-if="current === 1">
 						<text class="content-text">
-							选项卡2的内容
+							推荐
 						</text>
 					</view>
 				</scroll-view>
@@ -37,14 +37,15 @@
     const MAX_CACHE_DATA = 100;
     // 缓存页签数量
     const MAX_CACHE_PAGE = 3; */
-	//import windowMiXin from './window-checklist.js'
-	import windowList from './detail/window-list.vue';
+	import windowMiXin from './window-checklist.js'
+	import windowFood from './detail/window-food.vue';
 	import windowComment from './detail/window-comment.vue';
     export default {
         components: {
-            windowList,
+            windowFood,
 			windowComment
         },
+		mixins: [windowMiXin],
         data() {
             return {
 				current: 0,
@@ -115,6 +116,20 @@
 	.swiper-item {
 	    flex: 1;
 	    flex-direction: row;
+		
+		
+	}
+	.content-cuisine{
+		/* display: none; */
+		/* flex-direction: row; */
+		/* align-items: center; */
+		/* justify-content: center; */
+		/* align-content: center; */
+		/* flex-direction: row;
+		justify-content: space-between;
+		align-items: flex-end; */
+		
+		
 	}
 	.scroll-v {
 			flex: 1;

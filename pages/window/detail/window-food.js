@@ -10,7 +10,7 @@ export default{
 				auto: false, // 是否自动加载
 				page: {
 				 	num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-				 	size: 8, // 每页数据的数量，要与数据库一次取出对应，如果数据库取出数据小于size则默认到底
+				 	size: 10, // 每页数据的数量，要与数据库一次取出对应，如果数据库取出数据小于size则默认到底
 					time : null//time : 加载第一页数据服务器返回的时间 (可空); 防止用户翻页时,后台新增了数据从而导致下一页数据重复;
 				},
 				noMoreSize: 1,//如果列表已无数据,可设置列表的总数量要大于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
@@ -53,7 +53,7 @@ export default{
 				textLoading:'加载中 ...'	,//加载中的提示文本
 				textSuccess:'加载成功',//加载成功的提示文本 (1.3.3新增)
 				textErr:'加载失败',//加载失败的提示文本 (1.3.3新增)
-				beforeEndDelay:100,//延时结束的时长, 也是显示加载成功/失败的时长; 单位ms (1.3.3新增)
+				beforeEndDelay:100,//100 延时结束的时长, 也是显示加载成功/失败的时长; 单位ms (1.3.3新增)
 				bgColor:'transparent',//下拉区域背景颜色 (1.2.4新增);支持背景图和渐变: 如 'url(xxx) 0 0/100% 100%', 'linear-gradient(xx)' (1.2.6版本);支持一行代码定义background: https://www.runoob.com/cssref/css3-pr-background.html;建议同步配置pages.json的"backgroundColorTop"
 				textColor:'gray',//下拉文本的颜色 (当bgColor配置了颜色,textColor未配置时,则会默认为白色 1.2.4新增)
 				autoShowLoading:false,//如果设置auto=true ( 在初始化完毕之后自动执行下拉刷新的回调 ) ,那么是否显示下拉刷新的进度需配置down的callback才生效
@@ -74,16 +74,13 @@ export default{
 	},
 	methods: {
 		//加载热门推荐窗口列表-上拉加载
-		async loadHotWindowList(page){
-			let pageNum = page.num; // 页码, 默认从1开始
+		async loadWindowFoodList(page){
+			alert("上拉加载")
+			/* let pageNum = page.num; // 页码, 默认从1开始
 			let pageSize = page.size; // 页长, 默认每页10条
 			if(pageNum === 1){
 				//第一页清空数据重载，第一页刷新
 				this.windowList = [];
-				//alert("刷新数据");
-				/* this.$nextTick(() => {
-					 alert(this.$refs.productList);
-				 }) */
 				this.$nextTick(() => {
 					if(this.$refs.productList){
 						this.$refs.productList.loadType = 'refresh';
@@ -102,7 +99,7 @@ export default{
 			this.windowList = this.windowList.concat(currentList); //追加新数据
 			this.mescroll.endSuccess(currentList.length); //结束加载状态
 			
-			console.log(JSON.parse(JSON.stringify(res.result.data)));
+			console.log(JSON.parse(JSON.stringify(res.result.data))); */
 		},
 		mescrollInit(mescroll){
 			this.isLoading = true;

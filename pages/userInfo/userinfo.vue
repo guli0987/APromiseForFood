@@ -344,16 +344,13 @@
 		width: 80%;
 		margin: 30rpx auto 0rpx;
 		border-radius: 50rpx;
-	
-	
-	
 	}
 </style>
 <!--    display: flex;
 		flex-direction: row | row-reverse | column | column-reverse;//属性决定主轴的方向（即项目的排列方向）
 		flex-wrap: nowrap | wrap | wrap-reverse;//如果一条轴线排不下，如何换行。
 		 flex-flow: <flex-direction> || <flex-wrap>;//flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
-		justify-content: flex-start | flex-end | center | space-between | space-around;//属性定义了项目在主轴上的对齐方式。
+		justify-content: flex-start | flex-end | center | space-between 靠底 | space-around 左右有空隙，是中间的一半;//属性定义了项目在主轴上的对齐方式。
 		align-items: flex-start | flex-end | center | baseline | stretch;//属性定义项目在交叉轴上如何对齐。
 		align-content: flex-start | flex-end | center | space-between | space-around | stretch;//定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
 		

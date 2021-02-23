@@ -87,7 +87,7 @@ export default {
 			default: 'row'
 		},
 		title: {
-			type: String,
+			type: [String,Number],
 			default: ''
 		},
 		note: {
