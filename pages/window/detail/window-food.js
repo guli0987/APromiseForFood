@@ -75,7 +75,7 @@ export default{
 	methods: {
 		//加载热门推荐窗口列表-上拉加载
 		async loadWindowFoodList(page){
-			alert("上拉加载")
+			//alert("上拉加载")
 			/* let pageNum = page.num; // 页码, 默认从1开始
 			let pageSize = page.size; // 页长, 默认每页10条
 			if(pageNum === 1){

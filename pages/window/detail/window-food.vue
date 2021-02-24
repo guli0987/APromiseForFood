@@ -42,7 +42,7 @@
 		},
 		methods: {
 			clickWindowList(){
-				this.navTo('/pages/product/detail/product');
+				this.navTo('/pages/product/detail/product',{noCheckLogin:true});
 			}
 		}
 	}

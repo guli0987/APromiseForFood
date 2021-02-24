@@ -15,22 +15,22 @@
 		</view>
 		
 		<view class="introduce-section">
-			<text class="title">恒源祥2019春季长袖白色t恤 新款春装</text>
+			<text class="title">菜品名称 口味</text>
 			<view class="price-box">
 				<text class="price-tip">¥</text>
-				<text class="price">341.6</text>
-				<text class="m-price">¥488</text>
-				<text class="coupon-tip">7折</text>
+				<text class="price">现价</text>
+				<text class="m-price">¥原价</text>
+				<text class="coupon-tip">折扣</text>
 			</view>
 			<view class="bot-row">
 				<text>销量: 108</text>
-				<text>库存: 4690</text>
+				<text>排名: 2</text>
 				<text>浏览量: 768</text>
 			</view>
 		</view>
 		
-		<!--  分享 -->
-		<view class="share-section" @click="share">
+		<!--  分享 如果有优惠活动则显示-->
+		<view class="share-section" @click="share" v-if="true">
 			<view class="share-icon">
 				<text class="yticon icon-xingxing"></text>
 				 返
@@ -54,7 +54,8 @@
 				</view>
 				<text class="yticon icon-you"></text>
 			</view>
-			<view class="c-row b-b">
+			<!-- 如果有优惠券显示 -->
+			<view class="c-row b-b" v-if="true">
 				<text class="tit">优惠券</text>
 				<text class="con t-r red">领取优惠券</text>
 				<text class="yticon icon-you"></text>
@@ -107,23 +108,7 @@
 		
 		<!-- 底部操作菜单 -->
 		<view class="page-bottom">
-			<navigator url="/pages/index/index" open-type="switchTab" class="p-b-btn">
-				<text class="yticon icon-xiatubiao--copy"></text>
-				<text>首页</text>
-			</navigator>
-			<navigator url="/pages/cart/cart" open-type="switchTab" class="p-b-btn">
-				<text class="yticon icon-gouwuche"></text>
-				<text>购物车</text>
-			</navigator>
-			<view class="p-b-btn" :class="{active: favorite}" @click="toFavorite">
-				<text class="yticon icon-shoucang"></text>
-				<text>收藏</text>
-			</view>
-			
-			<view class="action-btn-group">
-				<button type="primary" class=" action-btn no-border buy-now-btn" @click="buy">立即购买</button>
-				<button type="primary" class=" action-btn no-border add-cart-btn">加入购物车</button>
-			</view>
+			<uni-goods-nav-best :options="options" :fill="true" :button-group="buttonGroup" @click="menuClick" @buttonClick="menuButtonClick" />
 		</view>
 		
 		
@@ -168,11 +153,9 @@
 			</view>
 		</view>
 		<!-- 分享 -->
-		<share 
-			ref="share" 
-			:contentHeight="580"
-			:shareList="shareList"
-		></share>
+		<uni-popup id="popupShare" ref="popupShare" type="share" @change="change">
+			<uni-popup-share title="分享到" @select="select"></uni-popup-share>
+		</uni-popup>
 	</view>
 </template>
 
@@ -184,11 +167,39 @@
 		},
 		data() {
 			return {
+				options: [
+				{
+					icon: 'home',
+					text: '首页',
+					color:'#7b7b7b'
+				},{
+					icon: 'headphones',
+					text: '客服',
+					color:'#7b7b7b',
+					info:1,
+					infoBackgroundColor: '#ff0000',
+					infoColor: "#f5f5f5"
+				}, {
+					icon: 'heart',
+					text: '收藏',
+					color:'#646566'
+				}],
+				buttonGroup: [{
+						text: '加入订单',
+						backgroundColor: '#ffa200',
+						color: '#fff'
+					},
+					{
+						text: '立即购买',
+						backgroundColor: '#ff0000',
+						color: '#fff'
+					}
+				],
+				
 				specClass: 'none',
 				specSelected:[],
 				
 				favorite: true,
-				shareList: [],
 				imgList: [
 					{
 						src: 'https://gd3.alicdn.com/imgextra/i3/0/O1CN01IiyFQI1UGShoFKt1O_!!0-item_pic.jpg_400x400.jpg'
@@ -287,9 +298,35 @@
 					}
 				}
 			})
-			this.shareList = await this.$api.json('shareList');
+			//this.shareList = await this.$api.json('shareList');
 		},
 		methods:{
+			/* 按钮组点击事件 */
+			menuClick(e) {
+				//console.log(JSON.stringify(e))
+				if(e.index === 0){
+					uni.showToast({
+						title: `回到${e.content.text}`,
+						icon: 'none'
+					})
+				}else if(e.index === 1){
+					uni.showToast({
+						title: `${e.content.text}`,
+						icon: 'none'
+					})
+				}else if(e.index === 2){
+					uni.showToast({
+						title: `加入${e.content.text}`,
+						icon: 'none'
+					})
+					this.options[e.index].icon="heart-filled";
+					this.options[e.index].color='#ff0000';
+				}
+			},
+			menuButtonClick(e) {
+				console.log(e)
+				this.options[2].info++
+			},
 			//规格弹窗开关
 			toggleSpec() {
 				if(this.specClass === 'show'){
@@ -327,7 +364,26 @@
 			},
 			//分享
 			share(){
-				this.$refs.share.toggleMask();	
+				//this.$refs.share.toggleMask();	
+				/* alert("share") */
+				this.$refs.popupShare.open()
+			},
+			/**
+			 * popup 状态发生变化触发
+			 * @param {Object} e
+			 */
+			change(e) {
+				console.log('popup ' + e.type + ' 状态', e.show)
+			},
+			/**
+			 * 选择内容
+			 */
+			select(e, done) {
+				uni.showToast({
+					title: `您选择了第${e.index+1}项：${e.item.text}`,
+					icon: 'none'
+				})
+				done()
 			},
 			//收藏
 			toFavorite(){
@@ -634,6 +690,7 @@
 				font-size: $font-sm + 2upx;
 				color: $font-color-base;
 				line-height: 42upx;
+				
 				.price{
 					font-size: $font-lg;
 					color: $uni-color-primary;
