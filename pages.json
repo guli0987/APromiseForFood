@@ -122,6 +122,18 @@
 			}
 		},
 		{
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": "Test"
+			}
+		},
+		{
+			"path": "pages/test/tests",
+			"style": {
+				"navigationBarTitleText": "Tests"
+			}
+		},
+		{
 			"path": "pages/tabBar/square/detail/history",
 			"style": {
 				"navigationBarTitleText": "搜索",

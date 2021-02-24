@@ -96,18 +96,20 @@
 						<text class="time">2019-04-01 19:21</text>
 					</view>
 				</view> -->
-				<view class="qiun-charts" style="background-color: #E5FDC3;">
-					<!--#ifdef MP-ALIPAY -->
-					<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" :width="cWidth*pixelRatio"
-					 :height="cHeight*pixelRatio" :style="{'width':cWidth+'px','height':cHeight+'px'}" @touchstart="touchIt($event,'canvasColumn')"></canvas>
-					<!--#endif-->
-					<!--#ifndef MP-ALIPAY -->
-					<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" @touchstart="touchIt($event,'canvasColumn')"></canvas>
-					<!--#endif-->
+				<!-- 柱状图 -->
+				<view class="qiun-columns">
+					<view class="qiun-charts" style="background-color: #E5FDC3;">
+						<!--#ifdef MP-ALIPAY -->
+						<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" :width="cWidth*pixelRatio"
+						 :height="cHeight*pixelRatio" :style="{'width':cWidth+'px','height':cHeight+'px'}" @touchstart="touchIt($event,'canvasColumn')"></canvas>
+						<!--#endif-->
+						<!--#ifndef MP-ALIPAY -->
+						<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" @touchstart="touchIt($event,'canvasColumn')"></canvas>
+						<!--#endif-->
+					</view>
 				</view>
 			</view>
 		</view>
-		
 		<view class="detail-desc">
 			<view class="d-header">
 				<text>图文详情</text>
@@ -168,18 +170,20 @@
 		<!-- 悬浮按钮 -->
 		<!-- <movable-area>
 			<movable-view :x="x" :y="y" direction="all" @change="onChangeM"> -->
-				<uni-fab-best ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction" @trigger="trigger" @fabClick="fabClick" />
+				<!-- <uni-fab-best ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction" @trigger="trigger" @fabClick="fabClick" /> -->
 			<!-- </movable-view>
 		</movable-area> -->
 	</view>
 </template>
 
 <script>
+	import chartProduct from '../../chart/product-chart.js'
 	import share from '@/components/mix-share/share.vue';
 	export default{
 		components: {
 			share
 		},
+		mixins: [chartProduct],
 		data() {
 			return {
 				x: 0,
@@ -698,10 +702,12 @@
 	.eva-section{
 		display: flex;
 		flex-direction: column;
-		padding: 20upx 30upx;
+		/* padding: 20upx 30upx; */
+		padding: 20upx 0upx;
 		background: #fff;
 		margin-top: 16upx;
 		.e-header{
+			padding: 20upx 30upx;
 			display: flex;
 			align-items: center;
 			height: 70upx;
@@ -722,21 +728,30 @@
 		}
 	}
 	.eva-box{
+		/* display: flex;
+		padding: 20upx 0; */
+		/* position: relative;
+		left: 0;
+		top: 0; */
+			
+	}
+	.qiun-columns {
 		display: flex;
-		padding: 20upx 0;
-			/* 通用样式 */
-			.qiun-charts {
-				/* width: 750rpx; */
-				/* width:100%; */
-				height: 400rpx;
-				background-color: #FFFFFF;
-				.charts {
-					/* width: 750rpx; */
-					width:100%;
-					height: 500rpx;
-					background-color: #FFFFFF;
-				}
-			}
+		flex-direction: column !important;
+	}
+	/* 通用样式 */
+	.qiun-charts {
+		/* width: 750rpx; */
+		/* width:100%; */
+		height: 500rpx;
+		background-color: #FFFFFF;
+	}
+	
+	.charts {
+		/* width: 750rpx; */
+		width:100%;
+		height: 500rpx;
+		background-color: #FFFFFF;
 	}
 	/*  详情 */
 	.detail-desc{
