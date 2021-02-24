@@ -73,6 +73,12 @@
 			}
 		},
 		{
+			"path": "pages/tabBar/order/detail/createOrder",
+			"style": {
+				"navigationBarTitleText": "创建订单"
+			}
+		},
+		{
 			"path": "pages/tabBar/mine/mine",
 			"style": {
 				"navigationBarTitleText": "我的",
@@ -204,7 +210,14 @@
 				"navigationBarTitleText": "商品详情",
 				"app-plus": {
 					"titleNView": {
-						"type": "transparent"
+						"type": "transparent",
+						"buttons":[{
+							/* "fontSrc": "/static/uni.ttf",
+							"text": "\ue405", */
+							"type": "share",
+							"float":"right"
+							/* "background":"rgba(0,0,0,0)" */
+						}]
 					}
 				}
 			}
@@ -226,6 +239,24 @@
 			"path": "pages/window/detail/window-comment",
 			"style": {
 				"navigationBarTitleText": "评价"
+			}
+		},
+		{
+			"path": "pages/toolBar/fab",
+			"style": {
+				"navigationBarTitleText": "拖动"
+			}
+		},
+		{
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址"
+			}
+		}, 
+		{
+			"path": "pages/address/addressManage",
+			"style": {
+				"navigationBarTitleText": "新增收货地址"
 			}
 		}
 	],

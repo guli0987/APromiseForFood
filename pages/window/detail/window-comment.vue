@@ -1,8 +1,20 @@
 <template>
 	<view>
-		<view class="uni-padding-wrap uni-common-mt">
-			<view style="font-size: 12px; color: #666;">注：PC 不支持下拉刷新</view>
-			<view class="text" v-for="(num,index) in data" :key="index">list - {{num}}</view>
+		<view class="window-comment">
+			<view class="window-comment-text" v-for="(num,index) in data" :key="index">
+				<view class="comment-avatar">
+					<image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1620020012,789258862&fm=26&gp=0.jpg"></image>
+				</view>
+				<view class="comment-mine">
+					<view class="comment-nickname">昵称{{num}}yy</view>
+					
+					<view class="comment-time">2021-02-24</view>
+				</view>
+				<view class="comment-content">
+					<view class="comment-rate"><uni-rate :readonly="true" :value="2" /></view>
+					<view class="comment-text">真是太好吃了，我再也不过来了</view>
+				</view>
+			</view>
 			<view class="uni-loadmore" v-if="showLoadMore">{{loadMoreText}}</view>
 		</view>
 	</view>
@@ -12,7 +24,7 @@
 		data() {
 			return {
 				title: '下拉刷新 + 加载更多',
-				data: [1,2,3],
+				data: [1,2,3,4,5,6,7,8,9,10],
 				loadMoreText: "加载中...",
 				showLoadMore: false,
 				max: 0
@@ -68,15 +80,60 @@
 	}
 </script>
 
-<style>
-	.text {
-		margin: 16rpx 0;
+<style lang="scss">
+	/* page{
+		background-color: #efeff4;
+	} */
+	.window-comment{
+		background-color: #efeff4;
+	}
+	.window-comment-text {
+		margin: 2rpx 0;
 		width:100%;
 		background-color: #fff;
-		height: 120rpx;
-		line-height: 120rpx;
+		height: 180rpx;
+		/* line-height: 120rpx;
 		text-align: center;
 		color: #555;
-		border-radius: 8rpx;
+		border-radius: 8rpx; */
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		.comment-avatar{
+			flex: 1;
+			image {
+				flex-shrink: 0;
+				display: block;
+				width: 120rpx;
+				height: 120rpx;
+				border-radius: 100rpx;
+				margin: auto;
+			}
+		}
+		.comment-mine{
+			flex: 3;
+			margin-left: 10rpx;
+			/* display: flex;
+			flex-direction: column; */
+			.comment-nickname{
+			}
+			.comment-time{
+				font-family: 'Times New Roman', Times, serif;
+				font-size: 12rpx;
+				margin-top: 16rpx;
+			}
+		}
+		.comment-content{
+			flex: 5;
+			display: flex;
+			flex-direction: column;
+			.comment-rate{
+				align-self: flex-end;
+				margin-right: 10rpx;
+			}
+			.comment-text{
+			}
+		}
 	}
 </style>

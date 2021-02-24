@@ -80,7 +80,7 @@
     }
 </script>
 
-<style>
+<style lang="scss">
     /* #ifndef APP-PLUS */
     page {
         width: 100%;
@@ -95,6 +95,7 @@
         flex-direction: column;
         overflow: hidden;
         background-color: #ffffff;
+		/* background-color: #efeff4; */
         /* #ifdef MP-ALIPAY || MP-BAIDU */
         height: 100vh;
         /* #endif */

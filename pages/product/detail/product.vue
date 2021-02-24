@@ -81,13 +81,13 @@
 		<!-- 评价 -->
 		<view class="eva-section">
 			<view class="e-header">
-				<text class="tit">评价</text>
+				<text class="tit">总体评价</text>
 				<text>(86)</text>
 				<text class="tip">好评率 100%</text>
 				<text class="yticon icon-you"></text>
 			</view> 
 			<view class="eva-box">
-				<image class="portrait" src="http://img3.imgtn.bdimg.com/it/u=1150341365,1327279810&fm=26&gp=0.jpg" mode="aspectFill"></image>
+				<!-- <image class="portrait" src="http://img3.imgtn.bdimg.com/it/u=1150341365,1327279810&fm=26&gp=0.jpg" mode="aspectFill"></image>
 				<view class="right">
 					<text class="name">Leo yo</text>
 					<text class="con">商品收到了，79元两件，质量不错，试了一下有点瘦，但是加个外罩很漂亮，我很喜欢</text>
@@ -95,6 +95,15 @@
 						<text class="attr">购买类型：XL 红色</text>
 						<text class="time">2019-04-01 19:21</text>
 					</view>
+				</view> -->
+				<view class="qiun-charts" style="background-color: #E5FDC3;">
+					<!--#ifdef MP-ALIPAY -->
+					<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" :width="cWidth*pixelRatio"
+					 :height="cHeight*pixelRatio" :style="{'width':cWidth+'px','height':cHeight+'px'}" @touchstart="touchIt($event,'canvasColumn')"></canvas>
+					<!--#endif-->
+					<!--#ifndef MP-ALIPAY -->
+					<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" @touchstart="touchIt($event,'canvasColumn')"></canvas>
+					<!--#endif-->
 				</view>
 			</view>
 		</view>
@@ -156,6 +165,12 @@
 		<uni-popup id="popupShare" ref="popupShare" type="share" @change="change">
 			<uni-popup-share title="分享到" @select="select"></uni-popup-share>
 		</uni-popup>
+		<!-- 悬浮按钮 -->
+		<!-- <movable-area>
+			<movable-view :x="x" :y="y" direction="all" @change="onChangeM"> -->
+				<uni-fab-best ref="fab" :pattern="pattern" :content="content" :horizontal="horizontal" :vertical="vertical" :direction="direction" @trigger="trigger" @fabClick="fabClick" />
+			<!-- </movable-view>
+		</movable-area> -->
 	</view>
 </template>
 
@@ -167,6 +182,44 @@
 		},
 		data() {
 			return {
+				x: 0,
+				y: 0,
+				scale: 2,
+				old: {
+					x: 0,
+					y: 0,
+					scale: 2
+				},
+				/* fab */
+				horizontal: 'left',
+				vertical: 'bottom',
+				direction: 'horizontal',
+				pattern: {
+					color: '#ff007f',
+					backgroundColor: '#fff',
+					selectedColor: '#007AFF',
+				},
+				content: [{
+						iconPath: '/static/component.png',
+						selectedIconPath: '/static/componentHL.png',
+						text: '当前订单',
+						active: false
+					},
+					{
+						iconPath: '/static/api.png',
+						selectedIconPath: '/static/apiHL.png',
+						text: '预约时间',
+						active: false
+					},
+					{
+						iconPath: '/static/template.png',
+						selectedIconPath: '/static/templateHL.png',
+						text: '设置',
+						active: false
+					}
+				],
+				
+				
 				options: [
 				{
 					icon: 'home',
@@ -223,58 +276,43 @@
 				specList: [
 					{
 						id: 1,
-						name: '尺寸',
+						name: '种类',
 					},
 					{	
 						id: 2,
-						name: '颜色',
+						name: '口味',
 					},
 				],
 				specChildList: [
 					{
 						id: 1,
 						pid: 1,
-						name: 'XS',
+						name: '小碗',
 					},
 					{
 						id: 2,
 						pid: 1,
-						name: 'S',
+						name: '中碗',
 					},
 					{
 						id: 3,
 						pid: 1,
-						name: 'M',
-					},
-					{
-						id: 4,
-						pid: 1,
-						name: 'L',
-					},
-					{
-						id: 5,
-						pid: 1,
-						name: 'XL',
-					},
-					{
-						id: 6,
-						pid: 1,
-						name: 'XXL',
+						name: '大碗',
 					},
 					{
 						id: 7,
 						pid: 2,
-						name: '白色',
+						name: '默认',
 					},
 					{
 						id: 8,
 						pid: 2,
-						name: '珊瑚粉',
+						name: '微辣',
 					},
 					{
 						id: 9,
 						pid: 2,
-						name: '草木绿',
+						name: '中辣',
 					},
 				]
 			};
@@ -301,6 +339,10 @@
 			//this.shareList = await this.$api.json('shareList');
 		},
 		methods:{
+			onChangeM(e) {
+				this.old.x = e.detail.x
+				this.old.y = e.detail.y
+			},
 			/* 按钮组点击事件 */
 			menuClick(e) {
 				//console.log(JSON.stringify(e))
@@ -324,8 +366,17 @@
 				}
 			},
 			menuButtonClick(e) {
-				console.log(e)
-				this.options[2].info++
+				console.log(JSON.stringify(e))
+				//this.options[2].info++
+				if(e.index === 0){
+					uni.showToast({
+						title: `${e.content.text}`,
+						icon: 'none'
+					})
+				}else if(e.index === 1){
+					this.navTo('/pages/tabBar/order/detail/createOrder',{noCheckLogin:true});
+				}
+				
 			},
 			//规格弹窗开关
 			toggleSpec() {
@@ -394,8 +445,68 @@
 					url: `/pages/order/createOrder`
 				})
 			},
-			stopPrevent(){}
+			stopPrevent(){},
+			trigger(e) {
+				if(e.index === 2){
+					uni.showActionSheet({
+						title:'',
+						itemList: ['切换菜单', '左下角显示', '右下角显示', '左上角显示','右上角显示'],
+						popover: {
+							top: 0,
+							left: 0
+						},
+						success: (e) => {
+							console.log(e.tapIndex);
+							/* uni.showToast({
+								title:"点击了第" + e.tapIndex + "个选项",
+								icon:"none"
+							}) */
+							if(e.tapIndex === 0){
+								this.switchBtn(0);
+							}else if(e.tapIndex === 1){
+								this.switchBtn('left', 'bottom');
+							}else if(e.tapIndex === 2){
+								this.switchBtn('right', 'bottom')
+							}else if(e.tapIndex === 3){
+								this.switchBtn('left', 'top')
+							}else if(e.tapIndex === 4){
+								this.switchBtn('right', 'top')
+							}
+						}
+					})
+				}
+			},
+			fabClick() {
+				uni.showToast({
+					title: '点击了悬浮按钮',
+					icon: 'none'
+				})
+			},
+			switchBtn(hor, ver) {
+				if (hor === 0) {
+					this.direction = this.direction === 'horizontal' ? 'vertical' : 'horizontal'
+					this.directionStr = this.direction === 'horizontal' ? '垂直' : '水平'
+				} else {
+					this.horizontal = hor
+					this.vertical = ver
+				}
+				this.$forceUpdate()
+			}
 		},
+		onBackPress() {
+			if (this.$refs.fab.isShow) {
+				this.$refs.fab.close()
+				return true
+			}
+			return false
+		},
+		onNavigationBarButtonTap(e) {
+			console.log(JSON.stringify(e))
+			if(e.index === 0){
+				//alert("123")
+				this.$refs.popupShare.open();
+			}
+		}
 
 	}
 </script>
@@ -450,7 +561,7 @@
 			height: 64upx;
 			padding: 10upx 0;
 			font-size: 26upx;
-			color:$uni-color-primary;
+			color:$font-color-hot;
 		}
 		.price{
 			font-size: $font-lg + 2upx;
@@ -463,7 +574,7 @@
 		.coupon-tip{
 			align-items: center;
 			padding: 4upx 10upx;
-			background: $uni-color-primary;
+			background: $font-color-discount;
 			font-size: $font-sm;
 			color: #fff;
 			border-radius: 6upx;
@@ -494,12 +605,12 @@
 			width: 70upx;
 			height: 30upx;
 			line-height: 1;
-			border: 1px solid $uni-color-primary;
+			border: 1px solid $font-color-share;
 			border-radius: 4upx;
 			position:relative;
 			overflow: hidden;
 			font-size: 22upx;
-			color: $uni-color-primary;
+			color: $font-color-share;
 			&:after{
 				content: '';
 				width: 50upx;
@@ -508,7 +619,7 @@
 				left: -20upx;
 				top: -12upx;
 				position:absolute;
-				background: $uni-color-primary;
+				background: $font-color-share;
 			}
 		}
 		.icon-xingxing{
@@ -533,12 +644,12 @@
 			flex: 1;
 			text-align:right;
 			font-size: $font-sm;
-			color: $uni-color-primary;
+			color: $font-color-share;
 		}
 		.icon-you{
 			font-size: $font-sm;
 			margin-left: 4upx;
-			color: $uni-color-primary;
+			color: $font-color-share;
 		}
 	}
 	
@@ -579,7 +690,7 @@
 			line-height: 40upx;
 		}
 		.red{
-			color: $uni-color-primary;
+			color: $font-color-hot;
 		}
 	}
 	
@@ -613,31 +724,19 @@
 	.eva-box{
 		display: flex;
 		padding: 20upx 0;
-		.portrait{
-			flex-shrink: 0;
-			width: 80upx;
-			height: 80upx;
-			border-radius: 100px;
-		}
-		.right{
-			flex: 1;
-			display: flex;
-			flex-direction: column;
-			font-size: $font-base;
-			color: $font-color-base;
-			padding-left: 26upx;
-			.con{
-				font-size: $font-base;
-				color: $font-color-dark;
-				padding: 20upx 0;
+			/* 通用样式 */
+			.qiun-charts {
+				/* width: 750rpx; */
+				/* width:100%; */
+				height: 400rpx;
+				background-color: #FFFFFF;
+				.charts {
+					/* width: 750rpx; */
+					width:100%;
+					height: 500rpx;
+					background-color: #FFFFFF;
+				}
 			}
-			.bot{
-				display: flex;
-				justify-content: space-between;
-				font-size: $font-sm;
-				color:$font-color-light;
-			}
-		}
 	}
 	/*  详情 */
 	.detail-desc{
@@ -693,7 +792,7 @@
 				
 				.price{
 					font-size: $font-lg;
-					color: $uni-color-primary;
+					color: $font-color-hot;
 					margin-bottom: 10upx;
 				}
 				.selected-text{
@@ -729,7 +828,7 @@
 			}
 			.selected{
 				background: #fbebee;
-				color: $uni-color-primary;
+				color: $font-color-hot;
 			}
 		}
 	}
@@ -783,7 +882,7 @@
 				height: 66upx;
 				line-height: 66upx;
 				border-radius: 100upx;
-				background: $uni-color-primary;
+				background: $font-color-btn-red;
 				font-size: $font-base + 2upx;
 				color: #fff;
 				margin: 30upx auto 20upx;
@@ -853,7 +952,7 @@
 				color: $font-color-light;
 			}
 			&.active, &.active .yticon{
-				color: $uni-color-primary;
+				color: $font-color-hot;
 			}
 			.icon-fenxiang2{
 				font-size: 42upx;
@@ -896,5 +995,24 @@
 			}
 		}
 	}
+/* 	movable-area {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: var(--window-top);
+		height: 100%;
+		width: 100%;
+		background-color: #D8D8D8;
+		overflow: hidden;
+		movable-view {
+			height: 100rpx;
+			width: 100rpx;
+			border: #ff0000 solid 1px;
+		}
+	} */
+
 	
 </style>
+<!-- 加入当前订单，没有购物车一说 
+	将地址改为预约时间
+-->
