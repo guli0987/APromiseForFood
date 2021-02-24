@@ -97,16 +97,17 @@
 					</view>
 				</view> -->
 				<!-- 柱状图 -->
-				<view class="qiun-columns">
+				<!-- <view class="qiun-columns">
 					<view class="qiun-charts" style="background-color: #E5FDC3;">
-						<!--#ifdef MP-ALIPAY -->
 						<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" :width="cWidth*pixelRatio"
 						 :height="cHeight*pixelRatio" :style="{'width':cWidth+'px','height':cHeight+'px'}" @touchstart="touchIt($event,'canvasColumn')"></canvas>
-						<!--#endif-->
-						<!--#ifndef MP-ALIPAY -->
 						<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" style="background-color: #E5FDC3;" @touchstart="touchIt($event,'canvasColumn')"></canvas>
-						<!--#endif-->
 					</view>
+				</view> -->
+				<view class="qiun-columns">
+						<view class="qiun-charts" >
+							<canvas canvas-id="canvasColumnStack" id="canvasColumnStack" class="charts"  @touchstart="touchColumn"></canvas>
+						</view>
 				</view>
 			</view>
 		</view>
@@ -728,31 +729,19 @@
 		}
 	}
 	.eva-box{
-		/* display: flex;
-		padding: 20upx 0; */
-		/* position: relative;
-		left: 0;
-		top: 0; */
+		overflow-x: hidden;
 			
 	}
-	.qiun-columns {
-		display: flex;
-		flex-direction: column !important;
-	}
-	/* 通用样式 */
-	.qiun-charts {
-		/* width: 750rpx; */
-		/* width:100%; */
-		height: 500rpx;
-		background-color: #FFFFFF;
-	}
-	
-	.charts {
-		/* width: 750rpx; */
-		width:100%;
-		height: 500rpx;
-		background-color: #FFFFFF;
-	}
+	.qiun-padding{padding:2%; width:96%;}
+	.qiun-wrap{display:flex; flex-wrap:wrap;}
+	.qiun-rows{display:flex; flex-direction:row !important;}
+	.qiun-columns{display:flex; flex-direction:column !important;}
+	.qiun-common-mt{margin-top:10upx;}
+	.qiun-bg-white{background:#FFFFFF;}
+	.qiun-title-bar{width:96%; padding:10upx 2%; flex-wrap:nowrap;}
+	.qiun-title-dot-light{border-left: 10upx solid #0ea391; padding-left: 10upx; font-size: 32upx;color: #000000}
+	.qiun-charts{width: 750upx; height:500upx;background-color: #FFFFFF;}
+	.charts{width: 750upx; height:500upx;background-color: #FFFFFF;}
 	/*  详情 */
 	.detail-desc{
 		background: #fff;
