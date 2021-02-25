@@ -74,6 +74,7 @@ import  { isJSON } from '@/common/js/checker.js';
 					canvaColumn=new uCharts({
 						$this:_self,
 						canvasId: canvasId,
+						colors: ['#f04864', '#facc14','#2fc25b'],
 						type: 'column',
 						padding:[15,15,0,15],
 						legend:{
