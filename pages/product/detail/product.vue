@@ -106,7 +106,7 @@
 				</view> -->
 				<view class="qiun-columns">
 						<view class="qiun-charts" >
-							<canvas canvas-id="canvasColumnStack" id="canvasColumnStack" class="charts"  @touchstart="touchColumn"></canvas>
+							<canvas canvas-id="canvasColumnStack" id="canvasColumnStack" class="charts"  @touchstart="touchStartColumn" @touchmove="touchMoveColumn" @touchend="touchEndColumn"></canvas>
 						</view>
 				</view>
 			</view>

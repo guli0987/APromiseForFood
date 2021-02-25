@@ -89,8 +89,12 @@ import  { isJSON } from '@/common/js/checker.js';
 						animation: true,
 						categories: chartData.categories,
 						series: chartData.series,
+						enableScroll: true,//是否开启滚动
 						xAxis: {
 							disableGrid:true,
+							itemCount:6,//每页显示多少
+							scrollAlign:'right',//滚动条位置
+							//scrollShow:true,//显示滚动条
 						},
 						yAxis: {
 							//disabled:true
@@ -107,7 +111,15 @@ import  { isJSON } from '@/common/js/checker.js';
 					});
 					
 				},
-				touchColumn(e){
+				touchStartColumn(e){
+					canvaColumn.scrollStart(e);
+				},
+				touchMoveColumn(e){
+					canvaColumn.scroll(e);
+				},
+				touchEndColumn(e){
+					canvaColumn.scrollEnd(e);
+					//下面是toolTip事件，如果滚动后不需要显示，可不填写
 					canvaColumn.touchLegend(e);
 					canvaColumn.showToolTip(e, {
 						format: function (item, category) {
