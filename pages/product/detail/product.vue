@@ -30,7 +30,7 @@
 		</view>
 		
 		<!--  分享 如果有优惠活动则显示-->
-		<view class="share-section" @click="share" v-if="true">
+		<!-- <view class="share-section" @click="share" v-if="true">
 			<view class="share-icon">
 				<text class="yticon icon-xingxing"></text>
 				 返
@@ -42,11 +42,11 @@
 				<text class="yticon icon-you"></text>
 			</view>
 			
-		</view>
+		</view> -->
 		
 		<view class="c-list">
 			<view class="c-row b-b" @click="toggleSpec">
-				<text class="tit">购买类型</text>
+				<text class="tit">类型</text>
 				<view class="con">
 					<text class="selected-text" v-for="(sItem, sIndex) in specSelected" :key="sIndex">
 						{{sItem.name}}
@@ -56,24 +56,22 @@
 			</view>
 			<!-- 如果有优惠券显示 -->
 			<view class="c-row b-b" v-if="true">
-				<text class="tit">优惠券</text>
+				<text class="tit">优惠</text>
 				<text class="con t-r red">领取优惠券</text>
 				<text class="yticon icon-you"></text>
 			</view>
 			<view class="c-row b-b">
-				<text class="tit">促销活动</text>
+				<text class="tit">活动</text>
 				<view class="con-list">
-					<text>新人首单送20元无门槛代金券</text>
-					<text>订单满50减10</text>
-					<text>订单满100减30</text>
-					<text>单笔购买满两件免邮费</text>
+					<text>新人首单送5元无门槛代金券</text>
+					<text>订单满30减6</text>
+					<text>订单满100减20</text>
 				</view>
 			</view>
 			<view class="c-row b-b">
-				<text class="tit">服务</text>
+				<text class="tit">其他</text>
 				<view class="bz-list con">
-					<text>7天无理由退换货 ·</text>
-					<text>假一赔十 ·</text>
+					<text>暂无</text>
 				</view>
 			</view>
 		</view>
@@ -187,6 +185,34 @@
 		mixins: [chartProduct],
 		data() {
 			return {
+				productInfoList:[{
+					"category_id": "1", // 所属窗口
+					"goods_sn": "20210225828", // 商品的唯一货号
+					"name": "手抓饼 传统美食", // 商品名称
+					"keywords": "饼,传统美食", // 商品关键字，为搜索引擎收录使用
+					// 商品详细描述
+					"goods_desc": "手抓饼是从葱抓饼演变而来，起源于中国台湾地区。2004年在台湾夜市被发现并于2005年正式从台湾引进至内地。新鲜出炉后的手抓饼，千层百叠，层如薄纸，用手抓之，面丝千连，其外层金黄酥脆，内层柔软白嫩，一股葱油与面筋的香味扑鼻而来，让每位食客来不及等待，抓起就吃。手抓饼至今一直风靡全国，可搭配鸡蛋、猪肉叉烧、牛肉饼、粮心香肠、藤椒鸡排、培根、方火腿、鸡柳、蔬菜等辅料，也可搭配酱爆汁、孜然香辣酱、番茄沙司、麻辣汁、甜辣酱、甜味沙拉酱、黑椒酱、排骨酱等酱料，香酥可口，老少皆宜。", 
+					"goods_thumb": "https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product1.jpg", // 商品缩略图，用于在列表或搜索结果中预览显示
+					"goods_banner_imgs": "", // 商品详情页的banner图地址
+					"goods_price": "9999", // 商品价格
+					"remain_count": "999999", // 库存数量
+					"month_sell_count": "640", // 月销量
+					"total_sell_count": "28512", // 总销量
+					"comment_count": "980021", // 累计评论数
+					"is_real": true, // 是否实物
+					"is_on_sale": true, // 是否上架销售
+					"is_alone_sale": true, // 是否能单独销售；如果不能单独销售，则只能作为某商品的配件或者赠品销售
+					"is_best": false, // 是否精品
+					"is_new": true, // 是否新品
+					"is_hot": false, // 是否热销
+					"add_date": "2020-8-26 09:37:21", // 上架时间
+					"last_modify_date": "2020-8-26 09:37:21", // 最后修改时间
+					"seller_note": "", //商家备注，仅商家可见
+					"shop_name": "京东商城网上自营专卖店",
+					"tag": ["饼", "传统美食"],
+					"goods_tip": "自营"
+				}],
+				//
 				x: 0,
 				y: 0,
 				scale: 2,
