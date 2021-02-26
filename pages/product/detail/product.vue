@@ -524,13 +524,13 @@
 				this.$forceUpdate()
 			}
 		},
-		onBackPress() {
+		/* onBackPress() {
 			if (this.$refs.fab.isShow) {
 				this.$refs.fab.close()
 				return true
 			}
 			return false
-		},
+		}, */
 		onNavigationBarButtonTap(e) {
 			console.log(JSON.stringify(e))
 			if(e.index === 0){
