@@ -72,6 +72,8 @@
 				<uni-list v-if="hasLogin">
 					<uni-list-item class="mine-text-direction" title="退出登录" clickable @click="loggout"/>
 				</uni-list>
+				<!-- 全局样式高度统一 -->
+				<show-modal></show-modal>
 			</view>
 		</view>
 	</view>
@@ -114,6 +116,11 @@
 						title:"登录提醒",
 						content:"您还未登录，需要登录后才能正常使用",
 						showCancel:!this.forceLogin,//是否展示取消按钮
+						cancelText:"取消",
+						cancelColor:"#000000",
+						confirmText:"确定",
+						confirmColor:"#000000",
+						hideTabBar:false,
 						success: (res) => {
 							if(res.confirm){
 								if(this.forceLogin){
@@ -128,6 +135,7 @@
 							}
 						}
 					});
+					
 				}
 		},
 		methods:{
