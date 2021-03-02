@@ -63,7 +63,7 @@
 				/* password: '', */
 				logining: false,
 				loginText:"注册或登录",
-				code: '272795',
+				code: '554314',
 				agreement: true
 			}
 		},
@@ -72,8 +72,10 @@
 		},
 		methods: {
 			...mapMutations({
-				loginORreg:'login',
-				loginToken:'setToken'
+				toRegisterCloud:'register',
+				toLoginCloud:'login',
+				/* loginORreg:'login', */
+				saveToken:'setToken'
 				}),
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
@@ -105,7 +107,7 @@
 					return;
 				}
 				if(!checkStr(code, 'mobileCode')){
-					this.$util.msg('验证码错误');
+					this.$util.msg('验证码有误');
 					this.logining = false;
 					this.loginText = "注册或登录";
 					return;
@@ -115,9 +117,11 @@
 					password: this.password
 				} */
 				const res = await this.$request('userCenter', 'loginBySms', {mobile,code});
+				//console.log("记录登录返回结果:"+JSON.stringify(res));
 				if(res.success){
 					if(res.result.code === 0){
-						this.loginSuccessCallBack(res.result.type,res.result);
+						this.loginSuccessCallBack(res.result);
+						//console.log("登录成功");
 					}else{
 						this.$util.msg('出了点小差错：'+res.result.msg);
 					}
@@ -128,28 +132,28 @@
 				this.logining = false;
 				this.loginText = "注册或登录";
 			},
-			loginSuccessCallBack(type,result){
-				this.logining = false;
-				this.loginText = "注册或登录";
-				let id='';
+			//登录成功
+			loginSuccessCallBack(result){
+				let type=result.type;
 				if(type === 'register'){
+					let uid=result.uid;
+					this.toRegisterCloud(result.userInfo,uid);
+					this.saveToken(result);
 					this.$util.msg('注册成功，热烈欢迎新用户~');
-					id=result.uid;
 				}else if(type === 'login'){
+					this.toLoginCloud(result.userInfo);
+					this.saveToken(result);
 					this.$util.msg('登录成功，欢迎回来~');
 				}
-				/* console.log("type——"+JSON.stringify(type));
-				console.log("token——"+JSON.stringify(result.token));
-				console.log("info——"+JSON.stringify(result.userInfo)); */
 				
-				this.loginORreg(result.userInfo,id);
-				this.loginToken(result);
 				//或者this.$store.commit('setToken', token,info);
+				this.logining = false;
+				this.loginText = "注册或登录";
 				setTimeout(()=>{
 					uni.reLaunch({
 						url:'../tabBar/index/index'
 					});
-				}, 1000)
+				}, 500)
 			},
 			//同意协议
 			checkAgreement(){

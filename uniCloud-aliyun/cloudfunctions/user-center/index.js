@@ -44,7 +44,22 @@ exports.main = async (event, context) => {
 			res = await uniID.loginByWeixin(params);
 			break;
 		case 'checkToken':
-			res = uniID.checkToken(event.uniIdToken);
+			//res = uniID.checkToken(event.uniIdToken);
+			res = uniID.checkToken(params.uniIdToken,params.checkTokenOptions);
+			/* const {
+			    code,
+			    token,
+			    tokenExpired,
+				userInfo
+			  } = res;
+			  if(code === 0){
+				  return {
+					  code,
+					  token,
+					  tokenExpired,
+					  userInfo
+					  };
+			  } */
 			break;
 		case 'createToken':
 			res = uniID.createToken(event.uniIdToken);
@@ -71,8 +86,8 @@ exports.main = async (event, context) => {
 					msg: 'sendSmsCode需要传入自己的templateId，参考https://uniapp.dcloud.net.cn/uniCloud/uni-id?id=sendsmscode'
 				}
 			}
-			const randomStr = '00000' + Math.floor(Math.random() * 1000000)
-			const code = randomStr.substring(randomStr.length - 6)
+			const randomStr = '00000' + Math.floor(Math.random() * 1000000);
+			const code = randomStr.substring(randomStr.length - 6);
 			//console.log("code:"+code+"/type:"+params.type+"/phone:"+params.mobile+"/templateId:"+templateId); + {"code":code,"type":params.type,"phone":params.mobile,"templateId":templateId};
 			res = await uniID.sendSmsCode({
 				mobile: params.mobile,

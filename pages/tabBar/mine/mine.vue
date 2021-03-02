@@ -70,10 +70,9 @@
 				<list-cell icon="icon-shezhi1" iconColor="#e07472" title="设置" border="" @eventClick="navTo('/pages/set/set')"></list-cell>
 				<list-cell icon="icon-about" iconColor="#bababa" title="关于" tips="版本1.0.0" border="" @eventClick="navTo('/pages/mine/about')"></list-cell>
 				<uni-list v-if="hasLogin">
-					<uni-list-item class="mine-text-direction" title="退出登录" clickable @click="loggout"/>
+					<uni-list-item class="mine-text-direction" title="退出登录" clickable @click="toLoggout"/>
 				</uni-list>
 				<!-- 全局样式高度统一 -->
-				<show-modal></show-modal>
 			</view>
 		</view>
 	</view>
@@ -82,7 +81,8 @@
 	import listCell from '@/components/mix-list-cell/mix-list-cell.vue';
 	//引入mapState,mapState 为辅助函数 当一个组件需要获取多个状态的时候，将这些状态都声明为计算属性会有些重复和冗余。
 	import {
-	    mapState,mapGetters
+	    mapState,
+		mapMutations
 	} from 'vuex';  
 	let startY = 0, moveY = 0, pageAtTop = true;
 	export default{
@@ -95,11 +95,8 @@
 			...mapState({
 				forceLogin:state=>state.user.forceLogin,
 				hasLogin:state=>state.user.hasLogin,
-				userName:state=>state.user.userName,
+				/* userName:state=>state.user.userName, */
 				userInfo:state=>state.user.userInfo
-			}),
-			...mapGetters({
-				/* getUserInformation:'getUserAllInfo' */
 			})
 		},
 		data(){
@@ -109,38 +106,53 @@
 				moving: false,
 			}
 		},
+		onInit(){
+			console.log("onInit");
+		},
 		onLoad(){
-				/* alert("show:"+this.hasLogin+"————"+this.forceLogin); */
-				if(!this.hasLogin){
-					uni.showModal({
-						title:"登录提醒",
-						content:"您还未登录，需要登录后才能正常使用",
-						showCancel:!this.forceLogin,//是否展示取消按钮
-						cancelText:"取消",
-						cancelColor:"#000000",
-						confirmText:"确定",
-						confirmColor:"#000000",
-						hideTabBar:false,
-						success: (res) => {
-							if(res.confirm){
-								if(this.forceLogin){
-									uni.navigateTo({
-										url:"/pages/public/login"
-									});
-								}else{
-									uni.navigateTo({
-										url:"/pages/public/login-reg"
-									});
-								}
+			console.log("onLoad");
+			if(!this.hasLogin){
+				uni.showModal({
+					title:"登录提醒",
+					content:"您还未登录，需要登录后才能正常使用",
+					showCancel:!this.forceLogin,//是否展示取消按钮
+					cancelText:"取消",
+					cancelColor:"#000000",
+					confirmText:"确定",
+					confirmColor:"#000000",
+					hideTabBar:false,
+					success: (res) => {
+						if(res.confirm){
+							if(this.forceLogin){
+								uni.navigateTo({
+									url:"/pages/public/login"
+								});
+							}else{
+								uni.navigateTo({
+									url:"/pages/public/login-reg"
+								});
 							}
 						}
-					});
-					
-				}
+					}
+				});
+				
+			}
+		},
+		onShow(){
+			console.log("onShow");
+		},
+		onReady(){
+			console.log("onReady");
 		},
 		methods:{
-			loggout(e) {
+			...mapMutations({
+				  toLogoutApp: 'logout' // 将 `this.add()` 映射为 `this.$store.commit('increment')`
+				}),
+			toLoggout(e) {
 				console.log('执行click事件', e.data)
+				//uniCloud.logout也要调用
+				
+				this.toLogoutApp();
 				uni.showToast({
 					title: '退出成功'
 				});

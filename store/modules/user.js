@@ -3,7 +3,7 @@ export default {
     state: {
         forceLogin:false,//是否需要强制登录
         hasLogin:false,//已经登录
-        userName:"",
+		userName:"",
         userId:"",
         userInfo: {},
         token:""
@@ -31,10 +31,15 @@ export default {
 				state[param.key] = param.val;
 			}
 		},
-		login(state,user,id){
+		checkTokenAndLogin(state,user){
+			state.hasLogin = true;
+			state.userId = user._id;
+			state.userInfo = user;
+		},
+		login(state,user){
 			state.userName=user.mobile || '';
 			state.hasLogin = true;
-			state.userId = user._id || id;
+			state.userId = user._id;
 			state.userInfo = user;
 			//state.token = user.token || '';
 			/* uni.setStorage({//缓存用户登陆状态 App.vue中也可运用
@@ -42,14 +47,29 @@ export default {
 			    data: provider  
 			}) */
 		},
-		logout(state,user){
+		register(state,user,uid){
+			state.userName=user.mobile || '';
+			state.hasLogin = true;
+			state.userId = uid;
+			state.userInfo = user;
+			//state.token = user.token || '';
+			/* uni.setStorage({//缓存用户登陆状态 App.vue中也可运用
+			    key: 'userInfo',  
+			    data: provider  
+			}) */
+		},
+		logout(state){
 			state.userName = "";
 		    state.hasLogin = false;
 		    state.userId = '';
 		    state.token = '';
+			state.userInfo='';
+			
 			/* uni.removeStorage({
 			    key: 'userInfo'  
 			}) */
+			uni.removeStorageSync('uni_id_token');
+			uni.removeStorageSync('uni_id_token_expired');
 		},
 		//更新token
 		setToken(state, data){
