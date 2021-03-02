@@ -81,6 +81,7 @@
 </script>
 
 <style lang="scss">
+	/* #ifndef APP-PLUS-NVUE */
 	/* page{
 		background-color: #efeff4;
 	} */
@@ -136,4 +137,5 @@
 			}
 		}
 	}
+	/* #endif */
 </style>

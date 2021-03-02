@@ -254,12 +254,6 @@
 			}
 		},
 		{
-			"path": "pages/toolBar/fab",
-			"style": {
-				"navigationBarTitleText": "拖动"
-			}
-		},
-		{
 			"path": "pages/address/address",
 			"style": {
 				"navigationBarTitleText": "收货地址"

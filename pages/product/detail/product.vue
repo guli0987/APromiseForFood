@@ -628,7 +628,7 @@
 		display:flex;
 		align-items:center;
 		color: $font-color-base;
-		background: linear-gradient(left, #fdf5f6, #fbebf6);
+		background: linear-gradient(to left, #fdf5f6, #fbebf6);
 		padding: 12upx 30upx;
 		.share-icon{
 			display:flex;
