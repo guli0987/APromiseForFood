@@ -16,13 +16,14 @@
 </template>
 
 <script>
+	import mixin from '../../../common/mixin/mixin.js'
 	export default{
 		data() {
 			return {
 				
 			}
 		},
-		mixins: [],
+		mixins: [mixin],
 		computed: {
 			
 		},
@@ -31,14 +32,14 @@
 		},
 		methods: {
 			clickWindowFood(){
+				/* nvue单独引入mixin 因为不能引用全局组件*/
+				this.navTo('/pages/product/detail/product',{noCheckLogin:true});
 				// #ifdef APP-PLUS-NVUE
-					//在起始页面跳转到test.vue页面并传递参数
-					uni.navigateTo({
-					    url: '/pages/product/detail/product'
-					});
+					
 				// #endif
+				
 				// #ifndef APP-PLUS-NVUE
-					this.navTo('/pages/product/detail/product',{noCheckLogin:true});
+					
 				// #endif
 			}
 		}
