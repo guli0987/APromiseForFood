@@ -1,30 +1,30 @@
 <template>
     <view class="window-checklist-body">
-		<view class="window-options">
+		<view class="window-checklist-options">
 				<uni-segmented-control :current="current" :values="items" :style-type="styleType" :active-color="activeColor" @clickItem="onClickItem" />
 		</view>
-        <view class="line-h"></view>
-        <swiper :current="current" class="swiper-box" :duration="300" @change="ontabchange">
-			<swiper-item class="swiper-item">
+        <view class="window-checklist-line-h"></view>
+        <swiper :current="current" class="window-checklist-swiper-box" :duration="300" @change="ontabchange">
+			<swiper-item class="window-checklist-swiper-item">
 				<scroll-view class="scroll-v list" scroll-y>
-					<view class="content-cuisine" v-if="current === 0">
-							<window-food ref="windowFood"></window-food>
+					<view class="window-checklist-food-list" v-if="current === 0">
+							<window-foods ref="windowFoods"></window-foods>
+							<!-- 菜系 -->
 					</view>
 				</scroll-view>
 			</swiper-item>
-			<swiper-item class="swiper-item">
+			<swiper-item class="window-checklist-swiper-item">
 				<scroll-view class="scroll-v list" scroll-y>
-					<view class="content-other" v-if="current === 1">
-						<text class="content-text">
-							推荐
-						</text>
+					<view class="window-checklist-food-hot" v-if="current === 1">
+							热门
 					</view>
 				</scroll-view>
 			</swiper-item>
-			<swiper-item class="swiper-item">
+			<swiper-item class="window-checklist-swiper-item">
 				<scroll-view class="scroll-v list" scroll-y>
-					<view class="" v-if="current === 2">
-						<window-comment ref="windowComment"></window-comment>
+					<view class="window-checklist-food-comment" v-if="current === 2">
+						<!-- <window-comment ref="windowComment"></window-comment> -->
+						评价
 					</view>
 				</scroll-view>
 			</swiper-item>
@@ -37,39 +37,43 @@
     const MAX_CACHE_DATA = 100;
     // 缓存页签数量
     const MAX_CACHE_PAGE = 3; */
-	import windowMiXin from './window-checklist.js'
-	import windowFood from './detail/window-food.vue';
+	/* import windowMiXin from './window-checklist.js' */
+	import windowFoods from './detail/window-foods.nvue';
 	import windowComment from './detail/window-comment.vue';
     export default {
         components: {
-            windowFood,
-			windowComment
+			windowFoods,
+            /* windowFood,
+			windowComment */
         },
-		mixins: [windowMiXin],
+		mixins: [],/* windowMiXin */
         data() {
             return {
-				current: 0,
-				items: ['菜系', '推荐', '评价'],//菜系可设置推荐
-				activeColor: '#4cd964',
-				styleType: 'button',
+				current: 0,//当前页
+				items: ['菜系', '热门', '评价'],//总页数为3
+				activeColor: '#4cd964',//被选中页的颜色
+				styleType: 'button',//样式 button或者text
             }
         },
         onLoad() {
             
         },
         methods: {
+			//窗口菜单选项点击事件
 			onClickItem(e) {
 				if (this.current !== e.currentIndex) {
 					this.current = e.currentIndex
 					console.log("current"+this.current);
 				}
 			},
+			//滑动页面改变
             ontabchange(e) {
-				//alert("tabChange")
-				console.log("tabIndex:"+e.target.current)
+				
+				console.log("tabIndex:"+e.detail.current)
                 let index = e.target.current || e.detail.current;
                 this.switchTab(index);
             },
+			//切换页面
             switchTab(index) {
                 if (this.current === index) {
                     return;
@@ -81,64 +85,51 @@
 </script>
 
 <style lang="scss">
-    /* #ifndef APP-PLUS */
+    /* #ifndef APP-PLUS-NVUE */
+	//nvue页面布局不支持百分比，故采用条件编译
     page {
         width: 100%;
         min-height: 100%;
         display: flex;
     }
-
     /* #endif */
-
-    .window-checklist-body {
-        flex: 1;
-        flex-direction: column;
-        overflow: hidden;
-        background-color: #ffffff;
+	.window-checklist-body {
+		/* 侧边栏大小固定后，将内容区flex：1，内容区则会自动放大占满剩余空间。 */
+		flex: 1;
+		flex-direction: column;
+		overflow: hidden;
+		background-color: #ffffff;
 		/* background-color: #efeff4; */
-        /* #ifdef MP-ALIPAY || MP-BAIDU */
-        height: 100vh;
-        /* #endif */
-    }
-
-	.window-options{
+		/* #ifdef MP-ALIPAY || MP-BAIDU */
+		height: 100vh;
+		/* #endif */
+	}
+	.window-checklist-options{
 		padding: 0px 30px;
 		margin-top: 20px;
-		}
-    .line-h {
-        /* height: 1rpx;
-        background-color: #cccccc; */
+	}
+	/* 菜系菜单与内容之间的缓冲线 */
+	.window-checklist-line-h {
+		/* height: 1rpx;
+		background-color: #cccccc; */
 		margin-bottom: 10rpx;
-    }
-	.swiper-box {
-	    flex: 1;
 	}
-	
-	.swiper-item {
-	    flex: 1;
-	    flex-direction: row;
-		
-		
+	/* 同样占满剩余空间 */
+	.window-checklist-swiper-box {
+		  flex: 1;
 	}
-	.content-cuisine{
-		/* display: none; */
-		/* flex-direction: row; */
-		/* align-items: center; */
-		/* justify-content: center; */
-		/* align-content: center; */
-		/* flex-direction: row;
-		justify-content: space-between;
-		align-items: flex-end; */
 		
-		
+	.window-checklist-swiper-item {
+		flex: 1;
 	}
 	.scroll-v {
-			flex: 1;
-			/* #ifndef MP-ALIPAY */
-			flex-direction: column;
-			/* #endif */
-			width: 750rpx;
-			width:100%;
-		}
-
+		flex: 1;
+		/* #ifndef MP-ALIPAY */
+		flex-direction: column;
+		/* #endif */
+	}
+	.window-checklist-food-list{
+		
+		
+	}
 </style>

@@ -57,7 +57,7 @@
 					<text>浏览历史</text>
 				</view>
 				<view v-if="userInfo.history">
-					<scroll-view scroll-x class="h-list" v-for="his in (userInfo.history || '')" >
+					<scroll-view scroll-x class="h-list" v-for="(his,his_index) in userInfo.history" :key="his_index">
 							<image @click="navTo('/pages/product/product')" :src="his.url" mode="aspectFill"></image>	
 					</scroll-view>
 				</view>

@@ -9,8 +9,9 @@
 				:down="downOption">
 			<uni-list class="window-food-size">
 				
-					<view v-for="(item,index) in 12" :key="index">
+					<!-- <view v-for="(item,index) in 12" :key="index"> -->
 						<uni-list-item-best 
+							v-for=""
 							class="window-food-style" 
 							:title="item"
 							note="菜品特色概括" 
@@ -19,7 +20,7 @@
 							clickable
 							@click="clickWindowList" 
 							/>
-					</view>
+					<!-- </view> -->
 			</uni-list>
 		</mescroll-body>
 	</view>

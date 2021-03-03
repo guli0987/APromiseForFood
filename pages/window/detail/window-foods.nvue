@@ -1,0 +1,50 @@
+<template>
+	<view>
+			<uni-list class="window-foods-style">
+				<uni-list-item-best 
+					v-for="(item_wf,index_wf) in 30" 
+					:key="index_wf"
+					:title="item_wf"
+					note="菜品特色概括" 
+					thumb="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" 
+					thumb-size="best" 
+					clickable
+					@click="clickWindowFood" 
+					/>
+			</uni-list>
+	</view>
+</template>
+
+<script>
+	export default{
+		data() {
+			return {
+				
+			}
+		},
+		mixins: [],
+		computed: {
+			
+		},
+		onLoad() {
+			
+		},
+		methods: {
+			clickWindowFood(){
+				// #ifdef APP-PLUS-NVUE
+					//在起始页面跳转到test.vue页面并传递参数
+					uni.navigateTo({
+					    url: '/pages/product/detail/product'
+					});
+				// #endif
+				// #ifndef APP-PLUS-NVUE
+					this.navTo('/pages/product/detail/product',{noCheckLogin:true});
+				// #endif
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	
+</style>
