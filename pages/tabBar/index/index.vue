@@ -20,7 +20,7 @@
 					</view>
 			    </view>
 			</uni-drawer>
-			<!-- 三级联动 picker-->
+			<!-- 四级联动 picker-->
 			<mpvue-picker-best
 				:themeColor="picker_themeColor"
 				ref="picker_locationPicker"
@@ -233,9 +233,12 @@
 				let swiper_info = await this.$request('swiper','getSwiper',{});
 				this.swiper_info = swiper_info.result.data;
 			},
+			//选择器信息
 			async loadPickerList(){
 				let pickerValueArray = await this.$request('picker','getPicker',{});
 				this.pickerValueArray = pickerValueArray.result.data;
+				let res=await this.$request_ssm('city/jsonCity');
+				console.log("【本地请求测试】:"+JSON.stringify(res));
 			},
 			async loadTagList(){
 				let tag_DataList = await this.$request('tag','getTag',{});

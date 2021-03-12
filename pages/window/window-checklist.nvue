@@ -37,7 +37,6 @@
     const MAX_CACHE_DATA = 100;
     // 缓存页签数量
     const MAX_CACHE_PAGE = 3; */
-	/* import windowMiXin from './window-checklist.js' */
 	import windowFoods from './detail/window-foods.nvue';
 	import windowComment from './detail/window-comment.vue';
     export default {
@@ -46,7 +45,7 @@
             /* windowFood,
 			windowComment */
         },
-		mixins: [],/* windowMiXin */
+		mixins: [],
         data() {
             return {
 				current: 0,//当前页

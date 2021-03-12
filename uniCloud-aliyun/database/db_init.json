@@ -409,6 +409,7 @@
 	"apff-picker_array": {
 		"data": [{
 				"label": "洛阳",
+				"code":1,
 				"children": [
 					{"label":"高校","children":[
 						{"label":"河南科技大学","children":[
@@ -446,6 +447,7 @@
 			},
 			{
 				"label": "郑州",
+				"code":2,
 				"children": [
 					{"label":"高校","children":[
 						{"label":"郑州大学","children":[
@@ -485,6 +487,7 @@
 			},
 			{
 				"label": "开封",
+				"code":3,
 				"children": [
 					{"label":"高校","children":[
 						{"label":"河南大学","children":[

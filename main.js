@@ -3,6 +3,7 @@ import App from './App'
 import Json from './Json' //测试虚拟数据
 import store from './store' //引入vuex
 // 注册全局组件
+import {request_ssm} from 'common/js/request_ssm.js'
 import {request} from 'common/js/request.js'
 import MescrollBody from "@/components/mescroll-uni/mescroll-body.vue"
 import {
@@ -25,6 +26,7 @@ Vue.prototype.$api = {json};
 import mixin from './common/mixin/mixin'
 Vue.mixin(mixin) 
 
+Vue.prototype.$request_ssm=request_ssm;
 Vue.prototype.$request=request;
 Vue.prototype.$util = {
 	msg,

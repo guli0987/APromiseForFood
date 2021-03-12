@@ -248,12 +248,6 @@
 			}
 		},
 		{
-			"path": "pages/window/detail/window-food",
-			"style": {
-				"navigationBarTitleText": "窗口"
-			}
-		},
-		{
 			"path": "pages/window/detail/window-comment",
 			"style": {
 				"navigationBarTitleText": "评价"
