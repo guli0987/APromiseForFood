@@ -21,7 +21,7 @@
 			    </view>
 			</uni-drawer>
 			<!-- 四级联动 picker-->
-			<mpvue-picker-best
+			<!-- <mpvue-picker-best
 				:themeColor="picker_themeColor"
 				ref="picker_locationPicker"
 				:mode="picker_mode"
@@ -30,7 +30,8 @@
 				@onConfirm="picker_onConfirm"
 				@onCancel="picker_onCancel"
 				:pickerValueArray="pickerValueArray"
-			></mpvue-picker-best>
+			></mpvue-picker-best> -->
+			<uni-data-picker-best popup-title="请选择所在地区" @change="picker_onChanges" @nodeclick="picker_nodeclick" :localdata="dataTree" ref="picker_onlinePicker"/>
 		</view>
 		<!-- 上拉加载下拉刷新 -->
 	<mescroll-body 
@@ -82,12 +83,69 @@
 	import productList from '../../product/product-list.vue';
 	export default {
 		components: {
-			mpvuePickerBest,
+			/* mpvuePickerBest, */
 			productList
 		},
 		mixins: [indexMiXin],
 		data() {
 			return {
+				dataTree: [{
+				    text: "洛阳",
+				    value: "1-0",
+				    children: [
+						{
+				        text: "高校",
+				        value: "1-1",
+						children: [{
+						    text: "河南科技大学",
+						    value: "1-1-1"
+						  }]
+				      },
+				      {
+				        text: "城区",
+				        value: "1-2",
+						children: [{
+						    text: "涧西区",
+						    value: "1-2-1"
+						  }]
+				      }
+				    ]
+				  },
+				  {
+				    text: "二年级",
+				    value: "2-0",
+					children: [{
+					    text: "2.1班",
+					    value: "2-1"
+					  },
+					  {
+					    text: "2.2班",
+					    value: "2-2"
+					  }
+					]
+				  },
+				  {
+				    text: "三年级",
+				    value: "3-0",
+					children: [{
+					    text: "3.1班",
+					    value: "3-1"
+					  },
+					  {
+					    text: "3.2班",
+					    value: "3-2"
+					  },
+					  {
+					      text: "3.3班",
+					      value: "3-3"
+					    },
+					    {
+					      text: "3.4班",
+					      value: "3-4"
+					    }
+					]
+				  }
+				],
 				sysSettingsList:[
 					{
 						"title":"浏览播放",
@@ -191,11 +249,11 @@
 				],
 				
 				//头部导航
-				pickerValueArray:[],
+				/* pickerValueArray:[],
 				picker_themeColor: '#007AFF',
 				picker_mode: 'multiLinkageSelector',
 				picker_deepLength: 4,
-				pickerValueDefault: [0,0,0,0],
+				pickerValueDefault: [0,0,0,0], */
 				//index: 0,
 				//轮播图
 				 swiper_info: [],
@@ -237,8 +295,8 @@
 			async loadPickerList(){
 				let pickerValueArray = await this.$request('picker','getPicker',{});
 				this.pickerValueArray = pickerValueArray.result.data;
-				let res=await this.$request_ssm('city/jsonCity');
-				console.log("【本地请求测试】:"+JSON.stringify(res));
+				/* let res=await this.$request_ssm('city/jsonCity');
+				console.log("【本地请求测试】:"+JSON.stringify(res)); */
 			},
 			async loadTagList(){
 				let tag_DataList = await this.$request('tag','getTag',{});
@@ -250,31 +308,35 @@
 				this.notice_text=notice_text.result.data[0].text;
 			},
 			//头部导航方法
-			picker_showLocationPicker() {
-				/* this.mode = 'multiLinkageSelector';//selector，multiLinkageSelector，multiSelector
-				this.deepLength = 4; */
-				this.picker_mode ="multiLinkageSelector";
-				this.picker_deepLength = 4;
-				this.pickerValueDefault = [0,0,0,0];
-				this.$refs.picker_locationPicker.show();
+			picker_onChanges(e) {
+			      //console.log("picker_onChanges:"+e+"/"+JSON.stringify(e));
+				  const value = e.detail.value;
+				  console.log("value:"+JSON.stringify(value));
+				  let text="";
+				  let del="-";//分隔符
+				  for(let i in value){
+					  //console.log("i.text: "+JSON.stringify(i));
+					  if(i == 0){
+						  text=value[i].text;
+					  }else{
+						  text+=del+value[i].text;
+					  }
+					  
+				  }
+				  //console.log(text);
+				  this.picker_setNavStyle(0, text);
+			    },
+			picker_nodeclick(e){
+				console.log("picker_nodeclick:"+e);
 			},
-			picker_onChange(e) {
-			      console.log(e);
-			    },
-			picker_onCancel(e) {
-			      console.log(e);
-			    },
-			picker_onConfirm(e) {
-			      console.log(e);
-				  //alert(e.label);
-				  this.picker_setStyle(0, e.label);
-			    },
-			picker_setStyle(index, text) {
+			picker_setNavStyle(index, text) {
 				let pages = getCurrentPages();
 				let page = pages[pages.length - 1];
-				if (text.length > 3) {
+				//设置text
+				//console.log("text: ",text);
+				if (text.length > 8) {
 					//text = text.substr(0, 3) + '...';
-					text = text.split("-")[text.split("-").length-1];
+					text = text.split("-")[0]+"-"+text.split("-")[text.split("-").length-1];
 				}
 				//app-plus 配置编译到 App 平台时的特定样式，部分常用配置 H5 平台也支持。
 				// #ifdef APP-PLUS
@@ -292,6 +354,24 @@
 				document.getElementsByClassName('uni-btn-icon')[2].innerText = text;//原来index为1，实际是第二个按钮
 				// #endif
 			},
+			/* picker_showLocationPicker() {
+
+				this.picker_mode ="multiLinkageSelector";
+				this.picker_deepLength = 4;
+				this.pickerValueDefault = [0,0,0,0];
+				this.$refs.picker_locationPicker.show();
+			},
+			picker_onChange(e) {
+			      console.log(e);
+			    },
+			picker_onCancel(e) {
+			      console.log(e);
+			    },
+			picker_onConfirm(e) {
+			      console.log(e);
+				  //alert(e.label);
+				  this.picker_setNavStyle(0, e.label);
+			    }, */
 			//轮播图方法
 			swiperChange(e) {
 			    this.swiper_current = e.detail.current;
@@ -346,8 +426,9 @@
 					this.$refs.drawer_showLeft.open()
 				} 
 			}else if(e.index == 1){//第二个按钮-地点选择器
-				this.picker_showLocationPicker();
+				//this.picker_showLocationPicker();
 				//alert("test");
+				this.$refs.picker_onlinePicker.show();
 			}
 		}
 	}
