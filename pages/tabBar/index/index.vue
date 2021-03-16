@@ -293,8 +293,7 @@
 				  	title:"请求数据库数据成功"
 				  })
 				  //请求成功刷新窗口数据  自动调用下拉刷新
-				  //this.$refs.mescrollRef.triggerDownScroll();
-				  
+				  //this.mescroll.triggerDownScroll();
 			    },
 			picker_nodeclick(e){
 				console.log("picker_nodeclick:"+e);

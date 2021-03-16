@@ -67,12 +67,12 @@
 			}
 		},
 		props:{
-			list: {
+			/* list2: {
 				type: Array,
 				default:()=>{
 					return []
 				}
-			}
+			} */
 		},
 		watch: {
 			/* list(val,oldValue){//val=newVal
