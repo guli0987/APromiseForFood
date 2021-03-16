@@ -46,6 +46,14 @@ exports.main = async (event, context) => {
 			res = await collection.skip(event.data.offset).limit(event.data.limit).get();
 			//https://uniapp.dcloud.io/uniCloud/cf-database skip有缺陷，权宜之计
 			break;
+		case 'getWindowCount':
+			//event.data.offset
+			//event.data.limit
+			collection = db.collection(tabName_w);
+			//res = await collection.limit(8).get(); 
+			res = await collection.count();
+			//https://uniapp.dcloud.io/uniCloud/cf-database skip有缺陷，权宜之计
+			break;
 		default:
 			console.log("default");
 			break;

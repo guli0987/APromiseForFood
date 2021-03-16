@@ -25,8 +25,8 @@
     <view class="uni-data-tree-dialog" v-if="isOpened">
       <view class="dialog-caption">
 		<view class="dialog-switch-mode" @click="switchMode">
-			<!-- <view>切换</view> -->
 			<uni-icons type="refreshempty" size="28" />
+			<view class="dialog-switch-mode-text">切换城区/高校</view>
 		</view>
         <view class="title-area">
           <text class="dialog-title">{{popupTitle}}</text>
@@ -419,6 +419,10 @@
 	  flex-direction: row;
 	  align-items: center;
 	  padding: 0 15px;
+  }
+  .dialog-switch-mode-text{
+	  font-size: 16rpx;
+	  color: #c5c5c5;
   }
   .dialog-close {
     position: absolute;

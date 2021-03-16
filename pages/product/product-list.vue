@@ -51,7 +51,7 @@
 		components: {},
 		data() {
 			return {
-				loadType: 'add',//标记加载还是刷新数据
+				//loadType: 'add',//标记加载还是刷新数据
 				productLists: [],
 				testList:[{
 							id:1,
@@ -75,7 +75,7 @@
 			}
 		},
 		watch: {
-			list(val,oldValue){//val=newVal
+			/* list(val,oldValue){//val=newVal
 				if(this.loadType === 'add'){
 					//alert("this.loadType === 'add'");
 					//this.productLists = this.productLists.concat(val.slice(this.productLists.length));
@@ -87,7 +87,7 @@
 					//alert("this.loadType === 'refresh'");
 					this.productLists = val;
 				}
-			}
+			} */
 		},
 		methods: {
 			clickCard(windowid) {

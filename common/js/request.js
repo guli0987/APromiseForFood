@@ -36,7 +36,7 @@ export const request = (module,operation, data={},ext={})=>{
 			   /* if(res.result){
 				  
 			  } */
-			  console.log("云函数回调："+JSON.stringify(res));
+			 // console.log("云函数回调："+JSON.stringify(res));
 			  //console.log("云函数回调【NoJSON】："+res.success+"/"+res.result.type);
 			  //alert(JSON.stringify(res.result.data));
 			  //resolve(res.result);

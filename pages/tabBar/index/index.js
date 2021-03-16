@@ -1,16 +1,18 @@
 // #ifndef MP-WEIXIN
 /* 非小程序端 */
+// 引入mescroll-mixins.js
 import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
 export default{
-	mixins: [MescrollMixin], 
+	mixins: [MescrollMixin], // 使用mixin
 	data() {
 		return {
+			// 上拉加载的配置(可选, 绝大部分情况无需配置)
 			upOption:{
 				use : true,//是否启用上拉加载
-				auto: false, // 是否自动加载
+				auto: true, // 是否在初始化完毕之后自动执行一次上拉加载的回调
 				page: {
 				 	num: 0, // 当前页码,默认0,回调之前会加1,即callback(page)会从1开始
-				 	size: 8, // 每页数据的数量，要与数据库一次取出对应，如果数据库取出数据小于size则默认到底
+				 	size: 10, // 每页数据的数量，要与数据库一次取出对应，如果数据库取出数据小于size则默认到底
 					time : null//time : 加载第一页数据服务器返回的时间 (可空); 防止用户翻页时,后台新增了数据从而导致下一页数据重复;
 				},
 				noMoreSize: 1,//如果列表已无数据,可设置列表的总数量要大于5条才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看
@@ -44,6 +46,7 @@ export default{
 				offset:150,//	距底部多远时,触发upCallback ; 1.1.0新增 (仅mescroll-uni生效) mescroll-body配置的是pages.json的 onReachBottomDistance
 				onScroll:false,//	是否监听滚动事件, 默认false (仅mescroll-uni可用;mescroll-body是页面的onPageScroll);监听列表滚动是非常耗性能的,很容易出现卡顿,非特殊情况不要配置此项
 			},
+			// 下拉刷新的配置(可选, 绝大部分情况无需配置)
 			downOption:{//网址http://www.mescroll.com/uni.html#options
 				use:true,//是否启用下拉刷新,如果配置false,则不会初始化下拉刷新的布局
 				auto:false,//是否在初始化完毕之后自动执行一次下拉刷新的回调 callback
@@ -73,17 +76,69 @@ export default{
 		}
 	},
 	methods: {
-		//加载热门推荐窗口列表-上拉加载
-		async loadHotWindowList(page){
+		//mescroll组件初始化的回调,可获取到mescroll对象,(此处可删,mixins已默认)
+		/* mescrollInit(mescroll){
+			console.log("mescrollInit");
+			//this.isLoading = true;
+			this.mescroll = mescroll;
+			this.mescroll.resetUpScroll(false)
+		}, */
+		//上拉加载回调  加载热门推荐窗口列表
+		async upCallback(page){
+			console.log("【upCallback】");
 			let pageNum = page.num; // 页码, 默认从1开始
-			let pageSize = page.size; // 页长, 默认每页10条
+			let pageSize = page.size; // 页长, 默认每页显示10条，注意与customCachePages的区别于联系
+			let customCachePages=10;//自定义每次网络请求获取多少数据
+			//console.log("pageNum:"+pageNum+"/"+"pageSize:"+pageSize);
+			//网络请求request,这里先用uniClod数据，等待后续迁移
+			
+			
+			/* //数据计数
+			const res = await this.$request('window', 'getWindowCount',{});
+			console.log("res: " + JSON.stringify(res));
+			console.log(res.result.total); */
+			
+			//返回数据
+			const res = await this.$request('window', 'getWindow', {
+				offset: (pageNum - 1) * customCachePages,//偏移量
+				limit: customCachePages//数据数
+			});
+			/* const currentList = res.result.data;//取到customCachePages条数据
+			console.log(JSON.stringify(currentList)); */
+			// 接口返回的当前页数据列表 (数组)
+			let curPageData = res.result.data; 
+			// 接口返回的当前页数据长度
+			let curPageLen = curPageData.length; 
+			// 接口返回的总页数 暂不设
+			//let totalPage = data.xxx; 
+			// 接口返回的总数据量 暂不设
+			//let totalSize = data.xxx; 
+			// 接口返回的是否有下一页 (true/false) 暂不设
+			//let hasNext = data.xxx; 
 			if(pageNum === 1){
+				this.$refs.productList.productLists=[];//先清空之前数据再追加第一页数据
+			}
+			this.$nextTick(() => {
+				this.$refs.productList.productLists=this.$refs.productList.productLists.concat(curPageData);
+			})
+			/* 请求成功,隐藏加载状态 */
+			//方法一(推荐): 后台接口有返回列表的总页数 totalPage
+			//this.mescroll.endByPage(curPageLen, totalPage);
+			//方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+			//this.mescroll.endBySize(curPageLen, totalSize);
+			//方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+			//this.mescroll.endSuccess(curPageLen, hasNext);
+			// 如果数据较复杂,可等到渲染完成之后再隐藏下拉加载状态: 如
+			// 建议使用setTimeout,因为this.$nextTick某些情况某些机型不触发
+			/* setTimeout(()=>{
+				this.mescroll.endSuccess(curPageLen)
+			},20) */
+			this.mescroll.endSuccess(curPageLen);
+			
+			/* if(pageNum === 1){
 				//第一页清空数据重载，第一页刷新
 				this.windowList = [];
 				//alert("刷新数据");
-				/* this.$nextTick(() => {
-					 alert(this.$refs.productList);
-				 }) */
 				this.$nextTick(() => {
 					if(this.$refs.productList){
 						this.$refs.productList.loadType = 'refresh';
@@ -102,15 +157,15 @@ export default{
 			this.windowList = this.windowList.concat(currentList); //追加新数据
 			this.mescroll.endSuccess(currentList.length); //结束加载状态
 			
-			console.log(JSON.parse(JSON.stringify(res.result.data)));
+			console.log(JSON.parse(JSON.stringify(res.result.data))); */
 		},
-		mescrollInit(mescroll){
-			this.isLoading = true;
-			this.mescroll = mescroll;
-			this.mescroll.resetUpScroll(false)
-		}/* ,
-		downCallback(){// 绝大部分情况methods中都不用写downCallback的,此时会默认调MescrollMixin的downCallback (效果同第2
-			// 第2种: 下拉刷新和上拉加载调同样的接口, 则不用第1种, 直接mescroll.resetUpScroll()即可
+		/*下拉刷新的回调, 有3种处理方式:
+		  第1种: 请求具体接口
+		  第2种: 下拉刷新和上拉加载调同样的接口, 则不用第1种, 直接mescroll.resetUpScroll()即可
+		  第3种: 下拉刷新什么也不处理, 可直接调用或者延时一会调用 mescroll.endSuccess() 结束即可
+		*/
+	   //当前第二种
+		/* downCallback(){
 			this.mescroll.resetUpScroll(); // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
 		} */
 	},

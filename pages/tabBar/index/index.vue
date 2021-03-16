@@ -32,14 +32,14 @@
 				:pickerValueArray="pickerValueArray"
 			></mpvue-picker-best> -->
 			<!-- <uni-data-picker-best popup-title="请选择所在地区" @change="picker_onChanges" @nodeclick="picker_nodeclick" :localdata="dataTree" ref="picker_onlinePicker"/> -->
-			<uni-data-picker-best popup-title="请选择所在地区"  @change="picker_onChanges" @nodeclick="picker_nodeclick" ref="picker_onlinePicker" :collection="collections" @switch="switchMode" field="code as value, name as text" orderby="value asc" :step-searh="true" self-field="code" parent-field="parent_code"/>
+			<uni-data-picker-best :popup-title="picker_title"  @change="picker_onChanges" @nodeclick="picker_nodeclick" ref="picker_onlinePicker" :collection="collections" @switch="switchMode" field="code as value, name as text" orderby="value asc" :step-searh="true" self-field="code" parent-field="parent_code"/>
 		</view>
 		<!-- 上拉加载下拉刷新 -->
 	<mescroll-body 
 			ref="mescrollRef" 
 			@init="mescrollInit" 
 			@down="downCallback" 
-			@up="loadHotWindowList" 
+			@up="upCallback" 
 			:up="upOption"
 			:down="downOption">
 		<!-- 轮播图 swiper -->
@@ -71,7 +71,7 @@
 		
 		<!-- 窗口列表 window -->
 		<view>
-			<product-list ref="productList" :list="windowList"></product-list>
+			<product-list ref="productList"></product-list><!-- :list="windowList" -->
 			<!-- 上拉加载更多 -->
 		</view>
 	</mescroll-body>
@@ -193,6 +193,9 @@
 				],
 				
 				//头部导航
+				//校区在原大学代码（五位）的基础上衔接两位，如10444校区1044401
+				//区号为6位，校园代号为5位，校区号设为7位，避免冲突
+				picker_title:'请选择所在地区',
 				collections:'opendb-city-china',//'opendb-city-university-china',
 				/* pickerValueArray:[],
 				picker_themeColor: '#007AFF',
@@ -213,8 +216,8 @@
 				 tag_DataList: [],
 				 //通告栏
 				 notice_text:"欢迎来到食约APP~",
-				 //窗口列表
-				 windowList:[]
+				 //窗口列表数据
+				 //windowList:[]
 			}
 		},
 		onLoad() {
@@ -223,7 +226,7 @@
 			//加载选项卡
 			this.loadTagList();
 			//加载地点选择器
-			this.loadPickerList();
+			//this.loadPickerList();
 			//加载通告栏
 			this.loadNotice();
 			/* setTimeout(()=>{
@@ -256,8 +259,11 @@
 			switchMode(e){
 				//console.log("switchMode_out:"+JSON.stringify(e));
 				if(this.collections === 'opendb-city-china'){
+					this.picker_title="请选择所在大学";
 					this.collections = 'opendb-city-university-china';
+					
 				}else if(this.collections === 'opendb-city-university-china'){
+					this.picker_title="请选择所在地区";
 					this.collections = 'opendb-city-china';
 				}
 				this.$refs.picker_onlinePicker.switchData();
@@ -280,6 +286,15 @@
 				  }
 				  //console.log(text);
 				  this.picker_setNavStyle(0, text);
+				  //发送网络请求
+				  /* let res=await this.$request_ssm('city/getWindowList');
+				  console.log("【本地请求测试】:"+JSON.stringify(res)); */
+				  uni.showToast({
+				  	title:"请求数据库数据成功"
+				  })
+				  //请求成功刷新窗口数据  自动调用下拉刷新
+				  //this.$refs.mescrollRef.triggerDownScroll();
+				  
 			    },
 			picker_nodeclick(e){
 				console.log("picker_nodeclick:"+e);

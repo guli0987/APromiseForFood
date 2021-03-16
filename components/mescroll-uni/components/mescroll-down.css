@@ -17,9 +17,6 @@
 	min-height: 60rpx;
 	padding: 20rpx 0;
 	text-align: center;
-	/* 新加 用于避免flex布局影响子元素位置（刷新图标和刷新文字提示受到flex-direction:row;影响） */
-	flex-direction: row !important;
-	justify-content: center !important; 
 }
 
 /* 下拉刷新--提示文本 */
