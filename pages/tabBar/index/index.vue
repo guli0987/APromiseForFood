@@ -31,7 +31,8 @@
 				@onCancel="picker_onCancel"
 				:pickerValueArray="pickerValueArray"
 			></mpvue-picker-best> -->
-			<uni-data-picker-best popup-title="请选择所在地区" @change="picker_onChanges" @nodeclick="picker_nodeclick" :localdata="dataTree" ref="picker_onlinePicker"/>
+			<!-- <uni-data-picker-best popup-title="请选择所在地区" @change="picker_onChanges" @nodeclick="picker_nodeclick" :localdata="dataTree" ref="picker_onlinePicker"/> -->
+			<uni-data-picker-best popup-title="请选择所在地区"  @change="picker_onChanges" @nodeclick="picker_nodeclick" ref="picker_onlinePicker" :collection="collections" @switch="switchMode" field="code as value, name as text" orderby="value asc" :step-searh="true" self-field="code" parent-field="parent_code"/>
 		</view>
 		<!-- 上拉加载下拉刷新 -->
 	<mescroll-body 
@@ -89,63 +90,6 @@
 		mixins: [indexMiXin],
 		data() {
 			return {
-				dataTree: [{
-				    text: "洛阳",
-				    value: "1-0",
-				    children: [
-						{
-				        text: "高校",
-				        value: "1-1",
-						children: [{
-						    text: "河南科技大学",
-						    value: "1-1-1"
-						  }]
-				      },
-				      {
-				        text: "城区",
-				        value: "1-2",
-						children: [{
-						    text: "涧西区",
-						    value: "1-2-1"
-						  }]
-				      }
-				    ]
-				  },
-				  {
-				    text: "二年级",
-				    value: "2-0",
-					children: [{
-					    text: "2.1班",
-					    value: "2-1"
-					  },
-					  {
-					    text: "2.2班",
-					    value: "2-2"
-					  }
-					]
-				  },
-				  {
-				    text: "三年级",
-				    value: "3-0",
-					children: [{
-					    text: "3.1班",
-					    value: "3-1"
-					  },
-					  {
-					    text: "3.2班",
-					    value: "3-2"
-					  },
-					  {
-					      text: "3.3班",
-					      value: "3-3"
-					    },
-					    {
-					      text: "3.4班",
-					      value: "3-4"
-					    }
-					]
-				  }
-				],
 				sysSettingsList:[
 					{
 						"title":"浏览播放",
@@ -249,6 +193,7 @@
 				],
 				
 				//头部导航
+				collections:'opendb-city-china',//'opendb-city-university-china',
 				/* pickerValueArray:[],
 				picker_themeColor: '#007AFF',
 				picker_mode: 'multiLinkageSelector',
@@ -308,6 +253,16 @@
 				this.notice_text=notice_text.result.data[0].text;
 			},
 			//头部导航方法
+			switchMode(e){
+				//console.log("switchMode_out:"+JSON.stringify(e));
+				if(this.collections === 'opendb-city-china'){
+					this.collections = 'opendb-city-university-china';
+				}else if(this.collections === 'opendb-city-university-china'){
+					this.collections = 'opendb-city-china';
+				}
+				this.$refs.picker_onlinePicker.switchData();
+				
+			},
 			picker_onChanges(e) {
 			      //console.log("picker_onChanges:"+e+"/"+JSON.stringify(e));
 				  const value = e.detail.value;
@@ -334,7 +289,7 @@
 				let page = pages[pages.length - 1];
 				//设置text
 				//console.log("text: ",text);
-				if (text.length > 8) {
+				if (text.length > 12) {
 					//text = text.substr(0, 3) + '...';
 					text = text.split("-")[0]+"-"+text.split("-")[text.split("-").length-1];
 				}

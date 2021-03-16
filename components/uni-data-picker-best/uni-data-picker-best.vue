@@ -24,6 +24,10 @@
     <view class="uni-data-tree-cover" v-if="isOpened" @click="handleClose"></view>
     <view class="uni-data-tree-dialog" v-if="isOpened">
       <view class="dialog-caption">
+		<view class="dialog-switch-mode" @click="switchMode">
+			<!-- <view>切换</view> -->
+			<uni-icons type="refreshempty" size="28" />
+		</view>
         <view class="title-area">
           <text class="dialog-title">{{popupTitle}}</text>
         </view>
@@ -65,6 +69,7 @@
    * @property {String|JQLString} where 查询条件
    * @event {Function} onpopupshow 弹出的选择窗口打开时触发此事件
    * @event {Function} onpopuphide 弹出的选择窗口关闭时触发此事件
+   * @event {Function} onswitch 切换数据表-新加
    */
   export default {
     name: 'UniDataPickerBest',
@@ -178,6 +183,30 @@
         this.hide()
 		console.log("handleClose");
       },
+	  /**
+	   * 切换数据
+	   */
+	  switchData(){
+		  this._treeData = [];
+		  this.selected = [],
+		  this.selectedIndex = 0,
+		  this.inputSelected = [];
+		  this.$nextTick(() => {
+		    this.$refs.pickerView.updateData({
+		      treeData: this._treeData,
+		      selected: this.selected,
+		      selectedIndex: this.selectedIndex
+		    })
+		  })
+	  },
+	  switchMode(e){
+		  console.log("switchMode");
+		  this.$emit('switch', {
+		    /* msg: {
+		      value: "测试"
+		    } */
+		  })
+	  },
       ondatachange(e) {
         this._treeData = this.$refs.pickerView._treeData
       },
@@ -381,7 +410,16 @@
     font-weight: bold;
     line-height: 44px;
   }
-
+  .dialog-switch-mode{
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  bottom: 0;
+	  display: flex;
+	  flex-direction: row;
+	  align-items: center;
+	  padding: 0 15px;
+  }
   .dialog-close {
     position: absolute;
     top: 0;
