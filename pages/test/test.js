@@ -226,3 +226,19 @@ login-reg.vue:137 {
 				],
 			},
 		}
+		
+token校验结果：{
+	"success":true,
+	"header":{"x-fc-invocation-service-version":"LATEST","x-serverless-runtime-version":"1.1.1","date":"Tue, 16 Mar 2021 17:16:33 GMT","x-serverless-cold-boot":"true","x-fc-invocation-duration":"63","x-fc-code-checksum":"11920753897763040351","access-control-expose-headers":"Date,x-fc-request-id,x-fc-error-type,x-fc-code-checksum,x-fc-invocation-duration,x-fc-max-memory-usage,x-fc-log-result,x-fc-invocation-code-version","content-disposition":"attachment","x-serverless-request-id":"ac140a3e1615914992085492574","content-length":"224","x-fc-request-id":"e054a747-57a7-4e7d-a30d-32dd8cc77d2c","x-fc-max-memory-usage":"35.30","content-type":"application/json"},
+	"result":{
+		"code":30203,
+		"msg":"token已过期，请重新登录",
+		"err":{
+			"name":"TokenExpiredError",
+			"message":"jwt expired",
+			"expiredAt":"2021-03-02T17:31:54.000Z"
+		},
+		"message":"token已过期，请重新登录"
+		},
+		"requestId":"ac140a3e1615914992085492574"
+	}

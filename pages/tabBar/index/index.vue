@@ -286,7 +286,7 @@
 				  }
 				  //console.log(text);
 				  this.picker_setNavStyle(0, text);
-				  //发送网络请求
+				  //向服务器发送网络请求
 				  /* let res=await this.$request_ssm('city/getWindowList');
 				  console.log("【本地请求测试】:"+JSON.stringify(res)); */
 				  uni.showToast({
