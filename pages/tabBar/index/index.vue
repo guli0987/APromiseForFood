@@ -41,7 +41,9 @@
 			@down="downCallback" 
 			@up="upCallback" 
 			:up="upOption"
-			:down="downOption">
+			:down="downOption"
+			@emptyclick="pickerEmptyclick"
+			>
 		<!-- 轮播图 swiper -->
 		<view>
 			<uni-swiper-dot @clickItem="swiperClickItem" :info="swiper_info" :current="swiper_current" :mode="swiper_mode" :dots-styles="swiper_dotsStyles" field="swiper_content">
@@ -83,7 +85,8 @@
 	import mpvuePickerBest from '../../../components/mpvue-picker-best/mpvuePickerBest.vue';
 	import productList from '../../product/product-list.vue';
 	import {
-	    mapState
+	    mapState,
+		mapActions
 	} from 'vuex'; 
 	export default {
 		components: {
@@ -242,6 +245,9 @@
 			}, 1000) */
 		},
 		methods: {
+			...mapActions({
+				updateLocalPosition:'updateCachePosition'
+			}),
 			//异步加载方法
 			async loadNavList(){
 				let swiper_info = await this.$request('swiper','getSwiper',{});
@@ -277,29 +283,21 @@
 				this.$refs.picker_onlinePicker.switchData();
 				
 			},
+			//picker确认
 			picker_onChanges(e) {
 			      //console.log("picker_onChanges:"+e+"/"+JSON.stringify(e));
 				  const value = e.detail.value;
-				  console.log("value:"+JSON.stringify(value));
-				  let text="";
-				  let del="-";//分隔符
-				  for(let i in value){
-					  //console.log("i.text: "+JSON.stringify(i));
-					  if(i == 0){
-						  text=value[i].text;
-					  }else{
-						  text+=del+value[i].text;
-					  }
-					  
-				  }
+				  console.log("value:"+JSON.stringify(value));			  
 				  //console.log(text);
-				  this.picker_setNavStyle(0, text);
+				  //this.picker_setNavStyle(value);
+				  //设置this.cachePosition值
+				  this.updateLocalPosition(value);
 				  //向服务器发送网络请求
 				  /* let res=await this.$request_ssm('city/getWindowList');
 				  console.log("【本地请求测试】:"+JSON.stringify(res)); */
-				  uni.showToast({
+				  /* uni.showToast({
 				  	title:"请求数据库数据 成功"
-				  })
+				  }) */
 				  //请求成功刷新窗口数据  自动调用下拉刷新
 				  this.mescroll.triggerDownScroll();
 			    },
@@ -311,7 +309,17 @@
 			 * index[number] 修改的buttons 下标索引，最右边索引为0
 			 * text[string] 需要修改的text 内容
 			 */
-			picker_setNavStyle(index, text) {
+			picker_setNavStyle(value) {
+				let text="";
+				let del="-";//自定义分隔符
+				for(let i in value){
+				  if(i == 0){
+					  text=value[i].text;
+				  }else{
+					  text+=del+value[i].text;
+				  }
+									  
+				}
 				//先获取当前页面
 				let pages = getCurrentPages();
 				let page = pages[pages.length - 1];
@@ -398,6 +406,14 @@
 					icon: 'none',
 					title: "你点击了设置选项"
 				})
+			},
+			//点击导航地点选择按钮
+			clickNavBarBtnSkipPicker(){
+				if(this.$refs.picker_onlinePicker.isOpenedStatus()){
+					return;
+				}else{
+					this.$refs.picker_onlinePicker.show();
+				}
 			}
 		},
 		//头部按钮方法
@@ -415,11 +431,7 @@
 				//alert("test");
 				console.log("点击picker");
 				//如果打开状态不响应，关闭状态就打开
-				if(this.$refs.picker_onlinePicker.isOpenedStatus()){
-					return;
-				}else{
-					this.$refs.picker_onlinePicker.show();
-				}
+				this.clickNavBarBtnSkipPicker();
 			}
 		}
 	}

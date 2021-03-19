@@ -36,7 +36,7 @@ export default{
 				  use : true ,//列表第一页无任何数据时,显示的空布局 use : 是否启用
 				  icon : null ,//icon : 空布局的图标路径 (支持网络路径)
 				  tip : "暂无相关数据",//tip : 提示文本
-				  btnText : "",//按钮文本
+				  btnText : "选择你的位置",//按钮文本
 				  fixed: false,//是否使用定位,默认false; 配置fixed为true,以下的top和zIndex才生效 (transform会使fixed失效,所以最终还是会降级为absolute)
 				  top: "100rpx",//fixed定位的top值 (完整的单位值,如"100rpx", "10%";)
 				  zIndex: 99//fixed定位z-index值
@@ -99,44 +99,54 @@ export default{
 			console.log(res.result.total); */
 			
 			//返回数据
-			//this.cachePosition为store/modules/cache.js中变量，存储用户先前选择位置。若进入首页发现cachePosition未存储位置数据，则不加载窗口，并提醒。
+			//this.cachePosition为store/modules/cache.js中变量，存储用户先前选择的位置。若进入首页发现cachePosition未存储位置数据，则不加载窗口，并提醒。
 			//若有数据则通过位置数据向服务器请求，获得窗口展示列表。
-			const res = await this.$request('window', 'getWindow', {
-				offset: (pageNum - 1) * customCachePages,//偏移量
-				limit: customCachePages//数据数
-			});
-			/* const currentList = res.result.data;//取到customCachePages条数据
-			console.log(JSON.stringify(currentList)); */
-			// 接口返回的当前页数据列表 (数组)
-			let curPageData = res.result.data; 
-			// 接口返回的当前页数据长度
-			let curPageLen = curPageData.length; 
-			// 接口返回的总页数 暂不设
-			//let totalPage = data.xxx; 
-			// 接口返回的总数据量 暂不设
-			//let totalSize = data.xxx; 
-			// 接口返回的是否有下一页 (true/false) 暂不设
-			//let hasNext = data.xxx; 
-			if(pageNum === 1){
-				this.$refs.productList.productLists=[];//先清空之前数据再追加第一页数据
-			}
-			this.$nextTick(() => {
-				this.$refs.productList.productLists=this.$refs.productList.productLists.concat(curPageData);
-			})
-			/* 请求成功,隐藏加载状态 */
-			//方法一(推荐): 后台接口有返回列表的总页数 totalPage
-			//this.mescroll.endByPage(curPageLen, totalPage);
-			//方法二(推荐): 后台接口有返回列表的总数据量 totalSize
-			//this.mescroll.endBySize(curPageLen, totalSize);
-			//方法三(推荐): 您有其他方式知道是否有下一页 hasNext
-			//this.mescroll.endSuccess(curPageLen, hasNext);
-			// 如果数据较复杂,可等到渲染完成之后再隐藏下拉加载状态: 如
-			// 建议使用setTimeout,因为this.$nextTick某些情况某些机型不触发
-			/* setTimeout(()=>{
-				this.mescroll.endSuccess(curPageLen)
-			},20) */
-			this.mescroll.endSuccess(curPageLen);
-			
+			//console.log("index.js页面this.cachePosition:"+JSON.stringify(this.cachePosition));
+			if(Object.keys(this.cachePosition).length  == 0||this.cachePosition == null){
+				this.mescroll.endSuccess(0);
+			}else{
+				//console.log("text:"+this.cachePosition[this.cachePosition.length-1].text);
+				this.picker_setNavStyle(this.cachePosition);//设置样式
+				uni.showToast({
+					title:"向码号为"+this.cachePosition[this.cachePosition.length-1].value+"名称为"+this.cachePosition[this.cachePosition.length-1].text+"请求数据"
+				})
+				
+				const res = await this.$request('window', 'getWindow', {
+					offset: (pageNum - 1) * customCachePages,//偏移量
+					limit: customCachePages//数据数
+				});
+				/* const currentList = res.result.data;//取到customCachePages条数据
+				console.log(JSON.stringify(currentList)); */
+				// 接口返回的当前页数据列表 (数组)
+				let curPageData = res.result.data; 
+				// 接口返回的当前页数据长度
+				let curPageLen = curPageData.length; 
+				// 接口返回的总页数 暂不设
+				//let totalPage = data.xxx; 
+				// 接口返回的总数据量 暂不设
+				//let totalSize = data.xxx; 
+				// 接口返回的是否有下一页 (true/false) 暂不设
+				//let hasNext = data.xxx; 
+				if(pageNum === 1){
+					this.$refs.productList.productLists=[];//先清空之前数据再追加第一页数据
+				}
+				this.$nextTick(() => {
+					this.$refs.productList.productLists=this.$refs.productList.productLists.concat(curPageData);
+				})
+				/* 请求成功,隐藏加载状态 */
+				//方法一(推荐): 后台接口有返回列表的总页数 totalPage
+				//this.mescroll.endByPage(curPageLen, totalPage);
+				//方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+				//this.mescroll.endBySize(curPageLen, totalSize);
+				//方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+				//this.mescroll.endSuccess(curPageLen, hasNext);
+				// 如果数据较复杂,可等到渲染完成之后再隐藏下拉加载状态: 如
+				// 建议使用setTimeout,因为this.$nextTick某些情况某些机型不触发
+				/* setTimeout(()=>{
+					this.mescroll.endSuccess(curPageLen)
+				},20) */
+				this.mescroll.endSuccess(curPageLen);
+		}
 			/* if(pageNum === 1){
 				//第一页清空数据重载，第一页刷新
 				this.windowList = [];
@@ -170,6 +180,9 @@ export default{
 		/* downCallback(){
 			this.mescroll.resetUpScroll(); // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
 		} */
+		pickerEmptyclick(){
+			this.clickNavBarBtnSkipPicker();
+		}
 	},
 }
 // #endif

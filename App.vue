@@ -2,12 +2,13 @@
 <script>
 	import {
 		mapState,
-		mapMutations
+		mapMutations,
+		mapActions
 	} from 'vuex'
 	/* 应用生命周期仅可在App.vue中监听，在其它页面监听无效。 */
 	export default {
 		onLaunch: function() {
-			this.initLogin();
+			this.initStart();
 			console.log('App Launch,app启动 当uni-app 初始化完成时触发（全局只触发一次）')
 		},
 		onShow: function() {
@@ -33,6 +34,12 @@
 		},
 		methods:{
 			...mapMutations(['checkTokenAndLogin']),
+			...mapActions(['updateCachePosition']),
+			
+			initStart(){
+				this.initLogin();
+				this.initLocalCache();
+			},
 			//验证登录状态
 			async initLogin(){
 				let uniIdToken = uni.getStorageSync('uni_id_token');
@@ -41,7 +48,7 @@
 					/* token校验登录状态 */
 					//是否
 					const checkTokenOptions={needPermission:false,needUserInfo:true};
-					const res = await this.$request('userCenter', 'checkToken', {uniIdToken,checkTokenOptions});
+					const res =await this.$request('userCenter', 'checkToken', {uniIdToken,checkTokenOptions});
 					console.log("token校验结果："+JSON.stringify(res));
 					if(res.result.code === 0){
 						this.checkTokenAndLogin(res.result.userInfo);
@@ -52,7 +59,15 @@
 				}else{
 					console.log("uniIdToken错误:"+uniIdToken);
 				}
+			},
+			async initLocalCache(){
+				let apffCachePosition = uni.getStorageSync('apff_cache_position');
+				//console.log("cache:"+JSON.stringify(apffCachePosition));
+				if(apffCachePosition){
+					this.updateCachePosition(apffCachePosition);
+				}
 			}
+			
 		}
 		/* 全局变量,js中操作globalData的方式如下： getApp().globalData.text = 'test' */
 		// globalData: {  
