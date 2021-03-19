@@ -7,6 +7,7 @@ export default {
         userId:"",
         userInfo: {},
         token:""
+		
     },
     getters: {
 		/* getUserAllInfo(state){

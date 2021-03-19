@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import user from '@/store/modules/user'
+import cache from '@/store/modules/cache'
 import moduleA from '@/store/modules/cart'
 import moduleB from '@/store/modules/products'
 
@@ -21,6 +22,7 @@ const store=new Vuex.Store({
 	},
 	modules:{
 		user,
+		cache,
 		moduleA,
 		moduleB
 	}

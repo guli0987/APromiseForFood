@@ -68,7 +68,7 @@
 			<uni-notice-bar :show-icon="true" :scrollable="true" :single="true" v-if="true" @click="noticeClick" :text="notice_text" /> 
 		</view>
 		<!-- 热门推荐 hot -->
-		
+		<!-- 待添加 -->
 		<!-- 窗口列表 window -->
 		<view>
 			<product-list ref="productList"></product-list><!-- :list="windowList" -->
@@ -82,12 +82,20 @@
 	import indexMiXin from './index.js'
 	import mpvuePickerBest from '../../../components/mpvue-picker-best/mpvuePickerBest.vue';
 	import productList from '../../product/product-list.vue';
+	import {
+	    mapState
+	} from 'vuex'; 
 	export default {
 		components: {
 			/* mpvuePickerBest, */
 			productList
 		},
 		mixins: [indexMiXin],
+		computed: {//计算属性
+			...mapState({
+				cachePosition:state=>state.cache.cache_position,
+			})
+		},
 		data() {
 			return {
 				sysSettingsList:[
@@ -290,18 +298,24 @@
 				  /* let res=await this.$request_ssm('city/getWindowList');
 				  console.log("【本地请求测试】:"+JSON.stringify(res)); */
 				  uni.showToast({
-				  	title:"请求数据库数据成功"
+				  	title:"请求数据库数据 成功"
 				  })
 				  //请求成功刷新窗口数据  自动调用下拉刷新
-				  //this.mescroll.triggerDownScroll();
+				  this.mescroll.triggerDownScroll();
 			    },
 			picker_nodeclick(e){
 				console.log("picker_nodeclick:"+e);
 			},
+			/**
+			 * 修改导航栏buttons
+			 * index[number] 修改的buttons 下标索引，最右边索引为0
+			 * text[string] 需要修改的text 内容
+			 */
 			picker_setNavStyle(index, text) {
+				//先获取当前页面
 				let pages = getCurrentPages();
 				let page = pages[pages.length - 1];
-				//设置text
+				//设置text过滤
 				//console.log("text: ",text);
 				if (text.length > 12) {
 					//text = text.substr(0, 3) + '...';
@@ -312,11 +326,12 @@
 				let currentWebview = page.$getAppWebview();
 				let titleNView = currentWebview.getStyle().titleNView;
 				// 添加文字过长截取为3个字符，请根据自己业务需求更改
-				//alert(titleNView.buttons[0].text);
-				titleNView.buttons[1].text = text;//第二个按钮,index=1
+				/* titleNView.buttons[1].text = text;//第二个按钮,index=1
 				currentWebview.setStyle({
 					titleNView: titleNView
-				});
+				}); */
+				/* 解决动态改变titleNView的值后APP端导航栏按钮点击无效的bug */
+				currentWebview.setTitleNViewButtonStyle(1,{text:text});
 				// #endif
 				// #ifdef H5
 				// h5 临时方案
@@ -387,6 +402,7 @@
 		},
 		//头部按钮方法
 		onNavigationBarButtonTap(e) {
+			console.log("导航栏被点击");
 			//alert(e.index);
 			if(e.index == 0){//第一个按钮-抽屉式导航
 				if (this.drawer_showLeft) {
@@ -397,7 +413,13 @@
 			}else if(e.index == 1){//第二个按钮-地点选择器
 				//this.picker_showLocationPicker();
 				//alert("test");
-				this.$refs.picker_onlinePicker.show();
+				console.log("点击picker");
+				//如果打开状态不响应，关闭状态就打开
+				if(this.$refs.picker_onlinePicker.isOpenedStatus()){
+					return;
+				}else{
+					this.$refs.picker_onlinePicker.show();
+				}
 			}
 		}
 	}

@@ -99,6 +99,8 @@ export default{
 			console.log(res.result.total); */
 			
 			//返回数据
+			//this.cachePosition为store/modules/cache.js中变量，存储用户先前选择位置。若进入首页发现cachePosition未存储位置数据，则不加载窗口，并提醒。
+			//若有数据则通过位置数据向服务器请求，获得窗口展示列表。
 			const res = await this.$request('window', 'getWindow', {
 				offset: (pageNum - 1) * customCachePages,//偏移量
 				limit: customCachePages//数据数

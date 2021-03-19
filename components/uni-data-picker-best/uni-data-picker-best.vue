@@ -160,6 +160,10 @@
         }
         return parent;
       },
+	  //判断闭合状态
+	  isOpenedStatus(){
+		  return this.isOpened;
+	  },
       show() {
         this.isOpened = true
         this.$nextTick(() => {

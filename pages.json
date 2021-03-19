@@ -15,7 +15,7 @@
 						},
 						{
 							"text": "选择地点",
-							"fontSize": "14",
+							"fontSize": "14px",
 							"select": true,
 							"width": "auto"
 						}
