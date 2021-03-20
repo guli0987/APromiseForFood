@@ -84,118 +84,48 @@ export default {
 			this.mescroll.resetUpScroll(false)
 		}, */
 		//上拉加载回调  加载热门推荐窗口列表
+		/* 请求成功,隐藏加载状态 */
+		//方法一(推荐): 后台接口有返回列表的总页数 totalPage
+		//this.mescroll.endByPage(curPageLen, totalPage);
+		//方法二(推荐): 后台接口有返回列表的总数据量 totalSize
+		//this.mescroll.endBySize(curPageLen, totalSize);
+		//方法三(推荐): 您有其他方式知道是否有下一页 hasNext
+		//this.mescroll.endSuccess(curPageLen, hasNext);
+		// 如果数据较复杂,可等到渲染完成之后再隐藏下拉加载状态: 如
+		// 建议使用setTimeout,因为this.$nextTick某些情况某些机型不触发
+		/* setTimeout(()=>{
+			this.mescroll.endSuccess(curPageLen)
+		},20) */
 		async upCallback(page) {
 			console.log("【upCallback】");
 			let pageNum = page.num; // 页码, 默认从1开始
 			let pageSize = page.size; // 页长, 默认每页显示10条，注意与customCachePages的区别于联系
-			let customCachePages = 10; //自定义每次网络请求获取多少数据
 			//console.log("pageNum:"+pageNum+"/"+"pageSize:"+pageSize);
-			//网络请求request,这里先用uniClod数据，等待后续迁移
-
-
-			/* //数据计数
-			const res = await this.$request('window', 'getWindowCount',{});
-			console.log("res: " + JSON.stringify(res));
-			console.log(res.result.total); */
+			/* //网络请求request,这里先用uniClod数据，等待后续迁移
+			const res = await this.$request('window', 'getWindow', {
+				offset: (pageNum - 1) * customCachePages,//偏移量
+				limit: customCachePages//数据数
+			}); */
 
 			//返回数据
-			//this.cachePosition为store/modules/cache.js中变量，存储用户先前选择的位置。若进入首页发现cachePosition未存储位置数据，则不加载窗口，并提醒。
-			//若有数据则通过位置数据向服务器请求，获得窗口展示列表。
+			//this.cachePosition为store/modules/cache.js中变量，存储用户先前选择的位置。若进入首页发现cachePosition未存储位置数据，则不加载窗口，并提醒。若有数据则通过位置数据向服务器请求，获得窗口展示列表。
 			//console.log("index.js页面this.cachePosition:"+JSON.stringify(this.cachePosition));
-			if (Object.keys(this.cachePosition).length == 0 || this.cachePosition == null) {
+			//console.log("this.cachePosition"+this.cachePosition.length);
+			if (this.cachePosition.length == 0 || this.cachePosition == null) {//若为空，说明未选择地址，则不请求加载数据
 				this.mescroll.endSuccess(0);
 			} else {
-				//console.log("text:"+this.cachePosition[this.cachePosition.length-1].text);
-				//this.picker_setNavStyle(this.cachePosition); //设置样式
-				/* uni.showToast({
-					title: "向码号为" + this.cachePosition[this.cachePosition.length - 1].value + "名称为" + this
-						.cachePosition[this.cachePosition.length - 1].text + "请求数据"
-				}) */
-
-				const res = await this.$request_ssm('area/getProductShopList', {
-					code: this.cachePosition[this.cachePosition.length - 1].value
+				this.picker_setNavStyle(this.cachePosition); //设置样式 如果是下拉加载等于重复提交，待修正
+				const res =await this.$request_ssm('area/getProductShopListLimitNumber', {
+					code: this.cachePosition[this.cachePosition.length - 1].value,
+					pageNum:pageNum,
+					pageSize:pageSize
 				});
-				//console.log("测试区域数据："+JSON.stringify(res));
-				/* const res = await this.$request('window', 'getWindow', {
-					offset: (pageNum - 1) * customCachePages,//偏移量
-					limit: customCachePages//数据数
-				}); */
-				/* const currentList = res.result.data;//取到customCachePages条数据
-				console.log(JSON.stringify(currentList)); */
+				//console.log("------------------"+JSON.stringify(res.code));
 				if (res.code === 100) {//请求成功
-					// 接口返回的当前页数据列表 (数组)
-					let curPageData = JSON.parse(res.data.result);
-					let currentDataList = curPageData[0].productShopList;//店铺数据列表
-					//console.log("curPageData:"+curPageData+"/"+curPageData[0]);
-					// 接口返回的当前页数据长度
-					let curPageLen = currentDataList.length;
-					//console.log(curPageLen);
-					//console.log(JSON.stringify(curPageData)+"/"+JSON.stringify(curPageData[0]));
-					// 接口返回的总页数 暂不设
-					//let totalPage = data.xxx; 
-					// 接口返回的总数据量 暂不设
-					//let totalSize = data.xxx; 
-					// 接口返回的是否有下一页 (true/false) 暂不设
-					//let hasNext = data.xxx; 
-					
-					
-					if (curPageLen != 0) {
-						if (pageNum === 1) {
-							this.$refs.productList.productLists = []; //先清空之前数据再追加第一页数据
-						}
-						this.$nextTick(() => {
-							//console.log("currentDataList:"+JSON.stringify(currentDataList));//应该有多个才对
-							//设想遍历
-							let endWindowList=[];
-							currentDataList.forEach((item,index)=>{
-								// console.log(item);
-								// console.log(index);
-								const {
-									productShopId:id,
-									productShopAvatar:icon,
-									productShopExtra:subTitle,//副标题
-									productShopHot:isHot,
-									//productShopId:,
-									productShopImg:imgs_notParse,
-									productShopName:title
-								}=item;
-								endWindowList.push({
-									id,
-									icon,
-									extra:isHot==0?"新店开张":"热门",
-									subTitle,//副标题
-									//productShopId:,
-									imgs:JSON.parse(imgs_notParse),
-									title
-								})
-								
-							})
-							
-							this.$refs.productList.productLists = this.$refs.productList.productLists
-								.concat(endWindowList);
-							//console.log("this.$refs.productList.productLists:"+JSON.stringify(this.$refs.productList.productLists));
-						})
-					}else{
-						this.$refs.productList.productLists = [];//当切换位置发现页面商店数据为0时把原来位置数据清空
-					}
-
-					this.mescroll.endSuccess(curPageLen);
-				} else {
-					console.log("error:" + JSON.stringify(res));
+					this.parseServerData(res.data.result,pageNum);
+				}else{
+					console.log("请求失败 error:" + JSON.stringify(res));
 				}
-
-				/* 请求成功,隐藏加载状态 */
-				//方法一(推荐): 后台接口有返回列表的总页数 totalPage
-				//this.mescroll.endByPage(curPageLen, totalPage);
-				//方法二(推荐): 后台接口有返回列表的总数据量 totalSize
-				//this.mescroll.endBySize(curPageLen, totalSize);
-				//方法三(推荐): 您有其他方式知道是否有下一页 hasNext
-				//this.mescroll.endSuccess(curPageLen, hasNext);
-				// 如果数据较复杂,可等到渲染完成之后再隐藏下拉加载状态: 如
-				// 建议使用setTimeout,因为this.$nextTick某些情况某些机型不触发
-				/* setTimeout(()=>{
-					this.mescroll.endSuccess(curPageLen)
-				},20) */
 
 			}
 		},
@@ -205,15 +135,60 @@ export default {
 		  第3种: 下拉刷新什么也不处理, 可直接调用或者延时一会调用 mescroll.endSuccess() 结束即可
 		*/
 		//当前第二种
-		downCallback(){
+		/* downCallback(){
 			console.log("【downCallback】");
 			//this.$refs.productList.loadType = 'refresh';
 			//if(this.$refs.productList.loadType == 'refresh')
 			this.mescroll.resetUpScroll(); // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
-		},
-		pickerEmptyclick() {
+		}, */
+		pickerEmptyclick() {//服务器端没有数据点击重新选择位置
 			this.clickNavBarBtnSkipPicker();
+		},
+		parseServerData(result,pageNum){//解析数据
+			let curPageData = JSON.parse(result);// 接口返回的当前页数据列表 (数组)
+			console.log("curPageData:"+JSON.stringify(curPageData));	
+			let currentDataList = curPageData.length==0?[]:curPageData[0].productShopList;//接口返回的当前页数据列表长度不为0，说明有数据;为0,数据为空
+			//console.log("curPageData:"+curPageData+"/"+curPageData[0]);
+			let curPageLen = currentDataList.length;// 接口返回的当前页数据长度
+			//console.log("接口返回的当前页数据长度:"+curPageLen);
+			//let totalPage = data.xxx; // 接口返回的总页数 暂不设	
+			//let totalSize = data.xxx; // 接口返回的总数据量 暂不设			
+			//let hasNext = data.xxx; // 接口返回的是否有下一页 (true/false) 暂不设
+				if (pageNum === 1) {
+					this.$refs.productList.productLists = []; //如果为第一页，有下拉导致刷新和重进首页两种情况，先清空之前数据再追加第一页数据
+				}
+				this.$nextTick(() => {
+					//console.log("currentDataList:"+JSON.stringify(currentDataList));//应该有多个才对
+					//设想遍历
+					let endWindowList=[];
+					currentDataList.forEach((item,index)=>{
+						const {
+							productShopId:id,
+							productShopAvatar:icon,
+							productShopExtra:subTitle,//副标题
+							productShopHot:isHot,
+							//productShopId:,
+							productShopImg:imgs_notParse,
+							productShopName:title
+						}=item;
+						endWindowList.push({
+							id,
+							icon,
+							extra:isHot==0?"新店开张":"热门",
+							subTitle,//副标题
+							//productShopId:,
+							imgs:JSON.parse(imgs_notParse),
+							title
+						})
+						
+					})
+					
+					this.$refs.productList.productLists = this.$refs.productList.productLists
+						.concat(endWindowList);
+					//console.log("this.$refs.productList.productLists:"+JSON.stringify(this.$refs.productList.productLists));
+				})
+				this.mescroll.endSuccess(curPageLen);
+			}
 		}
-	},
 }
 // #endif
