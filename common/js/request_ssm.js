@@ -2,13 +2,11 @@ const baseUrl='http://localhost:8080/apff_ssm_war_exploded/';//http://localhost:
 /* abort		中断请求任务
 offHeadersReceived		取消监听 HTTP Response Header 事件，仅微信小程序平台支持，文档详情
 onHeadersReceived		监听 HTTP Response Header 事件。会比请求完成事件更早，仅微信小程序平台支持，文档详情 */
-export const request_ssm = (url = '',data={},type = 'GET',header={})=>{
+export const request_ssm = (url = '',params={},type = 'GET',header={})=>{
 	return new Promise((resolve, reject) => {
 		uni.request({
 				url:baseUrl+url,//请求地址
-				data:{
-					data
-				},
+				data:params,
 				header:header,
 				method:type,//请求类型 GET POST PUT DELETE CONNECT HEAD OPTIONS TRACE
 				/* timeout:60000,

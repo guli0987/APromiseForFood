@@ -242,3 +242,33 @@ token校验结果：{
 		},
 		"requestId":"ac140a3e1615914992085492574"
 	}
+	
+curPageData:[
+	{
+		"areaCode":210304,
+		"areaId":413,
+		"areaName":"立山区",
+		"productShopList":[],
+	},
+],
+
+currentDataList:[
+	{
+		"areaCode":1046401,
+		"productShopAvatar":"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png",
+		"productShopExtra":"你好",
+		"productShopHot":0,
+		"productShopId":1,
+		"productShopImg":"[
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"},
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"},
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"}, 
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"},
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"},
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"},
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"}, 
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"}, 
+			{\"url\": \"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-mix-mall-admin/e18fa44d-b256-48d7-9eb8-047e0e4e5483.png\"}
+			]",
+		"productShopName":"410店铺"},
+		]

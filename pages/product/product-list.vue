@@ -4,6 +4,7 @@
 			<view v-for="(item,index) in productLists" :key="index">
 				<uni-card class="uni-card" :isShadow="false" :title="item.title" :subTitle="item.subTitle" mode="title" :thumbnail="item.icon" :extra="item.extra" note="true" @click="clickCard(item.id)">
 					<view>
+						<!-- 图片可以滑动 -->
 						<view class="window-image-box">	
 							<scroll-view  scroll-x="true" class="r-scroll" scroll-left="0" @scroll="scrollChange">
 								<view class="window-image-scroll">
@@ -13,22 +14,15 @@
 										:key="key"
 										:src="img.url" 
 										mode="aspectFill"
-										@click="navTo('/pages/product/detail?id=')"
-									></image>
+										@click="navTo('/pages/product/detail?id='+item.id)"
+									>
+									</image>
 								</view>
 							</scroll-view>
 						</view>
-						<!-- 图片可以滑动 -->
-						<!-- <view class="window-image-box">				
-							<swiper>
-								<swiper-item v-for="(img, key) in item.imgs" :key="key">
-									<image class="window-image-swiper" mode="aspectFill" :src="img.url" />
-								</swiper-item>
-							</swiper>
-						</view> -->
 						<view class="content-box" v-if="false">
-							<text class="content-box-text">
-								{{item.content}}
+							<text class="content-box-text" v-for="(img, key) in item.imgs">
+								url信息:{{img.url}}
 								</text>
 						</view>
 					</view>
@@ -51,7 +45,7 @@
 		components: {},
 		data() {
 			return {
-				//loadType: 'add',//标记加载还是刷新数据
+				loadType: 'add',//标记加载还是刷新数据
 				productLists: [],
 				testList:[{
 							id:1,

@@ -62,7 +62,7 @@
 			},
 			async initLocalCache(){
 				let apffCachePosition = uni.getStorageSync('apff_cache_position');
-				//console.log("cache:"+JSON.stringify(apffCachePosition));
+				console.log("缓存测试结果:"+JSON.stringify(apffCachePosition));
 				if(apffCachePosition){
 					this.updateCachePosition(apffCachePosition);
 				}

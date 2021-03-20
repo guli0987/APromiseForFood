@@ -292,6 +292,7 @@
 				  //this.picker_setNavStyle(value);
 				  //设置this.cachePosition值
 				  this.updateLocalPosition(value);
+				  this.picker_setNavStyle(this.cachePosition); //设置样式
 				  //向服务器发送网络请求
 				  /* let res=await this.$request_ssm('city/getWindowList');
 				  console.log("【本地请求测试】:"+JSON.stringify(res)); */
