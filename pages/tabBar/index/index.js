@@ -111,22 +111,26 @@ export default {
 			//this.cachePosition为store/modules/cache.js中变量，存储用户先前选择的位置。若进入首页发现cachePosition未存储位置数据，则不加载窗口，并提醒。若有数据则通过位置数据向服务器请求，获得窗口展示列表。
 			//console.log("index.js页面this.cachePosition:"+JSON.stringify(this.cachePosition));
 			//console.log("this.cachePosition"+this.cachePosition.length);
-			if (this.cachePosition.length == 0 || this.cachePosition == null) {//若为空，说明未选择地址，则不请求加载数据
+			if (Object.keys(this.cachePosition).length == 0 || this.cachePosition == null) {//若为空，说明未选择地址，则不请求加载数据
 				this.mescroll.endSuccess(0);
 			} else {
 				this.picker_setNavStyle(this.cachePosition); //设置样式 如果是下拉加载等于重复提交，待修正
-				const res =await this.$request_ssm('area/getProductShopListLimitNumber', {
-					code: this.cachePosition[this.cachePosition.length - 1].value,
-					pageNum:pageNum,
-					pageSize:pageSize
-				});
-				//console.log("------------------"+JSON.stringify(res.code));
-				if (res.code === 100) {//请求成功
-					this.parseServerData(res.data.result,pageNum);
-				}else{
-					console.log("请求失败 error:" + JSON.stringify(res));
+				try{
+					const res =await this.$request_ssm('area/getProductShopListLimitNumber', {
+						code: this.cachePosition[this.cachePosition.length - 1].value,
+						pageNum:pageNum,
+						pageSize:pageSize
+					});
+					//console.log("------------------"+JSON.stringify(res.code));
+					if (res.code === 100) {//请求成功
+						this.parseServerData(res.data.result,pageNum);
+					}else{
+						console.log("请求失败 error:" + JSON.stringify(res));
+					}
+				}catch(e){
+					//TODO handle the exception
+					console.log("error:"+e);
 				}
-
 			}
 		},
 		/*下拉刷新的回调, 有3种处理方式:

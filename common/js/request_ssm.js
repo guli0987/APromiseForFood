@@ -1,4 +1,4 @@
-const baseUrl='http://localhost:8080/apff_ssm_war_exploded/';//http://localhost:8080/apff_ssm_war_exploded/city/jsonCity
+const baseUrl='http://192.168.0.109:8080/apff_ssm_war_exploded/';//http://localhost:8080/apff_ssm_war_exploded/将localhost换为本地ip，不然实机调试报错
 /* abort		中断请求任务
 offHeadersReceived		取消监听 HTTP Response Header 事件，仅微信小程序平台支持，文档详情
 onHeadersReceived		监听 HTTP Response Header 事件。会比请求完成事件更早，仅微信小程序平台支持，文档详情 */
@@ -12,7 +12,7 @@ export const request_ssm = (url = '',params={},type = 'GET',header={})=>{
 				/* timeout:60000,
 				dataType:"json",
 				responseType:"text",
-				sslVerify:true,
+				sslVerify:true,//验证 ssl 证书	仅App安卓端支持
 				withCredentials:false,
 				firstIpv4:false, */
 				/**

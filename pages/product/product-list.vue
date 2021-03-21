@@ -14,8 +14,9 @@
 										:key="key"
 										:src="img.url" 
 										mode="aspectFill"
-										@click="navTo('/pages/product/detail?id='+item.id)"
+										@click.stop="clickPreviewImg(key,img.url,item.imgs)"
 									>
+									<!-- 改为点击放大图片 -->
 									</image>
 								</view>
 							</scroll-view>
@@ -45,6 +46,7 @@
 		components: {},
 		data() {
 			return {
+				previewImgList:[],
 				loadType: 'add',//标记加载还是刷新数据
 				productLists: [],
 				testList:[{
@@ -84,6 +86,29 @@
 			} */
 		},
 		methods: {
+			clickPreviewImg(index,currentURL,imgList){
+				//navTo('/pages/product/detail?id='+item.id,{noCheckLogin:true})
+				//console.log("点击预览图片"+JSON.stringify(imgList));
+				this.previewImgList=[];
+				imgList.forEach((item,index)=>{
+					//console.log(item.url);
+					this.previewImgList.push(item.url);
+				})
+				uni.previewImage({
+					//当 urls 中有重复的图片链接时：传链接，预览结果始终显示该链接在 urls 中第一次出现的位置;传索引值，在微信/百度/字节跳动小程序平台，会过滤掉传入的 urls 中该索引值之前与其对应图片链接重复的值。其它平台会保留原始的 urls 不会做去重处理。
+					current:index,//index currentURL current 为当前显示图片的链接/索引值，不填或填写的值无效则为 urls 的第一张
+					urls:this.previewImgList,
+					longPressActions: {
+					                itemList: ['发送给朋友', '保存图片', '收藏'],
+					                success: function(data) {
+					                    console.log('选中了第' + (data.tapIndex + 1) + '个按钮,第' + (data.index + 1) + '张图片');
+					                },
+					                fail: function(err) {
+					                    console.log(err.errMsg);
+					                }
+					            }
+				})
+			},
 			clickCard(windowid) {
 				//@click="navTo('/pages/product/detail?id=' + item._id)"
 				/* uni.showToast({

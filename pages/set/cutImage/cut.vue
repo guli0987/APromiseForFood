@@ -268,7 +268,7 @@
 						canvasId: 'myCanvas',
 						fileType:'jpg',
 						success: function (res) {
-							//console.log("路径："+res.tempFilePath);
+							//console.log("图片路径："+res.tempFilePath);
 							uni.hideLoading()
 							// 成功获得地址的地方
 							if(type === 'preview'){
