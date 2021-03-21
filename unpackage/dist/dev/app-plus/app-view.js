@@ -3971,7 +3971,7 @@ var render = function() {
                                 },
                                 _vm._l(_vm._$g(8 + "-" + $30, "f"), function(
                                   img,
-                                  key,
+                                  key_img,
                                   $21,
                                   $31
                                 ) {
@@ -4014,19 +4014,19 @@ var render = function() {
                   ),
                   _c(
                     "template",
-                    { attrs: { _i: "11-" + $30 }, slot: "footer" },
+                    { attrs: { _i: "10-" + $30 }, slot: "footer" },
                     [
                       _c(
                         "v-uni-view",
                         {
-                          staticClass: _vm._$g("12-" + $30, "sc"),
-                          attrs: { _i: "12-" + $30 }
+                          staticClass: _vm._$g("11-" + $30, "sc"),
+                          attrs: { _i: "11-" + $30 }
                         },
                         [
                           _c(
                             "v-uni-view",
                             {
-                              attrs: { _i: "13-" + $30 },
+                              attrs: { _i: "12-" + $30 },
                               on: {
                                 click: function($event) {
                                   return _vm.$handleViewEvent($event, {
@@ -4039,12 +4039,12 @@ var render = function() {
                               _c(
                                 "v-uni-view",
                                 {
-                                  staticClass: _vm._$g("14-" + $30, "sc"),
-                                  attrs: { _i: "14-" + $30 }
+                                  staticClass: _vm._$g("13-" + $30, "sc"),
+                                  attrs: { _i: "13-" + $30 }
                                 },
                                 [
                                   _c("uni-icons", {
-                                    attrs: { _i: "15-" + $30 }
+                                    attrs: { _i: "14-" + $30 }
                                   })
                                 ],
                                 1
@@ -4055,7 +4055,7 @@ var render = function() {
                           _c(
                             "v-uni-view",
                             {
-                              attrs: { _i: "16-" + $30 },
+                              attrs: { _i: "15-" + $30 },
                               on: {
                                 click: function($event) {
                                   return _vm.$handleViewEvent($event, {
@@ -4068,12 +4068,12 @@ var render = function() {
                               _c(
                                 "v-uni-view",
                                 {
-                                  staticClass: _vm._$g("17-" + $30, "sc"),
-                                  attrs: { _i: "17-" + $30 }
+                                  staticClass: _vm._$g("16-" + $30, "sc"),
+                                  attrs: { _i: "16-" + $30 }
                                 },
                                 [
                                   _c("uni-icons", {
-                                    attrs: { _i: "18-" + $30 }
+                                    attrs: { _i: "17-" + $30 }
                                   })
                                 ],
                                 1
@@ -4084,7 +4084,7 @@ var render = function() {
                           _c(
                             "v-uni-view",
                             {
-                              attrs: { _i: "19-" + $30 },
+                              attrs: { _i: "18-" + $30 },
                               on: {
                                 click: function($event) {
                                   return _vm.$handleViewEvent($event, {
@@ -4097,12 +4097,12 @@ var render = function() {
                               _c(
                                 "v-uni-view",
                                 {
-                                  staticClass: _vm._$g("20-" + $30, "sc"),
-                                  attrs: { _i: "20-" + $30 }
+                                  staticClass: _vm._$g("19-" + $30, "sc"),
+                                  attrs: { _i: "19-" + $30 }
                                 },
                                 [
                                   _c("uni-icons", {
-                                    attrs: { _i: "21-" + $30 }
+                                    attrs: { _i: "20-" + $30 }
                                   })
                                 ],
                                 1
@@ -7396,7 +7396,7 @@ var render = function() {
                                 },
                                 _vm._l(_vm._$g(8 + "-" + $30, "f"), function(
                                   img,
-                                  key,
+                                  key_img,
                                   $21,
                                   $31
                                 ) {
@@ -7439,19 +7439,19 @@ var render = function() {
                   ),
                   _c(
                     "template",
-                    { attrs: { _i: "11-" + $30 }, slot: "footer" },
+                    { attrs: { _i: "10-" + $30 }, slot: "footer" },
                     [
                       _c(
                         "v-uni-view",
                         {
-                          staticClass: _vm._$g("12-" + $30, "sc"),
-                          attrs: { _i: "12-" + $30 }
+                          staticClass: _vm._$g("11-" + $30, "sc"),
+                          attrs: { _i: "11-" + $30 }
                         },
                         [
                           _c(
                             "v-uni-view",
                             {
-                              attrs: { _i: "13-" + $30 },
+                              attrs: { _i: "12-" + $30 },
                               on: {
                                 click: function($event) {
                                   return _vm.$handleViewEvent($event, {
@@ -7464,12 +7464,12 @@ var render = function() {
                               _c(
                                 "v-uni-view",
                                 {
-                                  staticClass: _vm._$g("14-" + $30, "sc"),
-                                  attrs: { _i: "14-" + $30 }
+                                  staticClass: _vm._$g("13-" + $30, "sc"),
+                                  attrs: { _i: "13-" + $30 }
                                 },
                                 [
                                   _c("uni-icons", {
-                                    attrs: { _i: "15-" + $30 }
+                                    attrs: { _i: "14-" + $30 }
                                   })
                                 ],
                                 1
@@ -7480,7 +7480,7 @@ var render = function() {
                           _c(
                             "v-uni-view",
                             {
-                              attrs: { _i: "16-" + $30 },
+                              attrs: { _i: "15-" + $30 },
                               on: {
                                 click: function($event) {
                                   return _vm.$handleViewEvent($event, {
@@ -7493,12 +7493,12 @@ var render = function() {
                               _c(
                                 "v-uni-view",
                                 {
-                                  staticClass: _vm._$g("17-" + $30, "sc"),
-                                  attrs: { _i: "17-" + $30 }
+                                  staticClass: _vm._$g("16-" + $30, "sc"),
+                                  attrs: { _i: "16-" + $30 }
                                 },
                                 [
                                   _c("uni-icons", {
-                                    attrs: { _i: "18-" + $30 }
+                                    attrs: { _i: "17-" + $30 }
                                   })
                                 ],
                                 1
@@ -7509,7 +7509,7 @@ var render = function() {
                           _c(
                             "v-uni-view",
                             {
-                              attrs: { _i: "19-" + $30 },
+                              attrs: { _i: "18-" + $30 },
                               on: {
                                 click: function($event) {
                                   return _vm.$handleViewEvent($event, {
@@ -7522,12 +7522,12 @@ var render = function() {
                               _c(
                                 "v-uni-view",
                                 {
-                                  staticClass: _vm._$g("20-" + $30, "sc"),
-                                  attrs: { _i: "20-" + $30 }
+                                  staticClass: _vm._$g("19-" + $30, "sc"),
+                                  attrs: { _i: "19-" + $30 }
                                 },
                                 [
                                   _c("uni-icons", {
-                                    attrs: { _i: "21-" + $30 }
+                                    attrs: { _i: "20-" + $30 }
                                   })
                                 ],
                                 1

@@ -10,11 +10,11 @@
 								<view class="window-image-scroll">
 									<image 
 										class="scroll-image"
-										v-for="(img, key) in item.imgs"
-										:key="key"
+										v-for="(img, key_img) in item.imgs"
+										:key="key_img"
 										:src="img.url" 
 										mode="aspectFill"
-										@click.stop="clickPreviewImg(key,img.url,item.imgs)"
+										@click.stop="clickPreviewImg(key_img,img.url,item.imgs)"
 									>
 									<!-- 改为点击放大图片 -->
 									</image>
@@ -22,9 +22,9 @@
 							</scroll-view>
 						</view>
 						<view class="content-box" v-if="false">
-							<text class="content-box-text" v-for="(img, key) in item.imgs">
+							<!-- <text class="content-box-text" v-for="(img, key) in item.imgs">
 								url信息:{{img.url}}
-								</text>
+								</text> -->
 						</view>
 					</view>
 					<template slot="footer">
