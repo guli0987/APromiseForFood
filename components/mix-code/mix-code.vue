@@ -41,8 +41,44 @@
 			}
 		},
 		methods: {
-			//获取验证码
 			async getCode(){
+				if(this.timeDown > 0){
+					return;
+				}
+				this.$util.throttle(()=>{
+					const mobile = this.mobile
+					if(!checkStr(mobile, 'mobile')){
+						this.$util.msg('手机号码格式不正确');
+						return;
+					}
+					
+					uni.showLoading({
+					    title: '获取中..',
+						mask:true
+					});
+					
+					this.$request('userCenter', 'sendSmsCode', {
+						mobile,
+						type:"login",//不存在则注册
+						action: this.action, //uni短信必填
+						TemplateCode: this.templateCode, //阿里云必填
+					}).then(response=>{
+						if(response.success && response.result.code === 0){
+							this.$util.msg("验证码请求成功");
+							this.countDown(60);
+						}else{
+							this.$util.msg('验证码请求失败');
+						}
+						uni.hideLoading();
+					}).catch(err=>{
+						this.$util.msg('验证码发送失败');
+						uni.hideLoading()
+						console.log(err);//null
+					})
+				}, 2000)
+			},
+			//获取验证码
+			async getCode2(){
 				
 				if(this.timeDown > 0){
 					return;
