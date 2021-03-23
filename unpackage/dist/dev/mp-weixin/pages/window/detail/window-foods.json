@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "窗口",
+  "usingComponents": {
+    "uni-list": "/components/uni-list/uni-list",
+    "uni-list-item-best": "/components/uni-list-item-best/uni-list-item-best"
+  }
+}

@@ -8,11 +8,49 @@
 			        <view class="sys-set-title">系统设置</view>
 					<view class="scroll-view">
 						<scroll-view class="scroll-view-box" scroll-y="true">
-							<view class="info-content" v-for="(sys_set,index_sys) in sysSettingsList" :key="index_sys">
+							<!-- <view class="info-content" v-for="(sys_set,index_sys) in sysSettingsList" :key="index_sys">
 								<uni-list>
-									<uni-list-item :show-extra-icon="true" showArrow :extra-icon="sys_set.extraIcon" :title="sys_set.title" clickable @click="sysSettingsClick(sys_set.link)"/>
+									<uni-list-item :show-extra-icon="true" showArrow :extra-icon="sys_set.extraIcon" :title="sys_set.title" clickable @click="sysSettingsClick(sys_set.code)"/>
 								</uni-list>	
-							</view>
+							</view> -->
+							<uni-list-set >
+								<uni-list-item-set title="通知" :show-extra-icon="true" :extra-icon="sysSettingsList[0].extraIcon" clickable/>
+							</uni-list-set>
+							<uni-list-set >
+								<uni-list-item-set title="网络" :show-extra-icon="true" :extra-icon="sysSettingsList[1].extraIcon" clickable/>
+							</uni-list-set>
+							<uni-list-set >
+								<uni-list-item-set title="亮度" :show-extra-icon="true" :extra-icon="sysSettingsList[2].extraIcon" clickable/>
+							</uni-list-set>
+							<uni-list-set >
+								<uni-list-item-set title="夜间模式" :show-extra-icon="true" :extra-icon="sysSettingsList[3].extraIcon" :show-switch="true" clickable/>
+							</uni-list-set>
+							<!-- <uni-list-set >
+								<uni-list-item-set title="布局" :show-extra-icon="true" :extra-icon="sysSettingsList[3].extraIcon" showArrow="" clickable/>
+							</uni-list-set> -->
+							<uni-collapse>
+							    <uni-collapse-item-set title="布局" :show-extra-icon="true" :extra-icon="sysSettingsList[4].extraIcon">
+									<uni-list-set>
+										<uni-list-item-set isShowBorder="true" title="默认" />
+										<uni-list-item-set isShowBorder="true" title="缩放" />
+										<uni-list-item-set isShowBorder="true" title="快捷" />
+										<uni-list-item-set isShowBorder="true" title="展示" />
+									</uni-list-set>
+							    </uni-collapse-item-set>
+							</uni-collapse>
+							<uni-collapse>
+							    <uni-collapse-item-set title="其它" :show-extra-icon="true" :extra-icon="sysSettingsList[5].extraIcon">
+									<uni-list-set>
+										<uni-list-item-set isShowBorder="true" title="缓存" :show-extra-icon="true" :extra-icon="sysSettingsList[5].children[0].extraIcon"/>
+										<uni-list-item-set isShowBorder="true" title="省流" :show-extra-icon="true" :extra-icon="sysSettingsList[5].children[1].extraIcon"/>
+									</uni-list-set>
+							    </uni-collapse-item-set>
+							</uni-collapse>
+							<uni-list-set >
+								<uni-list-item-set title="去评价" :show-extra-icon="true" :extra-icon="sysSettingsList[6].extraIcon" clickable/>
+								<uni-list-item-set title="开源许可" :show-extra-icon="true" :extra-icon="sysSettingsList[7].extraIcon" clickable/>
+								<uni-list-item-set title="隐私协议" :show-extra-icon="true" :extra-icon="sysSettingsList[8].extraIcon" clickable/>
+							</uni-list-set>
 							<view class="close">
 								<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('drawer_showLeft')"><text class="word-btn-white">关闭抽屉</text></view>
 							</view>
@@ -82,6 +120,7 @@
 
 <script>
 	import indexMiXin from './index.js'
+	import sysSettingsMiXin from './sys_settings.js'
 	import mpvuePickerBest from '../../../components/mpvue-picker-best/mpvuePickerBest.vue';
 	import productList from '../../product/product-list.vue';
 	import {
@@ -93,7 +132,7 @@
 			/* mpvuePickerBest, */
 			productList
 		},
-		mixins: [indexMiXin],
+		mixins: [indexMiXin,sysSettingsMiXin],
 		computed: {//计算属性
 			...mapState({
 				cachePosition:state=>state.cache.cache_position,
@@ -101,108 +140,6 @@
 		},
 		data() {
 			return {
-				sysSettingsList:[
-					{
-						"title":"浏览播放",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'eye'
-						},
-						"link":""
-					},
-					{
-						"title":"网络设置",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'spinner-cycle'
-						},
-						"link":""
-					},
-					{
-						"title":"通知管理",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'chatbubble'
-						},
-						"link":""
-					},
-					{
-						"title":"应用布局",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'map'
-						},
-						"link":""
-					},
-					{
-						"title":"夜间模式",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'starhalf'
-						},
-						"link":""
-					},
-					{
-						"title":"省流量模式",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'flag'
-						},
-						"link":""
-					},
-					{
-						"title":"清除缓存",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'trash'
-						},
-						"link":""
-					},
-					{
-						"title":"分享",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'redo'
-						},
-						"link":""
-					},
-					{
-						"title":"去评价",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'hand-thumbsup'
-						},
-						"link":""
-					},
-					{
-						"title":"开源许可",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'paperclip'
-						},
-						"link":""
-					},
-					{
-						"title":"隐私协议",
-						"extraIcon": {
-							color: '#000000',
-							size: '20',
-							type: 'eye-slash-filled'
-						},
-						"link":""
-					}
-				],
-				
 				//头部导航
 				//校区在原大学代码（五位）的基础上衔接两位，如10444校区1044401
 				//区号为6位，校园代号为5位，校区号设为7位，避免冲突
@@ -401,12 +338,6 @@
 			// 关闭窗口
 			closeDrawer(e) {
 				this.$refs[e].close()
-			},
-			sysSettingsClick(e){
-				uni.showToast({
-					icon: 'none',
-					title: "你点击了设置选项"
-				})
 			},
 			//点击导航地点选择按钮
 			clickNavBarBtnSkipPicker(){

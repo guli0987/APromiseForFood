@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/tabBar/index/index",
+    "pages/tabBar/square/square",
+    "pages/tabBar/order/order",
+    "pages/tabBar/order/detail/createOrder",
+    "pages/tabBar/mine/mine",
+    "pages/product/product-list",
+    "pages/tabBar/square/news-item",
+    "pages/tabBar/square/detail/detail",
+    "pages/test/test",
+    "pages/test/tests",
+    "pages/tabBar/square/detail/history",
+    "pages/public/login",
+    "pages/public/login-reg",
+    "pages/set/set",
+    "pages/set/cutImage/cut",
+    "pages/userInfo/userinfo",
+    "pages/product/detail/product",
+    "pages/window/window-checklist",
+    "pages/window/detail/window-foods",
+    "pages/window/detail/window-comment",
+    "pages/address/address",
+    "pages/address/addressManage"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#12de12",
+    "borderStyle": "black",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "pagePath": "pages/tabBar/index/index",
+        "iconPath": "static/index-0.png",
+        "selectedIconPath": "static/index-1.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/tabBar/square/square",
+        "iconPath": "static/square-0.png",
+        "selectedIconPath": "static/square-1.png",
+        "text": "广场"
+      },
+      {
+        "pagePath": "pages/tabBar/order/order",
+        "iconPath": "static/order-0.png",
+        "selectedIconPath": "static/order-1.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/tabBar/mine/mine",
+        "iconPath": "static/mine-0.png",
+        "selectedIconPath": "static/mine-1.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "mescroll-body": "/components/mescroll-uni/mescroll-body"
+  },
+  "sitemapLocation": "sitemap52.json"
+}

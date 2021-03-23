@@ -128,5 +128,32 @@ export default {
 	"cloud-upload": "\ue8e6",
 	"cloud-download-filled": "\ue8e9",
 	"headphones":"\ue8bf",
-	"shop":"\ue609"
+	"shop":"\ue609",
+	/* 新加 */
+	"apffnotice":"\ue001",
+	"apffnetwork":"\ue002",
+	"apffbrightness":"\ue003",
+	"apffnightmode":"\ue004",
+	"apffnightmode2":"\ue005",
+	"apffdaymode":"\ue006",
+	"apffdaymode2":"\ue007",
+	"apfflayout":"\ue008",
+	"apffother":"\ue009",
+	"apffother2":"\ue00a",
+	"apffevaluation":"\ue00b",
+	"apfflicense":"\ue00c",
+	"apffopensource":"\ue00d",
+	"apffprivacy":"\ue00e",
+	"apffprivacy2":"\ue00f",
+	"apffshare":"\ue010",
+	"apffshare2":"\ue011",
+	"apffshare3":"\ue012",
+	"apffcache":"\ue013",
+	"apffcache2":"\ue014",
+	"apffcache3":"\ue015",
+	"apffflow":"\ue016",
+	"apffflow2":"\ue017",
+	"apffflow3":"\ue018",
+	"apffflow4":"\ue019"
+	
 }

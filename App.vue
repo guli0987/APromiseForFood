@@ -83,6 +83,7 @@
 	/* 注意如果工程下同时有vue和nvue文件，全局样式的所有css会应用于所有文件，而nvue支持的css有限，编译器会在控制台报警，提示某些css无法在nvue中支持。此时需要把nvue不支持的css写在单独的条件编译里 */
 	 /* #ifndef APP-PLUS-NVUE */
 	    @import './common/css/common.css';
+		@import './common/css/my.scss';
 	    @import url("./common/css/icon.css");
 	 /* #endif*/
 </style>

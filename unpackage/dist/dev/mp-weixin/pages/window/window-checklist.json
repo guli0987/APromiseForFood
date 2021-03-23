@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "窗口列表",
+  "usingComponents": {
+    "uni-segmented-control": "/components/uni-segmented-control/uni-segmented-control",
+    "window-foods": "/pages/window/detail/window-foods"
+  }
+}

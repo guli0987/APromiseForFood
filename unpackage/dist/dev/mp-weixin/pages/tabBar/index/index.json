@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "uni-drawer": "/components/uni-drawer/uni-drawer",
+    "uni-list": "/components/uni-list/uni-list",
+    "uni-list-item": "/components/uni-list-item/uni-list-item",
+    "uni-data-picker-best": "/components/uni-data-picker-best/uni-data-picker-best",
+    "uni-swiper-dot": "/components/uni-swiper-dot/uni-swiper-dot",
+    "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar",
+    "product-list": "/pages/product/product-list"
+  }
+}
