@@ -14,22 +14,22 @@
 								</uni-list>	
 							</view> -->
 							<uni-list-set >
-								<uni-list-item-set title="通知" :show-extra-icon="true" :extra-icon="sysSettingsList[0].extraIcon" clickable/>
+								<uni-list-item-set :title="sysSettingsList[0].title" :show-extra-icon="true" :extra-icon="sysSettingsList[0].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[0].code)"/>
 							</uni-list-set>
 							<uni-list-set >
-								<uni-list-item-set title="网络" :show-extra-icon="true" :extra-icon="sysSettingsList[1].extraIcon" clickable/>
+								<uni-list-item-set :title="sysSettingsList[1].title" :show-extra-icon="true" :extra-icon="sysSettingsList[1].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[1].code)"/>
 							</uni-list-set>
 							<uni-list-set >
-								<uni-list-item-set title="亮度" :show-extra-icon="true" :extra-icon="sysSettingsList[2].extraIcon" clickable/>
+								<uni-list-item-set :title="sysSettingsList[2].title" :show-extra-icon="true" :extra-icon="sysSettingsList[2].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[2].code)"/>
 							</uni-list-set>
 							<uni-list-set >
-								<uni-list-item-set title="夜间模式" :show-extra-icon="true" :extra-icon="sysSettingsList[3].extraIcon" :show-switch="true" clickable/>
+								<uni-list-item-set :title="sysSettingsList[3].title" :show-extra-icon="true" :extra-icon="sysSettingsList[3].extraIcon" :show-switch="true" clickable @click="sysSettingsClick(sysSettingsList[3].code)"/>
 							</uni-list-set>
 							<!-- <uni-list-set >
 								<uni-list-item-set title="布局" :show-extra-icon="true" :extra-icon="sysSettingsList[3].extraIcon" showArrow="" clickable/>
 							</uni-list-set> -->
 							<uni-collapse>
-							    <uni-collapse-item-set title="布局" :show-extra-icon="true" :extra-icon="sysSettingsList[4].extraIcon">
+							    <uni-collapse-item-set :title="sysSettingsList[4].title" :show-extra-icon="true" :extra-icon="sysSettingsList[4].extraIcon">
 									<uni-list-set>
 										<uni-list-item-set isShowBorder="true" title="默认" />
 										<uni-list-item-set isShowBorder="true" title="缩放" />
@@ -39,17 +39,18 @@
 							    </uni-collapse-item-set>
 							</uni-collapse>
 							<uni-collapse>
-							    <uni-collapse-item-set title="其它" :show-extra-icon="true" :extra-icon="sysSettingsList[5].extraIcon">
+							    <uni-collapse-item-set :title="sysSettingsList[5].title" :show-extra-icon="true" :extra-icon="sysSettingsList[5].extraIcon">
 									<uni-list-set>
-										<uni-list-item-set isShowBorder="true" title="缓存" :show-extra-icon="true" :extra-icon="sysSettingsList[5].children[0].extraIcon"/>
-										<uni-list-item-set isShowBorder="true" title="省流" :show-extra-icon="true" :extra-icon="sysSettingsList[5].children[1].extraIcon"/>
+										<uni-list-item-set isShowBorder="true" :title="sysSettingsList[5].children[0].title" :show-extra-icon="true" :extra-icon="sysSettingsList[5].children[0].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[5].children[0].code)"/>
+										<uni-list-item-set isShowBorder="true" :title="sysSettingsList[5].children[1].title" :show-extra-icon="true" :extra-icon="sysSettingsList[5].children[1].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[5].children[1].code)"/>
 									</uni-list-set>
 							    </uni-collapse-item-set>
 							</uni-collapse>
 							<uni-list-set >
-								<uni-list-item-set title="去评价" :show-extra-icon="true" :extra-icon="sysSettingsList[6].extraIcon" clickable/>
-								<uni-list-item-set title="开源许可" :show-extra-icon="true" :extra-icon="sysSettingsList[7].extraIcon" clickable/>
-								<uni-list-item-set title="隐私协议" :show-extra-icon="true" :extra-icon="sysSettingsList[8].extraIcon" clickable/>
+								<uni-list-item-set :title="sysSettingsList[6].title" :show-extra-icon="true" :extra-icon="sysSettingsList[6].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[6].code)"/>
+								<uni-list-item-set :title="sysSettingsList[7].title" :show-extra-icon="true" :extra-icon="sysSettingsList[7].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[7].code)"/>
+								<uni-list-item-set :title="sysSettingsList[8].title" :show-extra-icon="true" :extra-icon="sysSettingsList[8].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[8].code)"/>
+								<uni-list-item-set :title="sysSettingsList[9].title" :show-extra-icon="true" :extra-icon="sysSettingsList[9].extraIcon" clickable @click="sysSettingsClick(sysSettingsList[9].code)"/>
 							</uni-list-set>
 							<view class="close">
 								<view class="word-btn" hover-class="word-btn--hover" :hover-start-time="20" :hover-stay-time="70" @click="closeDrawer('drawer_showLeft')"><text class="word-btn-white">关闭抽屉</text></view>

@@ -17,7 +17,7 @@
 				<scroll-view class="scroll-v list" scroll-y>
 					<view class="window-checklist-food-hot" v-if="current === 1">
 							热门
-							<view v-for="i in 100">{i}</view>
+							<!-- <view v-for="i in 100">{i}</view> -->
 					</view>
 				</scroll-view>
 			</swiper-item>

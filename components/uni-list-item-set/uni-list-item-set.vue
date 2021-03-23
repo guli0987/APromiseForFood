@@ -367,7 +367,7 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 }
 
 .uni-list-item__icon {
-	margin-right: 18rpx;
+	margin-right: 32rpx;//18rpx改为32rpx
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;

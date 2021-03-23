@@ -66,7 +66,7 @@ export default {
 					"code":6,
 					"children":[
 						{
-							"title":"缓存",
+							"title":"缓存清理",
 							"extraIcon": {
 								color: '#000000',
 								size: '16',
@@ -75,7 +75,7 @@ export default {
 							"code":60
 						},
 						{
-							"title":"省流",
+							"title":"省流量模式",
 							"extraIcon": {
 								color: '#000000',
 								size: '16',
@@ -95,6 +95,16 @@ export default {
 					"code":7
 				},
 				{
+					"title":"分享给好友",
+					"extraIcon": {
+						color: '#000000',
+						size: '16',
+						type: 'apffshare'
+					},
+					"link":"",
+					"code":8
+				},
+				{
 					"title":"开源许可",
 					"extraIcon": {
 						color: '#000000',
@@ -102,7 +112,7 @@ export default {
 						type: 'apffopensource'
 					},
 					"link":"",
-					"code":8
+					"code":9
 				},
 				{
 					"title":"隐私协议",
@@ -112,7 +122,7 @@ export default {
 						type: 'apffprivacy'
 					},
 					"link":"",
-					"code":9
+					"code":10
 				}
 
 			]
@@ -123,11 +133,7 @@ export default {
 	},
 	methods: {
 		setNetWork(){
-			uni.getNetworkType({
-			    success: function (res) {
-			        console.log(res.networkType);
-			    }
-			});
+			this.navTo('/pages/sysset/network',{noCheckLogin:true});
 		},
 		sysSettingsClick(e){
 			console.log("设置：e: " + JSON.stringify(e));

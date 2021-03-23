@@ -85,5 +85,6 @@
 	    @import './common/css/common.css';
 		@import './common/css/my.scss';
 	    @import url("./common/css/icon.css");
+		/* @import url("@/common/css/uni-formal.css"); */
 	 /* #endif*/
 </style>

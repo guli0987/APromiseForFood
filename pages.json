@@ -264,6 +264,12 @@
 			"style": {
 				"navigationBarTitleText": "新增收货地址"
 			}
+		},
+		{
+			"path": "pages/sysset/network",
+			"style": {
+				"navigationBarTitleText": "网络设备信息"
+			}
 		}
 	],
 	"globalStyle": {
