@@ -1,16 +1,32 @@
 <template>
 	<view>
 			<uni-list class="window-foods-style">
-				<uni-list-item-best 
-					v-for="(item_wf,index_wf) in 30" 
+				<!-- <uni-list-item-best 
+					v-for="(item_cx,index_wf) in 17" 
 					:key="index_wf"
-					:title="item_wf"
-					note="菜品特色概括" 
-					thumb="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png" 
+					:title="randomTitle()"
+					:note="randomSpe()"
+					showBadge="true"
+					:badgeText="randomPri()"
+					:thumb="randomImg(item_cx)" 
 					thumb-size="best" 
 					clickable
 					@click="clickWindowFood" 
+					/> -->
+				<uni-list-item-best
+					v-for="(item_cx,index_wf) in windowFoodsList" 
+					:key="index_wf"
+					:title="item_cx.title"
+					:note="item_cx.desc"
+					showBadge="true"
+					:badgeText="'￥'+item_cx.price"
+					:thumb="item_cx.img" 
+					thumb-size="best" 
+					clickable
+					@click="clickWindowFood(item_cx.productid)" 
 					/>
+					<!-- rightText="¥ 10.0" -->
+					<!-- thumb=`"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/s"+{{Math.round(Math.random()*17+1)}}+".jepg"` --> 
 			</uni-list>
 	</view>
 </template>
@@ -20,7 +36,8 @@
 	export default{
 		data() {
 			return {
-				
+				windowFoodsList:[]
+				//ranDomImg:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/s"+Math.round(Math.random()*17+1)+".jpeg"
 			}
 		},
 		mixins: [mixin],
@@ -28,12 +45,28 @@
 			
 		},
 		onLoad() {
-			
+			console.log("测试window-foods加载顺序");
+			/* console.log("windowid:"+windowid);
+			this.getWindowFoodsList(windowid); */
 		},
 		methods: {
-			clickWindowFood(){
+			randomImg(index){
+				return "https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/s"+(index+1)+".jpeg"
+			},
+			randomSpe(){
+				let spe=["香酥可口","美味尝了才知道","葱香四溢","妙不可言","玉盘珍馐值万钱"];
+				return spe[Math.round(Math.random()*4+1)];
+			},
+			randomTitle(){
+				let tit=["红烧排骨","醋酸鱼","鸡腿饭","牛肉面","蛋炒饭","麻辣烫"];
+				return tit[Math.round(Math.random()*5+1)];
+			},
+			randomPri(){
+				return "¥ "+Math.round(Math.random()*21+1);
+			},
+			clickWindowFood(productid){
 				/* nvue单独引入mixin 因为不能引用全局组件*/
-				this.navTo('/pages/product/detail/product',{noCheckLogin:true});
+				this.navTo('/pages/product/detail/product?productid='+productid,{noCheckLogin:false});
 				// #ifdef APP-PLUS-NVUE
 					
 				// #endif

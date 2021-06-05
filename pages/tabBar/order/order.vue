@@ -32,9 +32,9 @@
 		<view class="list" v-if="hasLogin">
 			<!-- 刷新页面后的顶部提示框 -->
 			<!-- 当前弹出内容没有实际逻辑 ，可根据当前业务修改弹出提示 -->
-			<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
+			<view class="tips" :class="{ 'tips-ani': tipShow }">订单刷新成功</view>
 			<unicloud-db ref="udb" v-slot:default="{data, loading, error, options}" :options="formData" :collection="collection"
-			 :field="field" @load="load">
+			orderby="_id desc"  :field="field" @load="load">
 				<!-- 基于 uni-list 的页面布局 -->
 				<uni-list>
 					<!-- to 属性携带参数跳转详情页面，当前只为参考 -->
@@ -62,7 +62,7 @@
 									<text class="shop-price-text">{{ item.goods_price }}</text>
 									<text>.00</text>
 								</view>
-								<view class="uni-note">{{ item.comment_count }}条评论 月销量 {{ item.month_sell_count }}</view>
+								<!-- <view class="uni-note">{{ item.comment_count }}条评论 月销量 {{ item.month_sell_count }}</view> -->
 								<view class="uni-note ellipsis">
 									<text class="uni-ellipsis-1">{{ item.shop_name }}</text>
 									<text class="uni-link">进店 ></text>

@@ -248,6 +248,12 @@
 			}
 		},
 		{
+			"path": "pages/window/detail/window-hot",
+			"style": {
+				"navigationBarTitleText": "热门"
+			}
+		},
+		{
 			"path": "pages/window/detail/window-comment",
 			"style": {
 				"navigationBarTitleText": "评价"
@@ -270,6 +276,18 @@
 			"style": {
 				"navigationBarTitleText": "网络设备信息"
 			}
+		},
+		{
+			"path": "pages/sysset/screenBrightness",
+			"style": {
+				"navigationBarTitleText": "屏幕亮度"
+			}
+		},
+		{
+			"path": "pages/sysset/web-view",
+			"style": {
+				"navigationBarTitleText": "开源许可"
+			}
 		}
 	],
 	"globalStyle": {
@@ -282,30 +300,30 @@
 		}
 	},
 	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "#12de12",
+		"color": "#2c2c2c",//#7A7E83 #2c2c2c
+		"selectedColor": "#00ff00",//#51eb0d #12de12 #00ff00
 		"borderStyle": "black",
 		"backgroundColor": "#F8F8F8",
 		"list": [{
 				"pagePath": "pages/tabBar/index/index",
-				"iconPath": "static/index-0.png",//200首页
-				"selectedIconPath": "static/index-1.png",
+				"iconPath": "static/img-tabBar/index-0.png",//200首页
+				"selectedIconPath": "static/img-tabBar/index-1.png",
 				"text": "首页"
 			},
 			{
 				"pagePath": "pages/tabBar/square/square",
-				"iconPath": "static/square-0.png",//平台
-				"selectedIconPath": "static/square-1.png",
+				"iconPath": "static/img-tabBar/square-0.png",//广场 color: #2c2c2c size:64
+				"selectedIconPath": "static/img-tabBar/square-1.png",//#00ff00
 				"text": "广场"
 			}, {
 				"pagePath": "pages/tabBar/order/order",
-				"iconPath": "static/order-0.png",//订单
-				"selectedIconPath": "static/order-1.png",
+				"iconPath": "static/img-tabBar/order-0.png",//订单
+				"selectedIconPath": "static/img-tabBar/order-1.png",
 				"text": "订单"
 			}, {
 				"pagePath": "pages/tabBar/mine/mine",
-				"iconPath": "static/mine-0.png",//我的 bug
-				"selectedIconPath": "static/mine-1.png",
+				"iconPath": "static/img-tabBar/mine-0.png",//我的 bug
+				"selectedIconPath": "static/img-tabBar/mine-1.png",
 				"text": "我的"
 			}
 		]

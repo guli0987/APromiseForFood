@@ -2,11 +2,11 @@
 	<view class="content">
 		<view class="row b-b">
 			<text class="tit">联系人</text>
-			<input class="input" type="text" v-model="addressData.name" placeholder="收货人姓名" placeholder-class="placeholder" />
+			<input class="input" type="text" v-model="addressData.name" placeholder="就餐人姓名" placeholder-class="placeholder" />
 		</view>
 		<view class="row b-b">
 			<text class="tit">手机号</text>
-			<input class="input" type="number" v-model="addressData.mobile" placeholder="收货人手机号码" placeholder-class="placeholder" />
+			<input class="input" type="number" v-model="addressData.mobile" placeholder="就餐人手机号码" placeholder-class="placeholder" />
 		</view>
 		<view class="row b-b">
 			<text class="tit">地址</text>
@@ -16,8 +16,8 @@
 			<text class="yticon icon-shouhuodizhi"></text>
 		</view>
 		<view class="row b-b"> 
-			<text class="tit">门牌号</text>
-			<input class="input" type="text" v-model="addressData.area" placeholder="楼号、门牌" placeholder-class="placeholder" />
+			<text class="tit">位置</text>
+			<input class="input" type="text" v-model="addressData.area" placeholder="具体位置信息,精确到区" placeholder-class="placeholder" />
 		</view>
 		
 		<view class="row default-row">

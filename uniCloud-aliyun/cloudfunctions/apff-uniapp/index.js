@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
 			break;
 		case 'getTag':
 			collection = db.collection(tabName_t);
-			res = await collection.limit(4).get(); 
+			res = await collection.orderBy("_id","asc").limit(4).get(); 
 			break;
 		case 'getNotice':
 			collection = db.collection(tabName_n);

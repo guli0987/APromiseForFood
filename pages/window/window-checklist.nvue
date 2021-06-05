@@ -16,16 +16,14 @@
 			<swiper-item class="window-checklist-swiper-item">
 				<scroll-view class="scroll-v list" scroll-y>
 					<view class="window-checklist-food-hot" v-if="current === 1">
-							热门
-							<!-- <view v-for="i in 100">{i}</view> -->
+							<window-hot ref="windowHot"></window-hot>
 					</view>
 				</scroll-view>
 			</swiper-item>
 			<swiper-item class="window-checklist-swiper-item">
 				<scroll-view class="scroll-v list" scroll-y>
 					<view class="window-checklist-food-comment" v-if="current === 2">
-						<!-- <window-comment ref="windowComment"></window-comment> -->
-						评价
+						<window-comment ref="windowComment"></window-comment>
 					</view>
 				</scroll-view>
 			</swiper-item>
@@ -39,26 +37,86 @@
     // 缓存页签数量
     const MAX_CACHE_PAGE = 3; */
 	import windowFoods from './detail/window-foods.nvue';
+	import windowHot from './detail/window-hot.nvue';
 	import windowComment from './detail/window-comment.vue';
     export default {
         components: {
 			windowFoods,
-            /* windowFood,
-			windowComment */
+            windowHot,
+			windowComment
         },
 		mixins: [],
         data() {
             return {
+				windowId:0,
 				current: 0,//当前页
 				items: ['菜系', '热门', '评价'],//总页数为3
 				activeColor: '#4cd964',//被选中页的颜色
 				styleType: 'button',//样式 button或者text
             }
         },
-        onLoad() {
-            
+        onLoad(res) {
+        	console.log("windowid:"+JSON.stringify(res));
+			let id=res.windowid;
+			this.windowId=id;
+			this.getWindowFoodsList(id);
+			
+				/* this.$refs.windowFoods.windowFoodsList=[
+						{
+							title:"糖醋鲤鱼",
+							desc:"好吃好吃真好吃",
+							img:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/s1.jepg",
+							price:"9.9",
+							extra:"test"	
+						}
+					]; */
+				//console.log("this.$refs.windowFoods"+this.$refs.windowFoods);
+			
         },
         methods: {
+			//获取商品列表数据
+			async getWindowFoodsList(id){
+				let res=await this.$request_ssm('shopShow/getShopShowList',{
+						id:id
+					});
+				console.log("【shopShow/getShopShowList】："+JSON.stringify(res));
+				if(res.code==100){
+					console.log("result:"+res.data.result);
+					let result= JSON.parse(res.data.result);
+					this.$nextTick(() => {
+						
+						let windowFoodsList=[];
+						result.forEach((item,index)=>{
+							const {
+								productShowId:productid,
+								productShowTitle:title,
+								productShowImg:img,
+								productShowDesc:desc,
+								productShowPrice:price,
+								productShowExtra:extra,
+								productShopId:shopid,
+							}=item;
+							windowFoodsList.push({
+								productid,
+								title,
+								img,
+								desc,
+								price,
+								extra,
+								shopid
+							})
+						})
+						this.$refs.windowFoods.windowFoodsList=windowFoodsList;
+					});
+				}else{
+					console.log("请求错误"+res);
+				}
+				
+			},
+			//获取评论列表
+			async getWindowCommentsList(id){},
+			//获取热门列表
+			async getWindowHotsList(id){},
 			//窗口菜单选项点击事件
 			onClickItem(e) {
 				if (this.current !== e.currentIndex) {
@@ -75,11 +133,21 @@
             },
 			//切换页面
             switchTab(index) {
+				this.getList(index);
                 if (this.current === index) {
                     return;
                 }
                 this.current = index;
-            }  
+            },
+			getList(index){
+				if(index==0){
+					this.getWindowFoodsList(this.windowId);
+				}else if(index==1){
+					
+				}else if(index==2){
+					
+				}
+			}
         }
     }
 </script>

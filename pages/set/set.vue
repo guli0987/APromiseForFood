@@ -8,8 +8,8 @@
 			<text class="cell-tit">消息提醒</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
-		<view class="list-cell b-b" @click="navTo('收货地址')" hover-class="cell-hover" :hover-stay-time="50">
-			<text class="cell-tit">地址管理</text>
+		<view class="list-cell b-b" @click="navTo('/pages/address/address')" hover-class="cell-hover" :hover-stay-time="50">
+			<text class="cell-tit">位置信息</text>
 			<text class="cell-more yticon icon-you"></text>
 		</view>
 		<view class="list-cell" @click="navTo('实名认证')" hover-class="cell-hover" :hover-stay-time="50">

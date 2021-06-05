@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<page-head :title="networkType"></page-head>
+		<page-head :title="'当前网络状态:'+networkType"></page-head>
 		<view class="uni-common-mt">
 			<view class="uni-list">
 				<view class="uni-list-cell uni-list-cell-pd">
@@ -109,6 +109,14 @@
 					</view>
 				</view>
 				<!-- #endif -->
+				<view class="uni-list-cell uni-list-cell-pd">
+					<view class="uni-pd">
+						<view class="uni-label" style="width:180px;">允许监听网络状态</view>
+					</view>
+					<view class="uni-list-cell-db">
+						<switch checked style="transform:scale(0.7)" @change="onSwitchNetworkStatusChange"/>
+					</view>
+				</view>
 			</view>
 			<view class="uni-padding-wrap" v-if="false">
 				<view class="uni-btn-v">
@@ -142,10 +150,24 @@
 			this.getSystemInfo();
 		},
 		methods: {
+			onSwitchNetworkStatusChange(e){
+				//console.log('switch1 发生 change 事件，携带值为', e.target.value)
+				if(e.target.value){
+					console.log("已开启网络监听");
+					/* uni.onNetworkStatusChange(function (res) {
+						console.log(JSON.stringify(res));
+					    console.log(res.isConnected);
+					    console.log(res.networkType);
+					}); */
+				}else{
+					console.log("取消网络监听");
+					//uni.offNetworkStatusChange(CALLBACK);
+				}
+			},
 			getNetworkType: function () {
 				uni.getNetworkType({
 					success: (res) => {
-						console.log(res)
+						console.log(JSON.stringify(res))
 						this.networkType = res.subtype || res.networkType
 					},
 			        fail: () => {

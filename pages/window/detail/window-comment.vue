@@ -1,18 +1,18 @@
 <template>
 	<view>
 		<view class="window-comment">
-			<view class="window-comment-text" v-for="(num,index) in data" :key="index">
+			<view class="window-comment-text" v-for="(com,index) in data" :key="index">
 				<view class="comment-avatar">
-					<image src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1620020012,789258862&fm=26&gp=0.jpg"></image>
+					<image :src="com.avatar"></image>
 				</view>
 				<view class="comment-mine">
-					<view class="comment-nickname">昵称{{num}}yy</view>
+					<view class="comment-nickname">{{com.nickname}}</view>
 					
-					<view class="comment-time">2021-02-24</view>
+					<view class="comment-time">{{com.date}}</view>
 				</view>
 				<view class="comment-content">
-					<view class="comment-rate"><uni-rate :readonly="true" :value="2" /></view>
-					<view class="comment-text">真是太好吃了，我再也不过来了</view>
+					<view class="comment-rate"><uni-rate :readonly="true" :value="com.star" /></view>
+					<view class="comment-text">{{com.comment}}</view>
 				</view>
 			</view>
 			<view class="uni-loadmore" v-if="showLoadMore">{{loadMoreText}}</view>
@@ -24,7 +24,71 @@
 		data() {
 			return {
 				title: '下拉刷新 + 加载更多',
-				data: [1,2,3,4,5,6,7,8,9,10],
+				data: [
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h1.jpeg",
+						nickname:"你好",
+						date:"2021-02-24",
+						star:4,
+						comment:"还不错"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h2.jpeg",
+						nickname:"Hey",
+						date:"2021-02-25",
+						star:3,
+						comment:"一般吧，有待加强"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h3.jpeg",
+						nickname:"和谐社会",
+						date:"2021-02-25",
+						star:2,
+						comment:"服务态度真差"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h4.jpeg",
+						nickname:"一眼望去全是水",
+						date:"2021-03-02",
+						star:5,
+						comment:"满分，这家店特别好吃"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h5.jpeg",
+						nickname:"lod美好",
+						date:"2021-03-03",
+						star:4,
+						comment:"可以可以还可以"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h6.jpeg",
+						nickname:"胡同学",
+						date:"2021-03-10",
+						star:4,
+						comment:"不做评价"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h7.jpeg",
+						nickname:"还是算了",
+						date:"2021-03-11",
+						star:3,
+						comment:"还行"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h8.jpeg",
+						nickname:"hi",
+						date:"2021-03-20",
+						star:4,
+						comment:"可以吧"
+					},
+					{
+						avatar:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/h9.jpeg",
+						nickname:"Fire",
+						date:"2021-03-24",
+						star:1,
+						comment:"一头火，太差了也"
+					}
+				],
 				loadMoreText: "加载中...",
 				showLoadMore: false,
 				max: 0

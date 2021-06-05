@@ -1,8 +1,9 @@
 <template>
 	<view class="container">
+		<!-- <view>{{currProductInfo}}</view> -->
 		<view class="carousel">
 			<swiper indicator-dots circular=true duration="400">
-				<swiper-item class="swiper-item" v-for="(item,index) in imgList" :key="index">
+				<swiper-item class="swiper-item" v-for="(item,index) in this.currProductInfo.bannerImgs" :key="index">
 					<view class="image-wrapper">
 						<image
 							:src="item.src" 
@@ -15,25 +16,25 @@
 		</view>
 		
 		<view class="introduce-section">
-			<text class="title">菜品名称 口味</text>
+			<text class="title">{{currProductInfo.name}}</text>
+			<text class="hot">{{currProductInfo.isHot}}</text>
 			<view class="price-box">
 				<text class="price-tip">¥</text>
-				<text class="price">现价</text>
-				<text class="m-price">¥原价</text>
+				<text class="price">{{Math.floor(currProductInfo.price*0.8)}}</text>
+				<text class="m-price">¥{{currProductInfo.price}}</text>
 				<text class="coupon-tip">折扣</text>
 			</view>
 			<view class="bot-row">
-				<text>销量: 108</text>
-				<text>排名: 2</text>
-				<text>浏览量: 768</text>
+				<text>销量: {{currProductInfo.monthSellCount}}</text>
+				<text>排名: 加载中</text>
+				<text>浏览量: 3476</text>
 			</view>
 		</view>
 		
 		<!--  分享 如果有优惠活动则显示-->
 		<!-- <view class="share-section" @click="share" v-if="true">
-			<view class="share-icon">
-				<text class="yticon icon-xingxing"></text>
-				 返
+			<view class="">
+				<text>[活动]</text>
 			</view>
 			<text class="tit">该商品分享可领49减10红包</text>
 			<text class="yticon icon-bangzhu1"></text>
@@ -63,9 +64,15 @@
 			<view class="c-row b-b">
 				<text class="tit">活动</text>
 				<view class="con-list">
-					<text>新人首单送5元无门槛代金券</text>
-					<text>订单满30减6</text>
-					<text>订单满100减20</text>
+					<text>新人用户首单送3元无门槛代金券</text>
+					<text>订单满20减5</text>
+					<text>订单满50减10</text>
+				</view>
+			</view>
+			<view class="c-row b-b">
+				<text class="tit">日期</text>
+				<view class="bz-list con">
+					<text>{{currProductInfo.addDate}}</text>
 				</view>
 			</view>
 			<view class="c-row b-b">
@@ -113,7 +120,7 @@
 			<view class="d-header">
 				<text>图文详情</text>
 			</view>
-			<rich-text :nodes="desc"></rich-text>
+			<rich-text :nodes="currProductInfo.desc"></rich-text>
 		</view>
 		
 		<!-- 底部操作菜单 -->
@@ -133,10 +140,10 @@
 			<view class="mask"></view>
 			<view class="layer attr-content" @click.stop="stopPrevent">
 				<view class="a-t">
-					<image src="https://gd3.alicdn.com/imgextra/i3/0/O1CN01IiyFQI1UGShoFKt1O_!!0-item_pic.jpg_400x400.jpg"></image>
+					<image :src="this.currProductInfo.img"></image>
 					<view class="right">
-						<text class="price">¥328.00</text>
-						<text class="stock">库存：188件</text>
+						<text class="price">¥{{currProductInfo.price}}</text>
+						<text class="stock">库存：{{currProductInfo.stock}}件</text>
 						<view class="selected">
 							已选：
 							<text class="selected-text" v-for="(sItem, sIndex) in specSelected" :key="sIndex">
@@ -185,7 +192,30 @@
 		mixins: [chartProduct],
 		data() {
 			return {
-				productInfoList:[{
+				productId:0,
+				currProductInfo:{
+					id:0,
+					img:"加载中",
+					name:"加载中",
+					price:"--",
+					desc:"加载中",
+					sn:0,
+					type:"加载中",
+					tag:"",
+					note:"加载中",
+					addDate:"加载中",
+					modifyDate:"加载中",
+					isAlone:"加载中",
+					isBest:"加载中",
+					isHot:"加载中",
+					isNew:"加载中",
+					isOnSale:"加载中",
+					isReal:"加载中",
+					keyWords:"加载中",
+					bannerImgs:"加载中",
+					showid:"加载中"
+				},
+				/* productInfoList:[{
 					"category_id": "1", // 所属窗口
 					"goods_sn": "20210225828", // 商品的唯一货号
 					"name": "手抓饼 传统美食", // 商品名称
@@ -211,7 +241,7 @@
 					"shop_name": "京东商城网上自营专卖店",
 					"tag": ["饼", "传统美食"],
 					"goods_tip": "自营"
-				}],
+				}], */
 				//
 				x: 0,
 				y: 0,
@@ -281,27 +311,29 @@
 				],
 				
 				specClass: 'none',
-				specSelected:[],
+				specSelected:[
+					{name:"未选择"}
+				],
 				
 				favorite: true,
-				imgList: [
+				/* imgList: [
 					{
-						src: 'https://gd3.alicdn.com/imgextra/i3/0/O1CN01IiyFQI1UGShoFKt1O_!!0-item_pic.jpg_400x400.jpg'
+						src: 'https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p1.jpeg'
 					},
 					{
-						src: 'https://gd3.alicdn.com/imgextra/i3/TB1RPFPPFXXXXcNXpXXXXXXXXXX_!!0-item_pic.jpg_400x400.jpg'
+						src: 'https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p2.jpeg'
 					},
 					{
-						src: 'https://gd2.alicdn.com/imgextra/i2/38832490/O1CN01IYq7gu1UGShvbEFnd_!!38832490.jpg_400x400.jpg'
+						src: 'https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p3.jpeg'
 					}
-				],
+				], */
 				desc: `
 					<div style="width:100%">
-						<img style="width:100%;display:block;" src="https://gd3.alicdn.com/imgextra/i4/479184430/O1CN01nCpuLc1iaz4bcSN17_!!479184430.jpg_400x400.jpg" />
-						<img style="width:100%;display:block;" src="https://gd2.alicdn.com/imgextra/i2/479184430/O1CN01gwbN931iaz4TzqzmG_!!479184430.jpg_400x400.jpg" />
-						<img style="width:100%;display:block;" src="https://gd3.alicdn.com/imgextra/i3/479184430/O1CN018wVjQh1iaz4aupv1A_!!479184430.jpg_400x400.jpg" />
-						<img style="width:100%;display:block;" src="https://gd4.alicdn.com/imgextra/i4/479184430/O1CN01tWg4Us1iaz4auqelt_!!479184430.jpg_400x400.jpg" />
-						<img style="width:100%;display:block;" src="https://gd1.alicdn.com/imgextra/i1/479184430/O1CN01Tnm1rU1iaz4aVKcwP_!!479184430.jpg_400x400.jpg" />
+						<img style="width:100%;display:block;" src="https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p4.jpeg" /><br>
+						<img style="width:100%;display:block;" src="https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p5.jpeg" /><br>
+						<img style="width:100%;display:block;" src="https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p6.jpeg" /><br>
+						<img style="width:100%;display:block;" src="https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p7.jpeg" /><br>
+						<img style="width:100%;display:block;" src="https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/p1.jpeg" />
 					</div>
 				`,
 				specList: [
@@ -348,17 +380,17 @@
 				]
 			};
 		},
-		async onLoad(options){
+		onLoad(options){
+			console.log("options:"+JSON.stringify(options));
 			
 			//接收传值,id里面放的是标题，因为测试数据并没写id 
-			let id = options.id;
-			if(id){
-				this.$api.msg(`点击了${id}`);
-			}
-			
+			let id = options.productid;
+			this.productId=id;
+			//console.log(id);
+			this.getProductInfo(id);
 			
 			//规格 默认选中第一条
-			this.specList.forEach(item=>{
+			/* this.specList.forEach(item=>{
 				for(let cItem of this.specChildList){
 					if(cItem.pid === item.id){
 						this.$set(cItem, 'selected', true);
@@ -366,10 +398,113 @@
 						break; //forEach不能使用break
 					}
 				}
-			})
+			}) */
 			//this.shareList = await this.$api.json('shareList');
 		},
+		computed:{
+			/* currentProductInfo(){
+				return this.productInfo;
+			} */
+		},
 		methods:{
+			//得到产品详细数据
+			async getProductInfo(id){
+				let res=await this.$request_ssm('product/getProductInfo',{
+						id:id
+					});
+				console.log("【product/getProductInfo】："+JSON.stringify(res));
+				if(res.code==100){
+					console.log("result:"+res.data.result);
+					let result= JSON.parse(res.data.result);
+					this.$nextTick(() => {
+						
+						let getProductInfo=[];
+							const {
+								productId:id,//产品详情id
+								productGoodsThumb:img,//缩略图列表
+								productName:name,//产品名
+								productGoodsPrice:price,//产品价格
+								productGoodsDesc:desc,//描述
+								productGoodsSn:sn,//唯一货号
+								productGoodsType:type,//类型
+								productTag:tag,//标签
+								productSellerNote:note,//备注
+								productAddDate:addDate,//上架日期
+								productLastModifyDate:modifyDate,//修改日期
+								productAloneSale:isAlone,//是否单独销售
+								productBest:isBest,//是否精品
+								productHot:isHot,//是否热销
+								productNew:isNew,//是否新品
+								productOnSale:isOnSale,//是否上架销售
+								productReal:isReal,//是否为实物
+								productKeywords:keyWords,//关键字
+								productGoodsBannerImgs:bannerImgs,//BannerImgs地址
+								productShowId:showid,//所属产品展示id
+							}=result;
+							getProductInfo.push({
+								id,
+								img,
+								name,
+								price,
+								desc,
+								sn,
+								type,
+								tag,
+								note,
+								addDate:this.formatDate(addDate),
+								modifyDate,
+								isAlone,
+								isBest,
+								isHot:isHot==1?"火爆":"",
+								isNew,
+								isOnSale,
+								isReal,
+								keyWords,
+								bannerImgs:JSON.parse(bannerImgs),
+								showid,
+								stock:"加载中",//库存
+								monthSellCount:"加载中",
+								monthSellRank:"加载中"
+							})
+						this.currProductInfo=getProductInfo[0];
+						console.log("【数据刷新】"+JSON.stringify(this.currProductInfo));
+						//console.log(JSON.stringify(this.currProductInfo.bannerImgs.length));
+						//开始获取库存信息
+						this.getProductStockInfo(this.currProductInfo.showid);
+					
+					});
+				}else{
+					console.log("请求错误"+res);
+				}
+			},
+			checkZero(time){
+				return time<10?'0'+time:time;
+			},
+			formatDate(date){
+				var time = new Date(date);
+				var y = time.getFullYear();
+				var m = time.getMonth()+1;
+				var d = time.getDate();
+				var h = time.getHours();
+				var mm = time.getMinutes();
+				var s = time.getSeconds();
+				return y+'-'+this.checkZero(m)+'-'+this.checkZero(d);//+' '+this.checkZero(h)+':'+this.checkZero(mm)+':'+this.checkZero(s)
+			},
+			async getProductStockInfo(id){
+				let res=await this.$request_ssm('product/getProductStockInfo',{
+						id:id
+					});
+				console.log("【product/getProductStockInfo】："+JSON.stringify(res));
+				if(res.code==100){
+					let result= JSON.parse(res.data.result);
+					this.currProductInfo.stock=result.productStockCount;
+					this.currProductInfo.monthSellCount=result.productMonthSellCount;
+					console.log("【刷新数据】"+JSON.stringify(this.currProductInfo));
+					
+				}else{
+					console.log("error");
+				}
+			},
 			onChangeM(e) {
 				this.old.x = e.detail.x
 				this.old.y = e.detail.y
@@ -405,6 +540,7 @@
 						icon: 'none'
 					})
 				}else if(e.index === 1){
+					//是否校验登录状态{noCheckLogin:true}
 					this.navTo('/pages/tabBar/order/detail/createOrder',{noCheckLogin:true});
 				}
 				
@@ -585,6 +721,16 @@
 			color: $font-color-dark;
 			height: 50upx;
 			line-height: 50upx;
+		}
+		.hot{
+			position: absolute;
+			right: 30upx;
+			background: $uni-color-error;
+			color: #fff;
+			font-size: 6rpx;
+			border-radius: 8upx;
+			line-height: 1;
+			transform: translateY(-4upx); 
 		}
 		.price-box{
 			display:flex;

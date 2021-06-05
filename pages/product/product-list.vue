@@ -115,7 +115,8 @@
 					title: '点击卡片',
 					icon: 'none'
 				}) */
-				this.navTo('/pages/window/window-checklist?windowid='+windowid,{noCheckLogin:true});//设置为不检查登录
+				console.log("windowId:"+windowid);
+				this.navTo('/pages/window/window-checklist?windowid='+windowid,{noCheckLogin:false});//设置为不检查登录
 			},
 			footerClick(types) {
 				uni.showToast({

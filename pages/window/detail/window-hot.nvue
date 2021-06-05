@@ -1,0 +1,69 @@
+<template>
+	<view>
+			<uni-list class="window-foods-style">
+				<uni-list-item-best 
+					v-for="(item_cx,index_wf) in 8" 
+					:key="index_wf"
+					:title="randomTitle()"
+					:note="randomSpe()"
+					showBadge="true"
+					:thumb="randomImg(item_cx)" 
+					thumb-size="best" 
+					clickable
+					@click="clickWindowFood" 
+					rightText="[火爆]"
+					/>
+					<!-- rightText="¥ 10.0" -->
+					<!-- thumb=`"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/s"+{{Math.round(Math.random()*17+1)}}+".jepg"` --> 
+			</uni-list>
+	</view>
+</template>
+
+<script>
+	import mixin from '../../../common/mixin/mixin.js'
+	export default{
+		data() {
+			return {
+				//ranDomImg:"https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/s"+Math.round(Math.random()*17+1)+".jpeg"
+			}
+		},
+		mixins: [mixin],
+		computed: {
+			
+		},
+		onLoad() {
+			
+		},
+		methods: {
+			randomImg(index){
+				return "https://public-1301701929.cos.ap-shanghai.myqcloud.com/test/s"+(index+1)+".jpeg"
+			},
+			randomSpe(){
+				let spe=["香酥可口","美味尝了才知道","葱香四溢","妙不可言","玉盘珍馐值万钱"];
+				return spe[Math.round(Math.random()*4+1)];
+			},
+			randomTitle(){
+				let tit=["红烧排骨","醋酸鱼","鸡腿饭","牛肉面","蛋炒饭","麻辣烫"];
+				return tit[Math.round(Math.random()*5+1)];
+			},
+			randomPri(){
+				return "热门推荐";
+			},
+			clickWindowFood(){
+				/* nvue单独引入mixin 因为不能引用全局组件*/
+				this.navTo('/pages/product/detail/product',{noCheckLogin:true});
+				// #ifdef APP-PLUS-NVUE
+					
+				// #endif
+				
+				// #ifndef APP-PLUS-NVUE
+					
+				// #endif
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	
+</style>

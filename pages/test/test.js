@@ -1,4 +1,79 @@
+【product/getProductStockInfo】：
+{"code":100,
+"msg":"处理成功",
+"data":{
+	"result":"{
+		\"productId\":1,
+		\"productMonthSellCount\":149,
+		\"productStockCount\":20,
+		\"productStockId\":1,
+		\"productTotalSellCount\":2958}"}}
+
+
+productInfoList:[{
+					"category_id": "1", // 所属窗口
+					"goods_sn": "20210225828", // 商品的唯一货号
+					"name": "手抓饼 传统美食", // 商品名称
+					"keywords": "饼,传统美食", // 商品关键字，为搜索引擎收录使用
+					// 商品详细描述
+					"goods_desc": "手抓饼是从葱抓饼演变而来，起源于中国台湾地区。2004年在台湾夜市被发现并于2005年正式从台湾引进至内地。新鲜出炉后的手抓饼，千层百叠，层如薄纸，用手抓之，面丝千连，其外层金黄酥脆，内层柔软白嫩，一股葱油与面筋的香味扑鼻而来，让每位食客来不及等待，抓起就吃。手抓饼至今一直风靡全国，可搭配鸡蛋、猪肉叉烧、牛肉饼、粮心香肠、藤椒鸡排、培根、方火腿、鸡柳、蔬菜等辅料，也可搭配酱爆汁、孜然香辣酱、番茄沙司、麻辣汁、甜辣酱、甜味沙拉酱、黑椒酱、排骨酱等酱料，香酥可口，老少皆宜。", 
+					"goods_thumb": "https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product1.jpg", // 商品缩略图，用于在列表或搜索结果中预览显示
+					"goods_banner_imgs": "", // 商品详情页的banner图地址
+					"goods_price": "9999", // 商品价格
+					"remain_count": "999999", // 库存数量
+					"month_sell_count": "640", // 月销量
+					"total_sell_count": "28512", // 总销量
+					"comment_count": "980021", // 累计评论数
+					"is_real": true, // 是否实物
+					"is_on_sale": true, // 是否上架销售
+					"is_alone_sale": true, // 是否能单独销售；如果不能单独销售，则只能作为某商品的配件或者赠品销售
+					"is_best": false, // 是否精品
+					"is_new": true, // 是否新品
+					"is_hot": false, // 是否热销
+					"add_date": "2020-8-26 09:37:21", // 上架时间
+					"last_modify_date": "2020-8-26 09:37:21", // 最后修改时间
+					"seller_note": "", //商家备注，仅商家可见
+					"shop_name": "京东商城网上自营专卖店",
+					"tag": ["饼", "传统美食"],
+					"goods_tip": "自营"
+				}],
+
+【product/getProductInfo】：
+{"code":100,
+"msg":"处理成功",
+"data":{
+	"result":
+	"{
+		\"productAddDate\":1620498048000,
+		\"productAloneSale\":1,
+		\"productBest\":1,
+		\"productGoodsBannerImgs\":\"banner图\",
+		\"productGoodsDesc\":\"这是一个好的产品\",
+		\"productGoodsPrice\":67.7,
+		\"productGoodsSn\":\"1231323\",
+		\"productGoodsThumb\":\"https://img-cdn-qiniu.dcloud.net.cn/uploads/example/product1.jpg\",
+		\"productGoodsType\":\"食物\",
+		\"productHot\":1,
+		\"productId\":1,
+		\"productKeywords\":\"面食\",
+		\"productLastModifyDate\":1620498048000,
+		\"productName\":\"红烧牛肉面\",
+		\"productNew\":1,
+		\"productOnSale\":1,
+		\"productReal\":1,
+		\"productSellerNote\":\"备注\",
+		\"productShowId\":1,
+		\"productTag\":\"面\"}"}}
+
+
 本地服务器请求:
+{"code":100,
+"msg":"处理成功",
+"data":
+{
+	"result":
+		"[{\"productShopId\":1,\"productShowDesc\":\"好吃劲道\",\"productShowExtra\":\"还好\",\"productShowId\":1,\"productShowPrice\":10.0,\"productShowTitle\":\"牛肉面\"},{\"productShopId\":1,\"productShowDesc\":\"乌拉乌拉\",\"productShowExtra\":\"hahahahah\",\"productShowId\":3,\"productShowImg\":\"无图无真相\",\"productShowPrice\":67.9,\"productShowTitle\":\"鹅鹅鹅\"}]"}}
+
 【本地请求测试request_ssm返回】:[
 	null,
 	{

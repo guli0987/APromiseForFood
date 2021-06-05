@@ -116,13 +116,18 @@
 			<!-- 上拉加载更多 -->
 		</view>
 	</mescroll-body>
+	<!-- 分享 -->
+	<uni-popup id="popupShare" ref="popupShareToFriends" type="share" @change="shareChange">
+		<uni-popup-share title="分享给" @select="shareSelect"></uni-popup-share>
+	</uni-popup>
 	</view>
 </template>
 
 <script>
 	import indexMiXin from './index.js'
-	import sysSettingsMiXin from './sys_settings.js'
-	import mpvuePickerBest from '../../../components/mpvue-picker-best/mpvuePickerBest.vue';
+	import sysSettingsMiXin from '../../sysset/sys_settings.js'
+	import shareToFriends from '@/components/mix-share/share.vue';
+	/* import mpvuePickerBest from '../../../components/mpvue-picker-best/mpvuePickerBest.vue'; */
 	import productList from '../../product/product-list.vue';
 	import {
 	    mapState,
@@ -131,7 +136,8 @@
 	export default {
 		components: {
 			/* mpvuePickerBest, */
-			productList
+			productList,
+			shareToFriends
 		},
 		mixins: [indexMiXin,sysSettingsMiXin],
 		computed: {//计算属性
@@ -310,22 +316,17 @@
 			        },
 			swiperClickItem(e) {
 				this.swiperDotIndex = e;
-				/* this.swiperDotIndex = e;
-				alert(this.swiperDotIndex); */
 				console.log("test:"+this.swiperDotIndex);
 			},
 			swiperClick(e){
-				//alert("跳转地址"+e);
 				this.navTo('pages/swiper/swiper?url='+e,{noCheckLogin:true})
 			},
 			//通告栏
 			noticeClick(e){
-				//alert("跳转地址");
-				this.navTo('pages/tag/tag',{noCheckLogin:true});
+				this.navTo('pages/notice/notice',{noCheckLogin:true});
 			},
 			//选项卡
 			tagGoList(value) {
-				//alert("跳转地址");
 				this.navTo('pages/tag/tag');
 				//this.navTo('pages/tag/tag?type='+value.type+'&id=' + value.id);
 			},
@@ -347,7 +348,53 @@
 				}else{
 					this.$refs.picker_onlinePicker.show();
 				}
+			},
+			//分享改变
+			shareChange(e){
+				console.log('popup ' + e.type + ' 状态', e.show)
+			},
+			//分享挑选
+			shareSelect(e,done){
+				console.log("shareSelect:"+JSON.stringify(e));
+				uni.showToast({
+					title: `您选择了第${e.index+1}项：${e.item.text}`,
+					icon: 'none'
+				})
+				done()
+			},
+			async share(e) {
+				let shareOPtions = {
+					provider:"weixin",
+					type:1,//0	图文	weixin、sinaweibo;1	纯文字	weixin、qq;2	纯图片	weixin、qq;3	音乐	weixin、qq;4	视频	weixin、sinaweibo;5	小程序	weixin
+					//title:,
+					scene:"WXSceneSession",//WXSceneSession	分享到聊天界面;WXSenceTimeline	分享到朋友圈;WXSceneFavorite	分享到微信收藏
+					//summary:,
+					//href:,
+					//imageUrl:,
+					//mediaUrl:,
+					//miniProgram:,
+					success: (e) => {
+						console.log('success', e);
+						uni.showModal({
+							content: '已分享',
+							showCancel:false
+						})
+					},
+					fail: (e) => {
+						console.log('fail', e)
+						uni.showModal({
+							content: e.errMsg,
+							showCancel:false
+						})
+					},
+					complete:function(){
+						console.log('分享操作结束!')
+					}
+					
+				}
+				uni.share(shareOPtions);
 			}
+			
 		},
 		//头部按钮方法
 		onNavigationBarButtonTap(e) {
