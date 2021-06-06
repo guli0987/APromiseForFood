@@ -19,7 +19,7 @@
 					:title="item_cx.title"
 					:note="item_cx.desc"
 					showBadge="true"
-					:badgeText="'￥'+item_cx.price"
+					:badgeText="'￥ '+item_cx.price"
 					:thumb="item_cx.img" 
 					thumb-size="best" 
 					clickable

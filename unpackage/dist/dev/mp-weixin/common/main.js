@@ -12,10 +12,11 @@ var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ 5));
 var _Json = _interopRequireDefault(__webpack_require__(/*! ./Json */ 15));
 var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ 16));
 
-var _request_ssm = __webpack_require__(/*! common/js/request_ssm.js */ 25);
+
+var _request_ssm = __webpack_require__(/*! common/js/request_ssm.js */ 28);
 var _request = __webpack_require__(/*! common/js/request.js */ 18);
 
-var _util = __webpack_require__(/*! @/common/js/util */ 26);
+var _util = __webpack_require__(/*! @/common/js/util */ 29);
 
 
 
@@ -31,28 +32,38 @@ var _util = __webpack_require__(/*! @/common/js/util */ 26);
 
 
 
-
-var _mixin = _interopRequireDefault(__webpack_require__(/*! ./common/mixin/mixin */ 27));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var MescrollBody = function MescrollBody() {Promise.all(/*! require.ensure | components/mescroll-uni/mescroll-body */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/mescroll-uni/mescroll-body")]).then((function () {return resolve(__webpack_require__(/*! @/components/mescroll-uni/mescroll-body.vue */ 220));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);}; //
+var _mixin = _interopRequireDefault(__webpack_require__(/*! ./common/mixin/mixin */ 30));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var MescrollBody = function MescrollBody() {Promise.all(/*! require.ensure | components/mescroll-uni/mescroll-body */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/mescroll-uni/mescroll-body")]).then((function () {return resolve(__webpack_require__(/*! @/components/mescroll-uni/mescroll-body.vue */ 247));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);}; //import MinRouter from 'common/router/MinRouter.js';//路由管理
+//import minRouter from 'common/router/router.js'//引入router文件
+//本地数据模拟
 var json = function json(type) {//模拟异步请求数据
-  return new Promise(function (resolve) {setTimeout(function () {resolve(_Json.default[type]);}, 500);});};_vue.default.prototype.$api = { json: json };_vue.default.mixin(_mixin.default);
-_vue.default.prototype.$request_ssm = _request_ssm.request_ssm;
-_vue.default.prototype.$request = _request.request;
-_vue.default.prototype.$util = {
+  return new Promise(function (resolve) {setTimeout(function () {resolve(_Json.default[type]);}, 500);});};_vue.default.prototype.$api = { json: json }; //混入
+_vue.default.mixin(_mixin.default); //服务器数据
+_vue.default.prototype.$request_ssm = _request_ssm.request_ssm;_vue.default.prototype.$request = _request.request;_vue.default.prototype.$util = {
   msg: _util.msg,
   prePage: _util.prePage,
   throttle: _util.throttle };
 
 _vue.default.prototype.$store = _store.default; //把vuex定义成全局组件
-_vue.default.component('mescroll-body', MescrollBody);
+_vue.default.component('mescroll-body', MescrollBody); //全局注册mescroll-body组件，每个页面将可以直接使用该组件
+//Vue.use(MinRouter)//
 
 _vue.default.config.productionTip = false;
 _App.default.mpType = 'app';
 var app = new _vue.default(_objectSpread(_objectSpread({},
 _App.default), {}, {
   //挂载,把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
-  store: _store.default }));
+  store: _store.default
+  //minRouter
+}));
+createApp(app).$mount(); //挂载Vue实例
+/*
+提示：
+使用Vue.use引用插件，
+使用Vue.prototype添加全局变量，
+使用Vue.component注册全局组件。
+无法使用vue-router，路由须在pages.json中进行配置。
 
-createApp(app).$mount();
+*/
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["createApp"]))
 
 /***/ }),

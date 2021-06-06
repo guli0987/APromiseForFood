@@ -39,6 +39,7 @@
 	import windowFoods from './detail/window-foods.nvue';
 	import windowHot from './detail/window-hot.nvue';
 	import windowComment from './detail/window-comment.vue';
+	import {request_ssm} from '../../common/js/request_ssm.js'
     export default {
         components: {
 			windowFoods,
@@ -59,6 +60,7 @@
         	console.log("windowid:"+JSON.stringify(res));
 			let id=res.windowid;
 			this.windowId=id;
+			//console.log("id:"+id);
 			this.getWindowFoodsList(id);
 			
 				/* this.$refs.windowFoods.windowFoodsList=[
@@ -73,13 +75,33 @@
 				//console.log("this.$refs.windowFoods"+this.$refs.windowFoods);
 			
         },
+		/* onReady(){
+			this.test();
+		}, */
         methods: {
+			/* test(){
+				let er= request_ssm('shopShow/getShopShowList',{
+						id:1
+					});
+					console.log("123");
+			}, */
 			//获取商品列表数据
 			async getWindowFoodsList(id){
+				// #ifdef APP-PLUS
+				console.log("手机端");
+				let res=await request_ssm('shopShow/getShopShowList',{
+						id:id
+					});
+				// #endif
+				// #ifdef H5
+				console.log("网页端");
 				let res=await this.$request_ssm('shopShow/getShopShowList',{
 						id:id
 					});
-				console.log("【shopShow/getShopShowList】："+JSON.stringify(res));
+				// #endif
+				
+				
+				//console.log("【shopShow/getShopShowList】："+JSON.stringify(res));
 				if(res.code==100){
 					console.log("result:"+res.data.result);
 					let result= JSON.parse(res.data.result);

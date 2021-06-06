@@ -177,6 +177,30 @@ export default {
 			
 			// #endif
 		},
+		setCache(){
+			uni.showModal({
+				title:"缓存清理",
+				content:"确定要清理缓存吗？本地缓存数据将清空处理",
+				showCancel:true,//是否展示取消按钮
+				cancelText:"取消",
+				cancelColor:"#d5d5d5",
+				confirmText:"确定",
+				confirmColor:"#6098ff",
+				hideTabBar:false,
+				success: (res) => {
+					if(res.confirm){
+							let value=[{"text":"选择地点"}];
+							this.updateLocalPosition(value);
+							this.picker_setNavStyle(this.cachePosition);//this.cache_position={};
+							this.$util.msg('清理完成!');
+						}else{
+							
+						}
+					}
+			});
+			//console.log("缓存清理"+JSON.stringify(this.cachePosition));
+			
+		},
 		sysSettingsClick(e){
 			console.log("设置：e: " + JSON.stringify(e));
 			/* uni.showToast({
@@ -200,8 +224,8 @@ export default {
 				case 5:
 					
 					break;
-				case 6:
-					
+				case 60:
+					this.setCache();
 					break;
 				case 7:
 					this.setToEvaluation();

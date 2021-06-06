@@ -1,4 +1,5 @@
-const baseUrl='http://localhost:8080/apff_ssm_war_exploded/';
+//const baseUrl='http://localhost:8080/apff_ssm_war_exploded/';
+const baseUrl='http://121.5.182.74/apff/';
 //const baseUrl='http://192.168.1.127:8080/apff_ssm_war_exploded/';
 //http://localhost:8080/apff_ssm_war_exploded/将localhost换为本地ip，不然实机调试报错
 //192.168.0.109:8080

@@ -77,6 +77,17 @@ page {
   height: 50rpx;
   line-height: 50rpx;
 }
+.introduce-section .hot {
+  position: absolute;
+  right: 30rpx;
+  background: #dd524d;
+  color: #fff;
+  font-size: 6rpx;
+  border-radius: 8rpx;
+  line-height: 1;
+  -webkit-transform: translateY(-4rpx);
+          transform: translateY(-4rpx);
+}
 .introduce-section .price-box {
   display: -webkit-box;
   display: -webkit-flex;

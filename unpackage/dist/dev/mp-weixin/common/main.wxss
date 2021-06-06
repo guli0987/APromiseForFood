@@ -679,5 +679,7 @@ uni-button[type=default],
   content: "\e646";
 }
 
+/* @import url("@/common/css/uni-formal.css"); */
+
 
 

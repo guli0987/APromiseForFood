@@ -2,11 +2,16 @@
   "navigationBarTitleText": "首页",
   "usingComponents": {
     "uni-drawer": "/components/uni-drawer/uni-drawer",
-    "uni-list": "/components/uni-list/uni-list",
-    "uni-list-item": "/components/uni-list-item/uni-list-item",
+    "uni-list-set": "/components/uni-list-set/uni-list-set",
+    "uni-list-item-set": "/components/uni-list-item-set/uni-list-item-set",
+    "uni-collapse": "/components/uni-collapse/uni-collapse",
+    "uni-collapse-item-set": "/components/uni-collapse-item-set/uni-collapse-item-set",
     "uni-data-picker-best": "/components/uni-data-picker-best/uni-data-picker-best",
     "uni-swiper-dot": "/components/uni-swiper-dot/uni-swiper-dot",
     "uni-notice-bar": "/components/uni-notice-bar/uni-notice-bar",
-    "product-list": "/pages/product/product-list"
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "uni-popup-share": "/components/uni-popup-share/uni-popup-share",
+    "product-list": "/pages/product/product-list",
+    "share-to-friends": "/components/mix-share/share"
   }
 }

@@ -59,11 +59,11 @@
 	export default{
 		data(){
 			return {
-				mobile: '18436097288',
+				mobile: '',
 				/* password: '', */
 				logining: false,
 				loginText:"注册或登录",
-				code: '384035',
+				code: '',
 				agreement: true
 			}
 		},
